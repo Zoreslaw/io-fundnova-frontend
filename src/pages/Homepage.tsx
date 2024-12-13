@@ -19,7 +19,7 @@ const Homepage: React.FC = () => {
         <h1>Welcome to Our Crowdfunding Platform</h1>
         <p>Discover and support innovative projects that shape the future.</p>
         
-        <button className="btn btn-primary" 
+        <button className="btn btn-primary"
         //onClick={exploreButtonHandler}
         >
           Explore Projects

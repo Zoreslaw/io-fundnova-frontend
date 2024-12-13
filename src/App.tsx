@@ -5,6 +5,7 @@ import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
 import "./styles/global.css"; // Global styles for the app
 import { AuthProvider } from "./contexts/AuthContext";
+import UserProfile from "./pages/UserProfile";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/profile" element={<UserProfile/>} />
               {/* <Route path="/profile" element={<Homepage />} /> */}
             </Routes>
           </main>

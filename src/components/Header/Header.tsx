@@ -7,11 +7,13 @@ import LoginForm from "../Auth/LoginForm";
 import RegisterForm from "../Auth/RegisterForm";
 import Logo from "../Logo/Logo";
 import "./Header.css";
+import UserProfile from "../UserProfile/UserProfile";
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth(); // Dekonstrukcja `user` i `logout`
   const loginModal = useModal();
   const registerModal = useModal();
+  const profileModal = useModal();
 
   useEffect(() => {
     console.log(user);
@@ -27,7 +29,7 @@ const Header: React.FC = () => {
       <div className="auth-buttons">
         {user ? (
           <>
-            <span>Welcome, {user.username}!</span>
+            <span onClick={profileModal.openModal}>{user.username}</span>
             <button onClick={logout}>Log Out</button>
           </>
         ) : (
@@ -44,6 +46,9 @@ const Header: React.FC = () => {
       </Modal>
       <Modal isOpen={registerModal.isOpen} onClose={registerModal.closeModal}>
         <RegisterForm />
+      </Modal>
+      <Modal isOpen={profileModal.isOpen} onClose={profileModal.closeModal}>
+        <UserProfile />
       </Modal>
     </header>
   );
