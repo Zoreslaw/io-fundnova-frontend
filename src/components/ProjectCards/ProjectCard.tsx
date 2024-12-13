@@ -19,7 +19,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   return (
     <div className="project-card">
-      {/* Image Section */}
       <div className="project-image">
         <img src={project.imageUrl} alt={project.title} />
         <div className="overlay">
@@ -27,15 +26,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
       </div>
 
-      {/* Content Section */}
       <div className="project-content">
-        <h3 className="project-title">{project.title}</h3>
+        <div className="project-title">
+          <h3>{project.title}</h3>
+        </div>
+        
         <div className="progress-content">
             <p className="funding-info">
                 ${project.fundsRaised} / ${project.fundingGoal}
             </p>
             <div className="progress-bar">
-                <div className="progress" style={{ width: `${progress}%` }}></div>
+              <div
+                className="progress"
+                style={{ "--progress-width": `${progress}%` } as React.CSSProperties}
+              ></div>
             </div>
         </div>
       </div>

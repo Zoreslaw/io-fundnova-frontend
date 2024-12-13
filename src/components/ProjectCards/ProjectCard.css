@@ -1,4 +1,3 @@
-/* Общий стиль карточки */
 .project-card {
     position: relative;
     width: 100%;
@@ -18,16 +17,15 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
   
-  /* ====== Image Section ====== */
   .project-image {
     position: relative;
-    height: 50%; /* Изначально занимает половину карточки */
+    height: 50%;
     overflow: hidden;
     transition: height 0.4s ease;
   }
   
   .project-card:hover .project-image {
-    height: 100%; /* Растягиваем изображение на всю карточку */
+    height: 100%;
   }
   
   .project-image img {
@@ -42,13 +40,11 @@
     filter: brightness(50%);
   }
   
-  /* Overlay (текст поверх изображения) */
   .overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    /* padding: 20px; */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
     color: #fff;
     text-align: center;
@@ -65,30 +61,34 @@
   .project-description {
     font-size: 1rem;
     line-height: 1.5;
+    font-style:italic ;
   }
   
-  /* ====== Content Section ====== */
   .project-content {
     position: relative;
-    height: 50%; /* Изначально занимает половину карточки */
+    height: 50%; 
     padding: 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #292929;
+    background: #303030;
     transition: opacity 0.4s ease;
   }
   
   .project-card:hover .project-content {
     opacity: 0;
-    pointer-events: none; /* Отключаем взаимодействие при наведении */
+    pointer-events: none;
   }
   
   .project-title {
     font-size: 1.5rem;
-    margin: 0;
+    margin: auto 0; 
     color: #fff;
+  }
+
+  .project-title h3 {
+    display: inline;
   }
   
   .progress-bar {
@@ -100,10 +100,37 @@
     overflow: hidden;
     margin: 15px 0;
   }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%; /* Возвращаемся к началу */
+    }
+  }
+  
+  @keyframes progressAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--progress-width);
+    }
+  }
   
   .progress {
     height: 100%;
-    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    background: linear-gradient(135deg, #0061c8, #0056b3, #007aff, #0061c8);
+    background-size: 300% 300%;
+    border-radius: 4px;
+    animation: 
+      progressAnimation 1s ease-out forwards,
+      gradientFlow 6s linear infinite; 
+    width: var(--progress-width);
   }
   
   .funding-info {
@@ -114,3 +141,4 @@
   .progress-content{
     padding-bottom: 5%;
   }
+

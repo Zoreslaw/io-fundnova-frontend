@@ -47,7 +47,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
       setUser(loggedInUser);
       localStorage.setItem("user", JSON.stringify(loggedInUser));
-      //console.log("USELESS: " + loggedInUser.username);
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
