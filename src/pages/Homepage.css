@@ -1,0 +1,89 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 40px;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 50px;
+    background-color: #333333;
+    color: #d8d8d8;
+    border: 4px;
+    box-shadow: 5px 10px 10px rgba(24, 24, 24, 0.764);
+    border-radius: 10px;  
+    /* margin-bottom: 40px; */
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #003d80;
+  }
+  
+  .categories {
+    text-align: center;
+  }
+  
+  .category-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .category-card {
+    background-color: #333333;
+    color: #d8d8d8;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .category-card:hover {
+    transform: scale(1.05);
+    background-color: #2d2c2c;
+    color: #0092a8d7;
+  }
+  
+  .projects {
+    padding: 20px;
+    /* background: #121212; */
+  }
+  
+  .projects h2 {
+    color: #d8d8d8;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Динамическое количество колонок */
+    gap: 20px; /* Отступы между карточками */
+    justify-content: center; /* Центрирует всю сетку */
+    align-content: center; /* Центрирует по вертикали (при необходимости) */
+    padding: 20px;
+    margin: 0 auto; /* Центрирует контейнер */
+  }

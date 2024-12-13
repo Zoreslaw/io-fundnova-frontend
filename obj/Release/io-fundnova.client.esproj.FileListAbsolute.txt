@@ -1,0 +1,2 @@
+C:\Users\xxx\source\repos\IO-fundnova\io-fundnova.client\obj\Release\io-fundnova.client.esproj.CoreCompileInputs.cache
+C:\Users\xxx\Documents\GitHub\IO-fundnova\io-fundnova.client\obj\Release\io-fundnova.client.esproj.CoreCompileInputs.cache

@@ -1,0 +1,67 @@
+/* components/Auth/Auth.css */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: #ffffff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #5c5c5c;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.form-group input:focus {
+  border-color: #005198;
+  outline: none;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 12px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(145deg, #006bc9, #004c9c);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background: linear-gradient(145deg, #004c9c, #006bc9);
+}
+
+.btn:disabled {
+  background: #3d3d3d;
+  cursor: not-allowed;
+  box-shadow: none;
+}
