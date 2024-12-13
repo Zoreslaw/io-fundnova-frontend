@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useModal } from "../../hooks/useModal";
-import { useAuth } from "../../Contexts/AuthContext"; 
+import { useAuth } from "../../contexts/AuthContext"; 
 import Modal from "../Modal/Modal";
 import LoginForm from "../Auth/LoginForm";
 import RegisterForm from "../Auth/RegisterForm";

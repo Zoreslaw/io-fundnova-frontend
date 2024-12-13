@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useAuth } from "../../Contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { LoginPayload } from "../../types/LoginPayload";
 import FormField from "../FormField/FormField";
 import "./Auth.css";

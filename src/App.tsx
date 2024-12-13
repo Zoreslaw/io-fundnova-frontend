@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import Homepage from "./pages/Homepage";
 import NotFound from "./pages/NotFound";
 import "./styles/global.css"; // Global styles for the app
-import { AuthProvider } from "./Contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const App: React.FC = () => {
   return (
