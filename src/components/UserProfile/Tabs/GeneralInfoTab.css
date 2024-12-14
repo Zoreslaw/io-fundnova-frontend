@@ -1,0 +1,147 @@
+.generalInfoTab {
+  position: relative;
+  /* padding: 20px; */
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.infoList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #3d3d3d;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #3d3d3d;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer; /* Указатель для интерактивности */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.infoItem:hover {
+  background-color: #464646; /* Цвет при наведении */
+  transform: translateY(-0.5px); /* Легкое поднятие */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Увеличение тени */
+}
+
+.infoLabel {
+  font-weight: bold;
+}
+
+.infoValue {
+  flex: 1;
+  margin-left: 10px;
+  color: #cccccc;
+}
+
+.editButton {
+  padding: 8px 12px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.editButton:hover {
+  background-color: #00408a;
+}
+
+.editForm {
+  position: relative;
+  margin-top: 20px;
+  padding: 20px;
+  background: #252525;  
+  border-radius: 5px;
+  border-left: 2px solid #0050a697;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 0; /* Начальное свернутое состояние */
+  overflow: hidden;
+  opacity: 0; /* Форма невидима */
+  transform: translateY(-20px); /* Смещение вверх */
+  transition: all 0.2s ease;
+  pointer-events: none; /* Нельзя взаимодействовать */
+}
+
+.editForm form {
+  h3 {
+    margin-top: 0px;
+  }
+  
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+
+}
+
+.editForm.visible {
+  max-height: 500px; /* Пространство для содержимого */
+  opacity: 1; /* Форма видима */
+  transform: translateY(0); /* Без смещения */
+  pointer-events: auto;
+}
+
+.editForm.transitioning {
+  opacity: 0; /* Форма исчезает */
+  transform: translateY(-20px); /* Смещение вверх */
+  pointer-events: none;
+  max-height: 0; /* Свернуть форму */
+}
+
+.editForm .innerContent {
+  opacity: 1; /* Содержимое видно */
+  transition: opacity 0.3s ease; /* Плавное исчезновение */
+}
+
+.editForm.transitioning .innerContent {
+  opacity: 0; /* Содержимое исчезает медленно */
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancelButton {
+  padding: 10px 20px;
+  background-color: #444444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: #555555;
+}
+
+.confirmButton {
+  padding: 10px 20px;
+  background-color: #0061c8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmButton:hover {
+  background-color: #004d9f;
+}

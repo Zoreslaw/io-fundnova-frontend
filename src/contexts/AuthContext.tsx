@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { LoginPayload } from "../types/LoginPayload";
-import { login, register } from "../utils/authApi";
+import { login, register, updateEmailApi, updatePasswordApi, updateUsernameApi } from "../utils/authApi";
 
 interface User {
   username: string;
@@ -12,7 +12,10 @@ interface AuthContextProps {
   loginUser: (payload: LoginPayload) => Promise<void>;
   registerUser: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
-  errorClear: () => void;
+  serverErrorClear: () => void;
+  updateUsername: (newUsername: string) => void;
+  updateEmail: (newEmail: string) => void;
+  updatePassword: (currentPassword: string, newPassword: string) => void;
   isLoading: boolean;
   error: string | null;
 }
@@ -73,17 +76,59 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const updateUsername = async (newUsername: string) => {
+    try {
+      setIsLoading(true);
+      const data = await updateUsernameApi(newUsername); // Функция из authApi.ts
+      if (user) {
+        setUser({ ...user, username: data.username! }); // Обновляем только, если API вернул username
+      }
+    } catch (error: any) {
+      setError(error.message);
+      throw new Error("Failed to update username: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const updateEmail = async (newEmail: string) => {
+    try {
+      setIsLoading(true);
+      const data = await updateEmailApi(newEmail); // Функция из authApi.ts
+      if (user) {
+        setUser({ ...user, email: data.email! }); // Обновляем только, если API вернул email
+      }
+    } catch (error: any) {
+      setError(error.message);
+      throw new Error("Failed to update email: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const updatePassword = async (currentPassword: string, newPassword: string) => {
+    try {
+      setIsLoading(true);
+      await updatePasswordApi(currentPassword, newPassword);
+    } catch (error: any) {
+      setError(error.message);
+      throw new Error("Failed to update password: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
   };
 
-  const errorClear = () => {
+  const serverErrorClear = () => {
     setError(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, registerUser, logout, errorClear, isLoading, error }}>
+    <AuthContext.Provider value={{ user, loginUser, registerUser, logout, serverErrorClear, isLoading, error, updateUsername, updateEmail, updatePassword }}>
       {children}
     </AuthContext.Provider>
   );

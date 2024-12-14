@@ -12,7 +12,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const { user, errorClear } = useAuth();
+  const { user, serverErrorClear } = useAuth();
 
   console.log(children);
 
@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     setTimeout(() => {
       setIsVisible(false);
       setIsClosing(false);
-      errorClear();
+      serverErrorClear();
       onClose();
     }, 500);
   };
@@ -73,6 +73,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         width: isUserProfile ? "85vw" : "500px",
         // maxWidth: isUserProfile ? "90%" : "500px",
         background: isUserProfile ? "none" : "#333333",
+        padding: isUserProfile ? "none" : "20px",
       }}
       
       >
