@@ -1,13 +1,22 @@
 /* Header Container */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #3d3d3d; /* Light gray background */
-    border-bottom: 4px solid #363636; /* Subtle border for separation */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100vw; /* Ограничение ширины окна */
+  z-index: 1000; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #3d3d3d; /* Light gray background */
+  border-bottom: 4px solid #363636; /* Subtle border for separation */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  box-sizing: border-box; /* Включаем паддинги в размеры */
+  overflow: hidden; /* Убираем элементы, которые могут выходить */
+}
+
   
   .header-logo {
     display: flex;
@@ -22,6 +31,10 @@
   .auth-buttons {
     display: flex;
     gap: 10px;
+  }
+
+  .auth-buttons span {
+    cursor: pointer;
   }
   
   /* Auth Button Styling */

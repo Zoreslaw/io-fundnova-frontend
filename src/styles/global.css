@@ -15,4 +15,10 @@ body {
 main {
   flex: 1;
   padding: 20px;
+  margin-top: 60px;
+}
+
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
 }

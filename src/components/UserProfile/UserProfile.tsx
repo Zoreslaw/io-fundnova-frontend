@@ -4,52 +4,70 @@ import GeneralInfoTab from "./Tabs/GeneralInfoTab";
 import AdvancedInfoTab from "./Tabs/AdvancedInfoTab";
 import BackedProjectsTab from "./Tabs/BackedProjectsTab";
 import MyProjectsTab from "./Tabs/MyProjectsTab";
+import {
+    InformationCircleIcon,
+    CogIcon,
+    CurrencyDollarIcon,
+    BriefcaseIcon,
+    AdjustmentsHorizontalIcon,
+} from "@heroicons/react/24/solid";
+import "./UserProfile.css";
+
+interface Tab {
+  id: string;
+  label: string;
+  icon: JSX.Element;
+}
+
+const tabs: Tab[] = [
+  { id: "general", label: "General Info", icon: <InformationCircleIcon className="icon" /> },
+  { id: "advanced", label: "Advanced Info", icon: <CogIcon className="icon" /> },
+  { id: "backed", label: "Backed Projects", icon: <CurrencyDollarIcon className="icon" /> },
+  { id: "myProjects", label: "My Projects", icon: <BriefcaseIcon className="icon" /> },
+  { id: "settings", label: "Settings", icon: <AdjustmentsHorizontalIcon className="icon" /> },
+];
 
 const UserProfile: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("general");
 
-    const [activeTab, setActiveTab] = useState("general");
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "advanced":
+        return <AdvancedInfoTab />;
+      case "backed":
+        return <BackedProjectsTab />;
+      case "myProjects":
+        return <MyProjectsTab />;
+      case "settings":
+        return <SettingsTab />;
+      case "general":
+      default:
+        return <GeneralInfoTab />;
+    }
+  };
 
-    const submenuHandler = (submenuID :string) => {
-        setActiveTab(submenuID);
-
-    };
-
-    const renderTabContent = () => {
-        switch (activeTab) {
-            default:
-                return <GeneralInfoTab />
-            case "general": 
-                return <GeneralInfoTab />
-            case "advanced": 
-                return <AdvancedInfoTab />
-            case "backed": 
-                return <BackedProjectsTab />
-            case "myProjects": 
-                return <MyProjectsTab />
-            case "settings": 
-                return <SettingsTab />
-        }
-    };
-
-    return (
-        <div className="profilePage">
-            <section className="profileMenuCategories">
-                <div className="profileCategoryList">
-                    <button className="profileCategory" type="button" onClick={() => {submenuHandler("general")}}>InfoIcon</button>
-                    <button className="profileCategory" type="button" onClick={() => {submenuHandler("advanced")}}>AdvcIcon</button>
-                    <button className="profileCategory" type="button" onClick={() => {submenuHandler("backed")}}>ProjIcon</button>
-                    <button className="profileCategory" type="button" onClick={() => {submenuHandler("myProjects")}}>FundIcon</button>
-                    <button className="profileCategory" type="button" onClick={() => {submenuHandler("settings")}}>PrefIcon</button>
-                </div>
-            </section>
-
-            <section className="profileContent">
-                <div className="tabContent">
-                    {renderTabContent()}
-                </div>
-            </section>
+  return (
+    <div className="profilePage">
+      <section className="profileMenuCategories">
+        <div className="profileCategoryList">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`profileCategory ${activeTab === tab.id ? "active" : ""}`}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {tab.icon}
+            </button>
+          ))}
         </div>
-    )
-}
+      </section>
+
+      <section className="profileContent">
+        <div className="tabContent">{renderTabContent()}</div>
+      </section>
+    </div>
+  );
+};
 
 export default UserProfile;

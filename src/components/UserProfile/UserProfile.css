@@ -1,0 +1,155 @@
+    /* UserProfile.css */
+    .profilePage {
+        display: flex;
+        height: 90vh; /* Высота окна просмотра */
+        max-height: 90vh;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profileMenuCategories {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Равномерное распределение кнопок */
+        align-items: stretch;
+        width: 64px; /* Ширина меню */
+        min-width: 64px;
+        height: 100%; /* Высота наследуется от родителя */
+        /* background-color: #3d3d3d; */
+    }
+    
+    .profileCategory {
+        flex-grow: 1; /* Все кнопки занимают равное пространство */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Растягиваем кнопки на всю ширину */
+        background-color: #3d3d3d;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        border-left: 4px solid transparent;
+        min-height: 50px; /* Минимальная высота кнопок для маленьких экранов */
+        max-height: 90px; /* Предотвращаем слишком большие размеры */
+    }
+    
+    .profileCategoryList {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+        align-items: stretch;
+        height: 100%;
+        padding: 0;
+        gap: 0; /* Убираем лишние зазоры между вкладками */
+    }
+    
+    
+        .profileCategory svg {
+            width: calc(2vw + 20px); /* Динамический размер иконки */
+            height: calc(2vw + 20px); /* Динамический размер иконки */
+            color: #ffffff;
+            transition: transform 0.2s ease;
+        }
+
+        .profileCategory:hover {
+            background-color: #464646;
+        }
+    
+    .profileCategory.active {
+        background-color: #2a2a2a; /* Совпадает с фоном контента */
+        border-left: 4px solid #0056b3; /* Цвет линии, указывающий активность */
+        width: calc(100% + 10px); /* Увеличиваем ширину на 5px влево */
+        margin-left: -5px;
+        transition: transform 0.3s ease, background-color 0.3s ease; /* Плавный переход
+        z-index: 1; /* Повышаем приоритет для перекрытия соседей */
+    }
+
+    
+    
+    .profileContent {
+        flex-grow: 1; /* Растягиваем по высоте в пределах доступного пространства */
+        overflow-y: auto; /* Прокрутка для избыточного содержимого */
+        background-color: #2a2a2a;
+        scrollbar-width: thin;
+        scrollbar-color: #313131 #2a2a2a;
+        padding: 20px;
+        transition: background-color 0.3s ease;
+    }
+    
+
+    .profileContent::-webkit-scrollbar {
+        width: 8px;
+    }
+      
+    .profileContent::-webkit-scrollbar-track {
+        background: #2a2a2a;
+    }
+      
+    .profileContent::-webkit-scrollbar-thumb {
+        background-color: #0056b3;
+        border-radius: 4px;
+        border: 2px solid #2a2a2a;
+    }
+    
+    .tabContent {
+        padding: 20px;
+        border-radius: 8px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    }
+    
+    @keyframes fadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(10px);
+        }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 500px) {
+        .profilePage {
+            height: 100vh;
+            flex-direction: column; /* Смена направления на вертикальное */
+        }
+    
+        .profileMenuCategories {
+            display: flex;
+            /* padding-right: 30px; */
+            height: 64px; /* Фиксированная высота для горизонтального меню */
+            flex-direction: row; /* Вкладки располагаются горизонтально */
+            width: 100%; /* Растягиваем по ширине */
+            min-width: auto; /* Убираем фиксированную ширину */
+            background-color: #3d3d3d;
+        }
+
+        .profileCategoryList{
+            flex-direction: row;
+        }
+    
+        .profileCategory {
+            flex-grow: 1; /* Равномерное распределение ширины вкладок */
+            height: 100%; /* Растягиваем вкладки на всю высоту родителя */
+            min-height: auto; /* Убираем минимальную высоту */
+            width: calc(100% / 5); /* Каждая вкладка занимает равную ширину */
+        }
+
+        .profileCategory.active {
+            background-color: #2a2a2a;
+            border-top: 4px solid #0056b3;
+            border-left: none; /* Убираем левую границу */
+            height: calc(100% + 5px); /* Только высота увеличивается */
+            margin-top: -5px; /* Смещение вверх */
+            margin-left: 0; /* Убираем смещение влево */
+            width: 100%; /* Ширина кнопки остаётся фиксированной */
+            transition: background-color 0.3s ease;
+        }
+    
+        .profileContent {
+            flex-grow: 1;
+            height: calc(100% - 64px); /* Высота контента учитывает высоту меню */
+            overflow-y: auto; /* Добавляем прокрутку для длинного контента */
+        }
+    }
+    

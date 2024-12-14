@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import UserProfile from "../UserProfile/UserProfile";
 import "./Modal.css";
 
 interface ModalProps {
@@ -13,6 +14,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isClosing, setIsClosing] = useState(false);
   const { user, errorClear } = useAuth();
 
+  console.log(children);
+
   useEffect(() => {
     if (user) {
       handleClose();
@@ -22,9 +25,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
+      document.body.classList.add("no-scroll");
       document.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.classList.remove("no-scroll");
     }
     return () => {
+      document.body.classList.remove("no-scroll");
       document.removeEventListener("keydown", handleKeyDown);
     }; 
   }, [isOpen]);
@@ -49,6 +56,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     return null;
   }
 
+  const isUserProfile = children && React.isValidElement(children) && children.type === UserProfile;
+
   return (
     <div
       className={`modal-overlay ${isClosing ? "closing" : ""}`}
@@ -58,7 +67,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       //   }
       // }}
     >
-      <div className="modal-content">
+      {}
+      <div className="modal-content"
+      style={{
+        width: isUserProfile ? "85vw" : "500px",
+        // maxWidth: isUserProfile ? "90%" : "500px",
+        background: isUserProfile ? "none" : "#333333",
+      }}
+      
+      >
         <button className="modal-close" onClick={handleClose}>
           &times;
         </button>
