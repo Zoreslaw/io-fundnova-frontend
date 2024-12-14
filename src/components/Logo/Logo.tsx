@@ -12,24 +12,22 @@ const Logo: React.FC = () => {
     >
 
       <defs>
-        {/* Градиент для заливки */}
         <linearGradient id="logo-fill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#d4d4d4" /> {/* Светло-серебристый */}
-          <stop offset="100%" stopColor="#a9a9a9" /> {/* Темно-серебристый */}
+          <stop offset="0%" stopColor="#d4d4d4" />
+          <stop offset="100%" stopColor="#a9a9a9" />
         </linearGradient>
 
-        {/* Градиент для обводки */}
         <linearGradient id="logo-stroke-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffffff" /> {/* Белый оттенок */}
-          <stop offset="100%" stopColor="#b0b0b0" /> {/* Серебристый */}
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#b0b0b0" />
         </linearGradient>
       </defs>
       <g transform="translate(-75.068594,-502.89726)">
         <g
           transform="translate(-50.695169,323.00335)"
           style={{
-            fill: "#2a2a2a", // Градиент для заливки
-            stroke: "url(#logo-stroke-gradient)", // Градиент для обводки
+            fill: "#2a2a2a",
+            stroke: "url(#logo-stroke-gradient)",
             strokeWidth: 0.264583,
             strokeMiterlimit: 4,
           }}

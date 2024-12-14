@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "../../../../contexts/AuthContext";
 
-interface PasswordFormInputs {
+interface ChangePasswordFormInputs {
   currentPassword: string;
   newPassword: string;
+  confirmPassword: string;
 }
 
 const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
   const { updatePassword, isLoading, error, serverErrorClear } = useAuth();
+  const [firstClick, setFirstClick] = useState(false);
   const {
     register,
     handleSubmit,
+    watch,
+    trigger,
     formState: { errors },
-  } = useForm<PasswordFormInputs>();
+  } = useForm<ChangePasswordFormInputs>();
 
-  const onSubmit: SubmitHandler<PasswordFormInputs> = async (data) => {
+  const newPassword = watch("newPassword");
+
+  // Обработчик для первой валидации confirmPassword
+  const buttonHandler = () => {
+    setFirstClick(true);
+  };
+
+  // Триггер динамической валидации confirmPassword при изменении newPassword
+  useEffect(() => {
+    if (firstClick) {
+      trigger("confirmPassword");
+    }
+  }, [newPassword, trigger, firstClick]);
+
+  const onSubmit: SubmitHandler<ChangePasswordFormInputs> = async (data) => {
     try {
       // Попытка обновить пароль
       await updatePassword(data.currentPassword, data.newPassword);
@@ -54,7 +72,10 @@ const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
           type="password"
           {...register("newPassword", {
             required: "Please enter a new password",
-            minLength: { value: 6, message: "Password must be at least 6 characters long" },
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters long",
+            },
           })}
           onChange={(e) => {
             register("newPassword").onChange(e);
@@ -66,13 +87,37 @@ const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         )}
       </div>
 
+      <div className="form-group">
+        <label>Confirm New Password</label>
+        <input
+          type="password"
+          {...register("confirmPassword", {
+            required: "Please confirm your new password",
+            validate: (value) =>
+              value === newPassword || "Passwords do not match",
+          })}
+          onChange={(e) => {
+            register("confirmPassword").onChange(e);
+            serverErrorClear();
+          }}
+        />
+        {errors.confirmPassword && (
+          <span className="error">{errors.confirmPassword.message}</span>
+        )}
+      </div>
+
       {error && <div className="error">{"Failed to update password"}</div>}
 
       <div className="formActions">
         <button type="button" onClick={onCancel} className="cancelButton">
           Cancel
         </button>
-        <button type="submit" className="confirmButton" disabled={isLoading}>
+        <button
+          type="submit"
+          className="confirmButton"
+          disabled={isLoading}
+          onClick={buttonHandler}
+        >
           {isLoading ? "Updating..." : "Confirm"}
         </button>
       </div>

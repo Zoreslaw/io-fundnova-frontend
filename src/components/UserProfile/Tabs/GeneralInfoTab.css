@@ -25,11 +25,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 15px;
   background: #3d3d3d;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer; /* Указатель для интерактивности */
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -39,14 +39,38 @@
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Увеличение тени */
 }
 
+.infoContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
 .infoLabel {
   font-weight: bold;
+  color: #ffffff;
 }
 
 .infoValue {
-  flex: 1;
+  flex-grow: 1;
   margin-left: 10px;
   color: #cccccc;
+}
+
+.editIcon {
+  font-size: 1.5rem; /* Размер иконки */
+  color: #ffffff; /* Цвет иконки */
+  cursor: pointer; /* Указатель для интерактивности */
+  margin: 0 10px; /* Отступ от текста */
+  display: flex;
+  align-items: center; /* Выровнять содержимое по вертикали */
+  justify-content: center; /* Центрирование внутри элемента */
+  transition: color 0.3s ease, transform 0.2s ease; /* Анимации для интерактивности */
+}
+
+.editIcon:hover {
+  color: #1e90ff; /* Цвет при наведении */
+  transform: scale(1.1); /* Небольшое увеличение */
 }
 
 .editButton {

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SettingsTab from "./Tabs/SettingsTab";
 import GeneralInfoTab from "./Tabs/GeneralInfoTab";
 import AdvancedInfoTab from "./Tabs/AdvancedInfoTab";
 import BackedProjectsTab from "./Tabs/BackedProjectsTab";
 import MyProjectsTab from "./Tabs/MyProjectsTab";
 import {
-    InformationCircleIcon,
-    CogIcon,
-    CurrencyDollarIcon,
-    BriefcaseIcon,
-    AdjustmentsHorizontalIcon,
+  InformationCircleIcon,
+  CogIcon,
+  CurrencyDollarIcon,
+  BriefcaseIcon,
+  AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/solid";
 import "./UserProfile.css";
 
@@ -29,6 +29,7 @@ const tabs: Tab[] = [
 
 const UserProfile: React.FC = () => {
   const [activeTab, setActiveTab] = useState("general");
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -44,6 +45,30 @@ const UserProfile: React.FC = () => {
       default:
         return <GeneralInfoTab />;
     }
+  };
+
+  // Автоскролл вниз при смене вкладки
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activeTab]);
+
+  // Обработчик для показа кнопки "Вверх"
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Функция для возврата наверх
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -66,6 +91,13 @@ const UserProfile: React.FC = () => {
       <section className="profileContent">
         <div className="tabContent">{renderTabContent()}</div>
       </section>
+
+      {/* Кнопка вверх */}
+      {showScrollButton && (
+        <button className="scrollToTop" onClick={scrollToTop}>
+          ↑
+        </button>
+      )}
     </div>
   );
 };

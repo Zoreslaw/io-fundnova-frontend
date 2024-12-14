@@ -5,6 +5,7 @@ import { login, register, updateEmailApi, updatePasswordApi, updateUsernameApi }
 interface User {
   username: string;
   email: string;
+  passwordLength: number;
 }
 
 interface AuthContextProps {
@@ -47,6 +48,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const loggedInUser: User = {
         username: data.username,
         email: data.email,
+        passwordLength: payload.password.length,
       };
       setUser(loggedInUser);
       localStorage.setItem("user", JSON.stringify(loggedInUser));
@@ -65,6 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const regestredUser: User = {
         username: username,
         email: email,
+        passwordLength: password.length,
       };
       setUser(regestredUser);
       localStorage.setItem("user", JSON.stringify(regestredUser));

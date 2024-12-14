@@ -38,10 +38,10 @@ const GeneralInfoTab: React.FC = () => {
     switch (activeField) {
       case "username":
         return <ChangeUsernameForm onCancel={handleCancel} />;
-      case "password":
-        return <ChangePassForm onCancel={handleCancel} />;
       case "email":
         return <ChangeEmailForm onCancel={handleCancel} />;
+      case "password":
+        return <ChangePassForm onCancel={handleCancel} />;
       default:
         return null;
     }
@@ -49,7 +49,9 @@ const GeneralInfoTab: React.FC = () => {
 
   return (
     <div className="generalInfoTab">
+      <h3 style={{marginTop: "0px"}}>User Information</h3>
       <ul className="infoList">
+        {/* Username Card */}
         <li
           className="infoItem"
           onClick={() =>
@@ -58,9 +60,16 @@ const GeneralInfoTab: React.FC = () => {
               : handleOpenEdit("username")
           }
         >
-          <span className="infoLabel">Username:</span>
-          <span className="infoValue">{user?.username}</span>
+          <div className="infoContent">
+            <span className="infoLabel">Username:</span>
+            <span className="infoValue">{user?.username}</span>
+          </div>
+          <span className="editIcon" title="Edit username">
+            <i className="material-icons">edit</i>
+          </span>
         </li>
+
+        {/* Email Card */}
         <li
           className="infoItem"
           onClick={() =>
@@ -69,9 +78,16 @@ const GeneralInfoTab: React.FC = () => {
               : handleOpenEdit("email")
           }
         >
-          <span className="infoLabel">Email:</span>
-          <span className="infoValue">{user?.email}</span>
+          <div className="infoContent">
+            <span className="infoLabel">Email:</span>
+            <span className="infoValue">{user?.email}</span>
+          </div>
+          <span className="editIcon" title="Edit email">
+            <i className="material-icons">edit</i>
+          </span>
         </li>
+
+        {/* Password Card */}
         <li
           className="infoItem"
           onClick={() =>
@@ -80,21 +96,21 @@ const GeneralInfoTab: React.FC = () => {
               : handleOpenEdit("password")
           }
         >
-          <span className="infoLabel">Password:</span>
-          <span className="infoValue">********</span>
-          <button
-            onClick={() =>
-              activeField
-                ? handleChangeEdit("password")
-                : handleOpenEdit("password")
-            }
-            className="editButton"
-          >
-            Edit
-          </button>
+          <div className="infoContent">
+            <span className="infoLabel">Password:</span>
+            <span className="infoValue">
+              {Array.from({ length: user?.passwordLength || 0 })
+              .map(() => '*')
+              .join('')}
+            </span>
+          </div>
+          <span className="editIcon" title="Edit password">
+            <i className="material-icons">edit</i>
+          </span>
         </li>
       </ul>
 
+      {/* Form Section */}
       <div
         className={`editForm ${
           activeField ? "visible" : ""

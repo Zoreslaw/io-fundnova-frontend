@@ -44,16 +44,16 @@
     }
     
     
-        .profileCategory svg {
-            width: calc(2vw + 20px); /* Динамический размер иконки */
-            height: calc(2vw + 20px); /* Динамический размер иконки */
-            color: #ffffff;
-            transition: transform 0.2s ease;
-        }
+    .profileCategory svg {
+        width: calc(2vw + 20px); /* Динамический размер иконки */
+        height: calc(2vw + 20px); /* Динамический размер иконки */
+        color: #ffffff;
+        transition: transform 0.2s ease;
+    }
 
-        .profileCategory:hover {
-            background-color: #464646;
-        }
+    .profileCategory:hover {
+        background-color: #464646;
+    }
     
     .profileCategory.active {
         background-color: #2a2a2a; /* Совпадает с фоном контента */
@@ -74,6 +74,7 @@
         scrollbar-color: #313131 #2a2a2a;
         padding: 20px;
         transition: background-color 0.3s ease;
+        
     }
     
 
@@ -90,6 +91,8 @@
         border-radius: 4px;
         border: 2px solid #2a2a2a;
     }
+
+    
     
     .tabContent {
         padding: 20px;
