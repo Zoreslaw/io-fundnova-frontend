@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 
-interface FormFieldProps {
+interface AuthFormFieldProps {
   label: string;
   name: string;
   type: string;
@@ -10,7 +10,7 @@ interface FormFieldProps {
   validation?: any;
 }
 
-const FormField: React.FC<FormFieldProps> = ({ label, name, type, error, register, validation }) => {
+const AuthFormField: React.FC<AuthFormFieldProps> = ({ label, name, type, error, register, validation }) => {
 
     console.log("error");
 
@@ -24,4 +24,4 @@ const FormField: React.FC<FormFieldProps> = ({ label, name, type, error, registe
 }
 
 
-export default FormField;
+export default AuthFormField;

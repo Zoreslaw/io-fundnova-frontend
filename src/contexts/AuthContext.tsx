@@ -1,12 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { LoginPayload } from "../types/LoginPayload";
 import { login, register, updateEmailApi, updatePasswordApi, updateUsernameApi } from "../utils/authApi";
+import { User } from "../types/User";
 
-interface User {
-  username: string;
-  email: string;
-  passwordLength: number;
-}
 
 interface AuthContextProps {
   user: User | null;
@@ -48,8 +44,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const loggedInUser: User = {
         username: data.username,
         email: data.email,
-        passwordLength: payload.password.length,
+        passwordLength: payload.Password.length,
+        userId: data.userId,
       };
+
       setUser(loggedInUser);
       localStorage.setItem("user", JSON.stringify(loggedInUser));
     } catch (err: any) {
@@ -68,7 +66,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         username: username,
         email: email,
         passwordLength: password.length,
+        userId: data.userId,
       };
+      
       setUser(regestredUser);
       localStorage.setItem("user", JSON.stringify(regestredUser));
       console.log("Registration successful:", data);

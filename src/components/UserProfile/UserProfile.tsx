@@ -4,6 +4,7 @@ import GeneralInfoTab from "./Tabs/GeneralInfoTab";
 import AdvancedInfoTab from "./Tabs/AdvancedInfoTab";
 import BackedProjectsTab from "./Tabs/BackedProjectsTab";
 import MyProjectsTab from "./Tabs/MyProjectsTab";
+import { useAuth } from "../../contexts/AuthContext";
 import {
   InformationCircleIcon,
   CogIcon,
@@ -28,8 +29,9 @@ const tabs: Tab[] = [
 ];
 
 const UserProfile: React.FC = () => {
+
+  const { serverErrorClear } = useAuth();
   const [activeTab, setActiveTab] = useState("general");
-  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -47,30 +49,6 @@ const UserProfile: React.FC = () => {
     }
   };
 
-  // Автоскролл вниз при смене вкладки
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [activeTab]);
-
-  // Обработчик для показа кнопки "Вверх"
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Функция для возврата наверх
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <div className="profilePage">
       <section className="profileMenuCategories">
@@ -80,7 +58,10 @@ const UserProfile: React.FC = () => {
               key={tab.id}
               className={`profileCategory ${activeTab === tab.id ? "active" : ""}`}
               type="button"
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                serverErrorClear();
+              }}
             >
               {tab.icon}
             </button>
@@ -91,13 +72,6 @@ const UserProfile: React.FC = () => {
       <section className="profileContent">
         <div className="tabContent">{renderTabContent()}</div>
       </section>
-
-      {/* Кнопка вверх */}
-      {showScrollButton && (
-        <button className="scrollToTop" onClick={scrollToTop}>
-          ↑
-        </button>
-      )}
     </div>
   );
 };

@@ -68,7 +68,7 @@
     
     .profileContent {
         flex-grow: 1; /* Растягиваем по высоте в пределах доступного пространства */
-        overflow-y: auto; /* Прокрутка для избыточного содержимого */
+        overflow-y: scroll; /* Прокрутка для избыточного содержимого */
         background-color: #2a2a2a;
         scrollbar-width: thin;
         scrollbar-color: #313131 #2a2a2a;

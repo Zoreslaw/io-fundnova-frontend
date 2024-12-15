@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "../../contexts/AuthContext";
 import { LoginPayload } from "../../types/LoginPayload";
-import FormField from "../FormField/FormField";
+import AuthFormField from "../FormField/AuthFormField";
 import "./Auth.css";
 import { login } from "../../utils/authApi";
 
@@ -24,8 +24,8 @@ const LoginForm: React.FC = () => {
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     const loginPayload: LoginPayload = emailPattern.test(data.username)
-      ? { email: data.username, username: null, password: data.password }
-      : { email: null, username: data.username, password: data.password };
+      ? { Email: data.username, Username: null, Password: data.password }
+      : { Email: null, Username: data.username, Password: data.password };
 
     loginUser(loginPayload);
   };
@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
       <h2>Login</h2>
       {error && <div className="error">{error}</div>}
 
-      <FormField
+      <AuthFormField
         label="Username / Email"
         name="username"
         type="username"
@@ -46,7 +46,7 @@ const LoginForm: React.FC = () => {
         }}
       />
 
-      <FormField
+      <AuthFormField
         label="Password"
         name="password"
         type="password"
