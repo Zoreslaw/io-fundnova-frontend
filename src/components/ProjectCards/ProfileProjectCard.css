@@ -1,0 +1,187 @@
+.profile-project-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Изменено на auto-fill */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-project-list > * {
+  max-width: 100%; /* Убираем ограничение, чтобы сетка сама управляла размером */
+  width: 100%; /* Сохраняем адаптивность */
+}
+
+.base-project-card {
+  position: relative;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: 100%; /* Позволяем карточке масштабироваться */
+}
+
+/* Убираем приближение для ProfileProjectCard */
+.profile-project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-project-card:hover {
+  transform: none; /* Убираем анимацию трансформации */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Добавляем лёгкую тень */
+}
+  .project-card {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .project-image {
+    position: relative;
+    height: 50%;
+    overflow: hidden;
+    transition: height 0.4s ease;
+  }
+  
+  .project-card:hover .project-image {
+    height: 100%;
+  }
+  
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+  
+  .project-card:hover .project-image img {
+    transform: scale(1.1);
+    filter: brightness(50%);
+  }
+  
+  /* .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  } */
+  
+  .project-card:hover .overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .project-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style:italic ;
+  }
+  
+  /* .project-content {
+    position: relative;
+    height: 50%; 
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #303030;
+    transition: opacity 0.4s ease;
+  } */
+  
+  .project-card:hover .project-content {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .project-title {
+    font-size: 1.5rem;
+    margin: auto 0; 
+    color: #fff;
+  }
+
+  .project-title h3 {
+    display: inline;
+  }
+  
+  .progress-bar {
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background: #3a3a3a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 15px 0;
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%; /* Возвращаемся к началу */
+    }
+  }
+  
+  @keyframes progressAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--progress-width);
+    }
+  }
+  
+  .progress {
+    height: 100%;
+    background: linear-gradient(135deg, #0061c8, #0056b3, #007aff, #0061c8);
+    background-size: 300% 300%;
+    border-radius: 4px;
+    animation: 
+      progressAnimation 1s ease-out forwards,
+      gradientFlow 6s linear infinite; 
+    width: var(--progress-width);
+  }
+  
+  .funding-info {
+    font-size: 1rem;
+    color: #a5d6a7;
+  }
+  
+  .progress-content{
+    padding-bottom: 5%;
+  }
+
+
+.profile-project-card .project-image img {
+  transition: filter 0.3s ease; /* Добавляем эффект затемнения */
+}
+
+.profile-project-card:hover .project-image img {
+  filter: brightness(80%); /* При наведении изображение становится темнее */
+}

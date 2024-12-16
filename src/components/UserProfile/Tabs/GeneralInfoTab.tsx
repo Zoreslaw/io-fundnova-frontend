@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./GeneralInfoTab.css";
-import { useAuth } from "../../../contexts/AuthContext";
 import ChangeUsernameForm from "./Forms/ChangeUsernameForm";
 import ChangePassForm from "./Forms/ChangePassForm";
 import ChangeEmailForm from "./Forms/ChangeEmailForm";
+import { useBasicInfo } from "../../../hooks/useBasicInfo";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const GeneralInfoTab: React.FC = () => {
+  const { user } = useAuth();
+  const { info, isLoading, error, clearError, updateUsername, updateEmail, updatePassword } = useBasicInfo(user!);
+
   const [activeField, setActiveField] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const { user, serverErrorClear } = useAuth();
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsContentVisible(true);
+    } else {
+      setIsContentVisible(false);
+    }
+  }, [isLoading]);
 
   const handleOpenEdit = (field: string) => {
     if (activeField) return;
@@ -21,7 +33,7 @@ const GeneralInfoTab: React.FC = () => {
     setTimeout(() => {
       setActiveField(field);
       setIsTransitioning(false);
-      serverErrorClear();
+      clearError();
     }, 300);
   };
 
@@ -30,18 +42,18 @@ const GeneralInfoTab: React.FC = () => {
     setTimeout(() => {
       setActiveField(null);
       setIsTransitioning(false);
-      serverErrorClear();
+      clearError();
     }, 300);
   };
 
   const renderForm = () => {
     switch (activeField) {
       case "username":
-        return <ChangeUsernameForm onCancel={handleCancel} />;
+        return <ChangeUsernameForm onCancel={handleCancel} updateUsername={updateUsername} />;
       case "email":
-        return <ChangeEmailForm onCancel={handleCancel} />;
+        return <ChangeEmailForm onCancel={handleCancel} updateEmail={updateEmail} />;
       case "password":
-        return <ChangePassForm onCancel={handleCancel} />;
+        return <ChangePassForm onCancel={handleCancel} updatePassword={updatePassword} />;
       default:
         return null;
     }
@@ -49,74 +61,72 @@ const GeneralInfoTab: React.FC = () => {
 
   return (
     <div className="generalInfoTab">
-      <h3 style={{marginTop: "0px"}}>User Information</h3>
-      <ul className="infoList">
-        {/* Username Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
-            activeField
-              ? handleChangeEdit("username")
-              : handleOpenEdit("username")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Username:</span>
-            <span className="infoValue">{user?.username}</span>
-          </div>
-          <span className="editIcon" title="Edit username">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
+      {error && <p className="error">{error}</p>}
 
-        {/* Email Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
-            activeField
-              ? handleChangeEdit("email")
-              : handleOpenEdit("email")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Email:</span>
-            <span className="infoValue">{user?.email}</span>
-          </div>
-          <span className="editIcon" title="Edit email">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
-
-        {/* Password Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
-            activeField
-              ? handleChangeEdit("password")
-              : handleOpenEdit("password")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Password:</span>
-            <span className="infoValue">
-              {Array.from({ length: user?.passwordLength || 0 })
-              .map(() => '*')
-              .join('')}
+      <div className={`infoContentWrapper ${isContentVisible ? "fade-in" : "fade-out"}`}>
+        <h3 style={{ marginTop: "0px" }}>User Information</h3>
+        <ul className="infoList">
+          {/* Username Card */}
+          <li
+            className="infoItem"
+            onClick={() =>
+              activeField ? handleChangeEdit("username") : handleOpenEdit("username")
+            }
+          >
+            <div className="infoContent">
+              <span className="infoLabel">Username:</span>
+              <span className="infoValue">{info?.username || "Not provided"}</span>
+            </div>
+            <span className="editIcon" title="Edit username">
+              <i className="material-icons">edit</i>
             </span>
-          </div>
-          <span className="editIcon" title="Edit password">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
-      </ul>
+          </li>
 
-      {/* Form Section */}
-      <div
-        className={`editForm ${
-          activeField ? "visible" : ""
-        } ${isTransitioning ? "transitioning" : ""}`}
-      >
-        {renderForm()}
+          {/* Email Card */}
+          <li
+            className="infoItem"
+            onClick={() =>
+              activeField ? handleChangeEdit("email") : handleOpenEdit("email")
+            }
+          >
+            <div className="infoContent">
+              <span className="infoLabel">Email:</span>
+              <span className="infoValue">{info?.email || "Not provided"}</span>
+            </div>
+            <span className="editIcon" title="Edit email">
+              <i className="material-icons">edit</i>
+            </span>
+          </li>
+
+          {/* Password Card */}
+          <li
+            className="infoItem"
+            onClick={() =>
+              activeField ? handleChangeEdit("password") : handleOpenEdit("password")
+            }
+          >
+            <div className="infoContent">
+              <span className="infoLabel">Password:</span>
+              <span className="infoValue">
+                {Array.from({ length: info?.passwordLength || 0 })
+                  .map(() => "*")
+                  .join("")}
+              </span>
+            </div>
+            <span className="editIcon" title="Edit password">
+              <i className="material-icons">edit</i>
+            </span>
+          </li>
+        </ul>
+
+        {/* Form Section */}
+        <div
+          className={`editForm ${
+            activeField ? "visible" : ""
+          } ${isTransitioning ? "transitioning" : ""}`}
+        >
+          {renderForm()}
+        </div>
       </div>
     </div>
   );

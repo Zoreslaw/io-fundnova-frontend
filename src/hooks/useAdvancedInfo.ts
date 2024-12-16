@@ -11,7 +11,7 @@ import { User } from "../types/User";
 
 export const useAdvancedInfo = (user: User) => {
   const [info, setInfo] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const loadAdvancedInfo = async () => {
@@ -56,6 +56,7 @@ export const useAdvancedInfo = (user: User) => {
     try {
       const data = await updateAddressApi(user.userId, newAddress);
       setInfo((prevInfo: any) => ({ ...prevInfo, address: data.address }));
+      console.log(info);
     } catch (err: any) {
       setError(err.message || "Failed to update address");
     } finally {

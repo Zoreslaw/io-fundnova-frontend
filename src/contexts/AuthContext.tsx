@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { LoginPayload } from "../types/LoginPayload";
-import { login, register, updateEmailApi, updatePasswordApi, updateUsernameApi } from "../utils/authApi";
+import { login, register } from "../utils/authApi";
 import { User } from "../types/User";
 
 
@@ -10,9 +10,10 @@ interface AuthContextProps {
   registerUser: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   serverErrorClear: () => void;
-  updateUsername: (newUsername: string) => void;
-  updateEmail: (newEmail: string) => void;
-  updatePassword: (currentPassword: string, newPassword: string) => void;
+  updateUserSession: (updatedData: Partial<User>) => void;
+  // updateUsername: (newUsername: string) => void;
+  // updateEmail: (newEmail: string) => void;
+  // updatePassword: (currentPassword: string, newPassword: string) => void;
   isLoading: boolean;
   error: string | null;
 }
@@ -33,6 +34,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    return serverErrorClear;
   }, []);
 
   const loginUser = async (payload: LoginPayload) => {
@@ -44,14 +47,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const loggedInUser: User = {
         username: data.username,
         email: data.email,
-        passwordLength: payload.Password.length,
-        userId: data.userId,
+        passwordLength: payload.password.length,
+        userId: data.id,
       };
 
       setUser(loggedInUser);
       localStorage.setItem("user", JSON.stringify(loggedInUser));
     } catch (err: any) {
-      setError(err.response?.data?.message || "Login failed");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Login failed");
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         username: username,
         email: email,
         passwordLength: password.length,
-        userId: data.userId,
+        userId: data.Id,
       };
       
       setUser(regestredUser);
@@ -79,47 +84,57 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const updateUsername = async (newUsername: string) => {
-    try {
-      setIsLoading(true);
-      const data = await updateUsernameApi(newUsername); // Функция из authApi.ts
-      if (user) {
-        setUser({ ...user, username: data.username! }); // Обновляем только, если API вернул username
-      }
-    } catch (error: any) {
-      setError(error.message);
-      throw new Error("Failed to update username: " + error.message);
-    } finally {
-      setIsLoading(false);
-    }
+  // const updateUsername = async (newUsername: string) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const data = await updateUsernameApi(user?.userId || "0", newUsername); // Функция из authApi.ts
+  //     if (user) {
+  //       setUser({ ...user, username: data.username! }); // Обновляем только, если API вернул username
+  //     }
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     throw new Error("Failed to update username: " + error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  
+  // const updateEmail = async (newEmail: string) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const data = await updateEmailApi(user?.userId || "0", newEmail); // Функция из authApi.ts
+  //     if (user) {
+  //       setUser({ ...user, email: data.email! }); // Обновляем только, если API вернул email
+  //     }
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     throw new Error("Failed to update email: " + error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  
+  // const updatePassword = async (currentPassword: string, newPassword: string) => {
+  //   try {
+  //     setIsLoading(true);
+  //     await updatePasswordApi(user?.userId || "0", currentPassword, newPassword);
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     throw new Error("Failed to update password: " + error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const updateUserSession = (updatedData: Partial<User>) => {
+    setUser((prevUser) => {
+      if (!prevUser) return null;
+      const updatedUser = { ...prevUser, ...updatedData };
+      localStorage.setItem("user", JSON.stringify(updatedUser)); // Обновляем localStorage
+      return updatedUser;
+    });
   };
   
-  const updateEmail = async (newEmail: string) => {
-    try {
-      setIsLoading(true);
-      const data = await updateEmailApi(newEmail); // Функция из authApi.ts
-      if (user) {
-        setUser({ ...user, email: data.email! }); // Обновляем только, если API вернул email
-      }
-    } catch (error: any) {
-      setError(error.message);
-      throw new Error("Failed to update email: " + error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  
-  const updatePassword = async (currentPassword: string, newPassword: string) => {
-    try {
-      setIsLoading(true);
-      await updatePasswordApi(currentPassword, newPassword);
-    } catch (error: any) {
-      setError(error.message);
-      throw new Error("Failed to update password: " + error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const logout = () => {
     setUser(null);
@@ -131,7 +146,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loginUser, registerUser, logout, serverErrorClear, isLoading, error, updateUsername, updateEmail, updatePassword }}>
+    <AuthContext.Provider value={{ user, updateUserSession, loginUser, registerUser, logout, serverErrorClear, isLoading, error }}>
       {children}
     </AuthContext.Provider>
   );

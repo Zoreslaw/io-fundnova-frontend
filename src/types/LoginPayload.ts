@@ -1,5 +1,5 @@
 export type LoginPayload = {
-  Email: string | null;
-  Username: string | null;
-  Password: string;
+  email: string | null;
+  username: string | null;
+  password: string;
 }

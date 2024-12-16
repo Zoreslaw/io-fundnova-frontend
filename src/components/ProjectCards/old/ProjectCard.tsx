@@ -1,5 +1,5 @@
 import React from "react";
-import "./ProjectCard.css";
+// import "./ProjectCard.css";
 
 interface Project {
   id: string;

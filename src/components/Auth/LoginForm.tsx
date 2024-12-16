@@ -24,8 +24,8 @@ const LoginForm: React.FC = () => {
     const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     const loginPayload: LoginPayload = emailPattern.test(data.username)
-      ? { Email: data.username, Username: null, Password: data.password }
-      : { Email: null, Username: data.username, Password: data.password };
+      ? { email: data.username, username: null, password: data.password }
+      : { email: null, username: data.username, password: data.password };
 
     loginUser(loginPayload);
   };

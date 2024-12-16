@@ -1,17 +1,31 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "./Homepage.css";
-import ProjectCard from "../components/ProjectCards/ProjectCard";
-import { useProjects } from "../hooks/useProjects";
+import ProjectCard from "../components/ProjectCards/old/ProjectCard";
+import HomePageProjectCard from "../components/ProjectCards/HomepageProjectCard";
+import { useProjects } from "../hooks/useRecentProjects";
 //import { useAuth } from "../Contexts/AuthContext";
 
 const Homepage: React.FC = () => {
   const { projects, isLoading, error } = useProjects();
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsContentVisible(true);
+    } else {
+      setIsContentVisible(false);
+    }
+  }, [isLoading]);
   
 //  const { user } = useAuth();
 
   // const exploreButtonHandler = () => {
   //   alert("User: " + user?.username + " Email: " + user?.email)
   // }
+
+  console.log(projects.map((project) =>
+    console.log(project)));
 
   return (
     <div className="homepage">
@@ -37,18 +51,20 @@ const Homepage: React.FC = () => {
       </section>
 
       <section className="projects">
-        <h2>Recent Projects</h2>
-        {isLoading && <p>Loading projects...</p>}
-        {error && <p>Error loading projects: {error}</p>}
-        {!isLoading && !error && projects.length > 0 ? (
-        <div className="project-list">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
+        <div className={`infoContentWrapper ${isContentVisible ? "fade-in" : "fade-out"}`}>
+          <h2>Recent Projects</h2>
+          {/* {isLoading && <p>Loading projects...</p>} */}
+          {error && <p>Error loading projects: {error}</p>}
+          {!isLoading && !error && projects.length > 0 ? (
+          <div className="project-list">
+          {projects.map((project) => (
+            <HomePageProjectCard key={project.Id} project={project} />
           ))}
+          </div>
+          ) : (
+            !isLoading && <p>No projects found.</p>
+          )}
         </div>
-        ) : (
-          !isLoading && <p>No projects found.</p>
-        )}
       </section>
     </div>
   );

@@ -1,98 +1,78 @@
+import { convertToPascalCase, convertToCamelCase } from "../utils/caseConverters";
+
 const API_BASE = "https://localhost:7225/api";
 
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    const errorResponse = await response.text();
+    throw new Error(errorResponse);
+  }
+  const data = await response.json();
+  return convertToCamelCase(data);
+};
 
 export const updateSurnameApi = async (userId: string, surname: string) => {
-  const response = await fetch(`${API_BASE}/Users/update-surname`, {
+  const payload = convertToPascalCase({ id: userId, surname });
+  const response = await fetch(`${API_BASE}/users/update-surname`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, surname }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update surname");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updateAddressApi = async (userId: string, address: string) => {
-  const response = await fetch(`${API_BASE}/Users/update-address`, {
+  const payload = convertToPascalCase({ id: userId, address });
+  const response = await fetch(`${API_BASE}/users/update-address`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, address }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update address");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updatePaymentApi = async (userId: string, paymentMethod: string) => {
-  const response = await fetch(`${API_BASE}/Users/update-payment-method`, {
+  const payload = convertToPascalCase({ id: userId, paymentMethod });
+  const response = await fetch(`${API_BASE}/users/update-payment-method`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, paymentMethod }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update payment method");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updatePaymentInfoApi = async (userId: string, paymentInfo: string) => {
-  const response = await fetch(`${API_BASE}/Users/update-payment-info`, {
+  const payload = convertToPascalCase({ id: userId, paymentInfo });
+  const response = await fetch(`${API_BASE}/users/update-payment-info`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, paymentInfo }),
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update payment info");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 export const fetchAdvancedInfo = async (userId: string): Promise<any> => {
-  
-
-  const response = await fetch(`${API_BASE}/Users/advanced-info`, {
+  const payload = convertToPascalCase({ id: userId });
+  const response = await fetch(`${API_BASE}/users/advanced-info`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userId }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to fetch advanced info");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updateNameApi = async (userId: string, name: string): Promise<any> => {
-  const response = await fetch(`${API_BASE}/Users/update-name`, {
+  const payload = convertToPascalCase({ id: userId, name });
+  const response = await fetch(`${API_BASE}/users/update-name`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userId, name }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    const errorResponse = await response.json();
-    throw new Error(errorResponse.message || "Failed to update name");
-  }
-
-  return response.json();
+  return handleResponse(response);
 };

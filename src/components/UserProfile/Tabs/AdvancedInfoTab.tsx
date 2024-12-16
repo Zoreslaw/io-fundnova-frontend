@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./GeneralInfoTab.css"; // Используем существующий CSS для таба
+import React, { useEffect, useState } from "react";
+import "./GeneralInfoTab.css";
 import ChangeNameForm from "./Forms/ChangeNameForm";
 import ChangeSurnameForm from "./Forms/ChangeSurnameForm";
 import ChangeAddressForm from "./Forms/ChangeAdressForm";
@@ -10,15 +10,20 @@ import { useAuth } from "../../../contexts/AuthContext";
 
 const AdvancedInfoTab: React.FC = () => {
   const { user } = useAuth();
-
-  if (!user) {
-    return <p>Loading user information...</p>;
-  }
-
   const [activeField, setActiveField] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
   const { info, isLoading, error, updateName, updateSurname, updateAddress, updatePayment, updatePaymentInfo } =
-  useAdvancedInfo(user);
+    useAdvancedInfo(user!);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsContentVisible(true)
+    } else {
+      setIsContentVisible(false);
+    }
+  }, [isLoading]);
 
   const handleOpenEdit = (field: string) => {
     if (activeField) return;
@@ -59,103 +64,73 @@ const AdvancedInfoTab: React.FC = () => {
     }
   };
 
-  if (isLoading) return <p>Loading advanced info...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
-    <div className="generalInfoTab">
-      <h3 style={{ marginTop: "0px" }}>Advanced Info</h3>
-      <ul className="infoList">
-        {/* Name Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
+    <div className="advancedInfoTab">
+      {/* {isLoading && <p>Loading advanced info...</p>} */}
+
+      {error && <p className="error">{error}</p>}
+
+      <div className={`infoContentWrapper ${isContentVisible ? "fade-in" : "fade-out"}`}>
+        <h3 style={{ marginTop: "0px" }}>Advanced Info</h3>
+        <ul className="infoList">
+          <li className="infoItem" onClick={() => 
             activeField ? handleChangeEdit("name") : handleOpenEdit("name")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Name:</span>
-            <span className="infoValue">{info?.name || "Not provided"}</span>
-          </div>
-          <span className="editIcon" title="Edit name">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
+            }>
+            <div className="infoContent">
+              <span className="infoLabel">Name:</span>
+              <span className="infoValue">{info?.name || "Not provided"}</span>
+            </div>
+            <i className="material-icons editIcon" title="Edit name">edit</i>
+          </li>
 
-        {/* Surname Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
+          <li className="infoItem" onClick={() => 
             activeField ? handleChangeEdit("surname") : handleOpenEdit("surname")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Surname:</span>
-            <span className="infoValue">{info?.surname || "Not provided"}</span>
-          </div>
-          <span className="editIcon" title="Edit surname">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
+            }>
+            <div className="infoContent">
+              <span className="infoLabel">Surname:</span>
+              <span className="infoValue">{info?.surname || "Not provided"}</span>
+            </div>
+            <i className="material-icons editIcon" title="Edit surname">edit</i>
+          </li>
 
-        {/* Address Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
+          <li className="infoItem" onClick={() => 
             activeField ? handleChangeEdit("address") : handleOpenEdit("address")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Address:</span>
-            <span className="infoValue">{info?.address || "Not provided"}</span>
-          </div>
-          <span className="editIcon" title="Edit address">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
+            }>
+            <div className="infoContent">
+              <span className="infoLabel">Address:</span>
+              <span className="infoValue">{info?.address || "Not provided"}</span>
+            </div>
+            <i className="material-icons editIcon" title="Edit address">edit</i>
+          </li>
 
-        {/* Payment Method Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
+          <li className="infoItem" onClick={() => 
             activeField ? handleChangeEdit("payment") : handleOpenEdit("payment")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Payment Method:</span>
-            <span className="infoValue">{info?.paymentMethod || "Not provided"}</span>
-          </div>
-          <span className="editIcon" title="Edit payment method">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
+            }>
+            <div className="infoContent">
+              <span className="infoLabel">Payment Method:</span>
+              <span className="infoValue">{info?.paymentMethod || "Not provided"}</span>
+            </div>
+            <i className="material-icons editIcon" title="Edit payment method">edit</i>
+          </li>
 
-        {/* Payment Method Info Card */}
-        <li
-          className="infoItem"
-          onClick={() =>
-            activeField
-              ? handleChangeEdit("paymentInfo")
-              : handleOpenEdit("paymentInfo")
-          }
-        >
-          <div className="infoContent">
-            <span className="infoLabel">Payment Info:</span>
-            <span className="infoValue">{info?.paymentInfo || "Not provided"}</span>
-          </div>
-          <span className="editIcon" title="Edit payment info">
-            <i className="material-icons">edit</i>
-          </span>
-        </li>
-      </ul>
+          <li className="infoItem" onClick={() => 
+            activeField ? handleChangeEdit("paymentInfo") : handleOpenEdit("paymentInfo")
+            }>
+            <div className="infoContent">
+              <span className="infoLabel">Payment Info:</span>
+              <span className="infoValue">{info?.paymentInfo || "Not provided"}</span>
+            </div>
+            <i className="material-icons editIcon" title="Edit payment info">edit</i>
+          </li>
+        </ul>
 
-      {/* Form Section */}
-      <div
-        className={`editForm ${
-          activeField ? "visible" : ""
-        } ${isTransitioning ? "transitioning" : ""}`}
-      >
-        {renderForm()}
+        <div
+          className={`editForm ${activeField ? "visible" : ""} ${
+            isTransitioning ? "transitioning" : ""
+          }`}
+        >
+          {renderForm()}
+        </div>
       </div>
     </div>
   );

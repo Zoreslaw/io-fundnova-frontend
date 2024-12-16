@@ -3,6 +3,11 @@
   /* padding: 20px; */
 }
 
+.advancedInfoTab {
+  position: relative;
+  /* padding: 20px; */
+}
+
 .infoList {
   list-style: none;
   padding: 0;
@@ -34,9 +39,9 @@
 }
 
 .infoItem:hover {
-  background-color: #464646; /* Цвет при наведении */
-  transform: translateY(-0.5px); /* Легкое поднятие */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Увеличение тени */
+  background-color: #464646;
+  transform: translateY(-0.5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .infoContent {
@@ -58,19 +63,19 @@
 }
 
 .editIcon {
-  font-size: 1.5rem; /* Размер иконки */
-  color: #ffffff; /* Цвет иконки */
-  cursor: pointer; /* Указатель для интерактивности */
-  margin: 0 10px; /* Отступ от текста */
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  margin: 0 10px;
   display: flex;
-  align-items: center; /* Выровнять содержимое по вертикали */
-  justify-content: center; /* Центрирование внутри элемента */
-  transition: color 0.3s ease, transform 0.2s ease; /* Анимации для интерактивности */
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .editIcon:hover {
-  color: #1e90ff; /* Цвет при наведении */
-  transform: scale(1.1); /* Небольшое увеличение */
+  color: #1e90ff;
+  transform: scale(1.1);
 }
 
 .editButton {
@@ -95,12 +100,12 @@
   border-radius: 5px;
   border-left: 2px solid #0050a697;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 0; /* Начальное свернутое состояние */
+  max-height: 0;
   overflow: hidden;
-  opacity: 0; /* Форма невидима */
-  transform: translateY(-20px); /* Смещение вверх */
+  opacity: 0;
+  transform: translateY(-20px);
   transition: all 0.2s ease;
-  pointer-events: none; /* Нельзя взаимодействовать */
+  pointer-events: none;
 }
 
 .editForm form {
@@ -115,26 +120,26 @@
 }
 
 .editForm.visible {
-  max-height: 500px; /* Пространство для содержимого */
-  opacity: 1; /* Форма видима */
-  transform: translateY(0); /* Без смещения */
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
   pointer-events: auto;
 }
 
 .editForm.transitioning {
-  opacity: 0; /* Форма исчезает */
-  transform: translateY(-20px); /* Смещение вверх */
+  opacity: 0;
+  transform: translateY(-20px);
   pointer-events: none;
-  max-height: 0; /* Свернуть форму */
+  max-height: 0;
 }
 
 .editForm .innerContent {
-  opacity: 1; /* Содержимое видно */
-  transition: opacity 0.3s ease; /* Плавное исчезновение */
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .editForm.transitioning .innerContent {
-  opacity: 0; /* Содержимое исчезает медленно */
+  opacity: 0;
 }
 
 .formActions {

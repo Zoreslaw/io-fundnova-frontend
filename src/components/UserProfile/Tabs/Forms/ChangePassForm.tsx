@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useAuth } from "../../../../contexts/AuthContext";
 
 interface ChangePasswordFormInputs {
   currentPassword: string;
@@ -8,58 +7,39 @@ interface ChangePasswordFormInputs {
   confirmPassword: string;
 }
 
-const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
-  const { updatePassword, isLoading, error, serverErrorClear } = useAuth();
-  const [firstClick, setFirstClick] = useState(false);
+interface ChangePassFormProps {
+  onCancel: () => void;
+  updatePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+}
+
+const ChangePassForm: React.FC<ChangePassFormProps> = ({
+  onCancel,
+  updatePassword,
+}) => {
   const {
     register,
     handleSubmit,
     watch,
-    trigger,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ChangePasswordFormInputs>();
 
   const newPassword = watch("newPassword");
 
-  // Обработчик для первой валидации confirmPassword
-  const buttonHandler = () => {
-    setFirstClick(true);
-  };
-
-  // Триггер динамической валидации confirmPassword при изменении newPassword
-  useEffect(() => {
-    if (firstClick) {
-      trigger("confirmPassword");
-    }
-  }, [newPassword, trigger, firstClick]);
-
   const onSubmit: SubmitHandler<ChangePasswordFormInputs> = async (data) => {
-    try {
-      // Попытка обновить пароль
-      await updatePassword(data.currentPassword, data.newPassword);
-
-      // Закрываем форму только при отсутствии ошибок
-      onCancel();
-    } catch (err) {
-      console.error("Error updating password:", err);
-    }
+    await updatePassword(data.currentPassword, data.newPassword);
+    onCancel();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h3>Change Password</h3>
-
       <div className="form-group">
         <label>Current Password</label>
         <input
           type="password"
           {...register("currentPassword", {
-            required: "Please enter your current password",
+            required: "Current password is required",
           })}
-          onChange={(e) => {
-            register("currentPassword").onChange(e);
-            serverErrorClear();
-          }}
         />
         {errors.currentPassword && (
           <span className="error">{errors.currentPassword.message}</span>
@@ -71,16 +51,12 @@ const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
         <input
           type="password"
           {...register("newPassword", {
-            required: "Please enter a new password",
+            required: "New password is required",
             minLength: {
               value: 6,
               message: "Password must be at least 6 characters long",
             },
           })}
-          onChange={(e) => {
-            register("newPassword").onChange(e);
-            serverErrorClear();
-          }}
         />
         {errors.newPassword && (
           <span className="error">{errors.newPassword.message}</span>
@@ -96,29 +72,18 @@ const ChangePassForm: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
             validate: (value) =>
               value === newPassword || "Passwords do not match",
           })}
-          onChange={(e) => {
-            register("confirmPassword").onChange(e);
-            serverErrorClear();
-          }}
         />
         {errors.confirmPassword && (
           <span className="error">{errors.confirmPassword.message}</span>
         )}
       </div>
 
-      {error && <div className="error">{"Failed to update password"}</div>}
-
       <div className="formActions">
         <button type="button" onClick={onCancel} className="cancelButton">
           Cancel
         </button>
-        <button
-          type="submit"
-          className="confirmButton"
-          disabled={isLoading}
-          onClick={buttonHandler}
-        >
-          {isLoading ? "Updating..." : "Confirm"}
+        <button type="submit" className="confirmButton" disabled={isSubmitting}>
+          {isSubmitting ? "Updating..." : "Confirm"}
         </button>
       </div>
     </form>
