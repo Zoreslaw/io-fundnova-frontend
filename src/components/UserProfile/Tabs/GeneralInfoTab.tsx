@@ -33,7 +33,7 @@ const GeneralInfoTab: React.FC = () => {
     setTimeout(() => {
       setActiveField(field);
       setIsTransitioning(false);
-      clearError();
+      // clearError();
     }, 300);
   };
 
@@ -42,7 +42,7 @@ const GeneralInfoTab: React.FC = () => {
     setTimeout(() => {
       setActiveField(null);
       setIsTransitioning(false);
-      clearError();
+      // clearError();
     }, 300);
   };
 
@@ -61,8 +61,6 @@ const GeneralInfoTab: React.FC = () => {
 
   return (
     <div className="generalInfoTab">
-      {error && <p className="error">{error}</p>}
-
       <div className={`infoContentWrapper ${isContentVisible ? "fade-in" : "fade-out"}`}>
         <h3 style={{ marginTop: "0px" }}>User Information</h3>
         <ul className="infoList">
@@ -82,7 +80,6 @@ const GeneralInfoTab: React.FC = () => {
             </span>
           </li>
 
-          {/* Email Card */}
           <li
             className="infoItem"
             onClick={() =>
@@ -98,7 +95,6 @@ const GeneralInfoTab: React.FC = () => {
             </span>
           </li>
 
-          {/* Password Card */}
           <li
             className="infoItem"
             onClick={() =>
@@ -119,7 +115,8 @@ const GeneralInfoTab: React.FC = () => {
           </li>
         </ul>
 
-        {/* Form Section */}
+        {error && <p className="error">{error}</p>}
+
         <div
           className={`editForm ${
             activeField ? "visible" : ""

@@ -20,8 +20,9 @@ export const useAdvancedInfo = (user: User) => {
       const data = await fetchAdvancedInfo(user.userId);
       setInfo(data);
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Failed to fetch advanced info");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to fetch advanced info");
     } finally {
       setIsLoading(false);
     }
@@ -33,7 +34,9 @@ export const useAdvancedInfo = (user: User) => {
       const data = await updateNameApi(user.userId, newName);
       setInfo((prevInfo: any) => ({ ...prevInfo, name: data.name }));
     } catch (err: any) {
-      setError(err.message || "Failed to update name");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update name");
     } finally {
       setIsLoading(false);
     }
@@ -45,7 +48,9 @@ export const useAdvancedInfo = (user: User) => {
       const data = await updateSurnameApi(user.userId, newSurname);
       setInfo((prevInfo: any) => ({ ...prevInfo, surname: data.surname }));
     } catch (err: any) {
-      setError(err.message || "Failed to update surname");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update surname");
     } finally {
       setIsLoading(false);
     }
@@ -56,9 +61,10 @@ export const useAdvancedInfo = (user: User) => {
     try {
       const data = await updateAddressApi(user.userId, newAddress);
       setInfo((prevInfo: any) => ({ ...prevInfo, address: data.address }));
-      console.log(info);
     } catch (err: any) {
-      setError(err.message || "Failed to update address");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update address");
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +76,9 @@ export const useAdvancedInfo = (user: User) => {
       const data = await updatePaymentApi(user.userId, newPayment);
       setInfo((prevInfo: any) => ({ ...prevInfo, paymentMethod: data.paymentMethod }));
     } catch (err: any) {
-      setError(err.message || "Failed to update payment method");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update payment method");
     } finally {
       setIsLoading(false);
     }
@@ -82,10 +90,16 @@ export const useAdvancedInfo = (user: User) => {
       const data = await updatePaymentInfoApi(user.userId, newPaymentInfo);
       setInfo((prevInfo: any) => ({ ...prevInfo, paymentInfo: data.paymentInfo }));
     } catch (err: any) {
-      setError(err.message || "Failed to update payment info");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update payment info");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   useEffect(() => {
@@ -96,6 +110,7 @@ export const useAdvancedInfo = (user: User) => {
     info,
     isLoading,
     error,
+    clearError,
     loadAdvancedInfo,
     updateName,
     updateSurname,

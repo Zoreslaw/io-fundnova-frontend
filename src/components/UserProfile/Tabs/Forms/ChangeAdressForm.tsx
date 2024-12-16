@@ -17,6 +17,7 @@ const ChangeAddressForm: React.FC<{ onCancel: () => void; updateAddress: (addres
 
   const onSubmit: SubmitHandler<AddressFormInputs> = async (data) => {
     await updateAddress(data.address);
+    
     onCancel();
   };
 

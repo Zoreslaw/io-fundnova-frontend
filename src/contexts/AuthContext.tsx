@@ -6,6 +6,7 @@ import { User } from "../types/User";
 
 interface AuthContextProps {
   user: User | null;
+  userId: string | null;
   loginUser: (payload: LoginPayload) => Promise<void>;
   registerUser: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -26,6 +27,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -52,6 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
 
       setUser(loggedInUser);
+      setUserId(data.id);
       localStorage.setItem("user", JSON.stringify(loggedInUser));
     } catch (err: any) {
       console.log('err',err)
@@ -71,14 +74,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         username: username,
         email: email,
         passwordLength: password.length,
-        userId: data.Id,
+        userId: data.id,
       };
-      
+      setUserId(data.id);
       setUser(regestredUser);
       localStorage.setItem("user", JSON.stringify(regestredUser));
       console.log("Registration successful:", data);
     } catch (err: any) {
-      setError(err.response?.data?.message || "Registration failed");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Registration failed");
     } finally {
       setIsLoading(false);
     }
@@ -138,6 +143,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    setUserId(null);
     localStorage.removeItem("user");
   };
 
@@ -146,7 +152,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, updateUserSession, loginUser, registerUser, logout, serverErrorClear, isLoading, error }}>
+    <AuthContext.Provider value={{ user, userId, updateUserSession, loginUser, registerUser, logout, serverErrorClear, isLoading, error }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Homepage.css";
-import ProjectCard from "../components/ProjectCards/old/ProjectCard";
 import HomePageProjectCard from "../components/ProjectCards/HomepageProjectCard";
 import { useProjects } from "../hooks/useRecentProjects";
 //import { useAuth } from "../Contexts/AuthContext";
@@ -23,9 +22,6 @@ const Homepage: React.FC = () => {
   // const exploreButtonHandler = () => {
   //   alert("User: " + user?.username + " Email: " + user?.email)
   // }
-
-  console.log(projects.map((project) =>
-    console.log(project)));
 
   return (
     <div className="homepage">

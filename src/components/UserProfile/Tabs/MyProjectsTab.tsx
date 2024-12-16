@@ -40,10 +40,22 @@ const MyProjectsTab: React.FC = () => {
 
   // if (isLoading) return <div className="loading">Loading projects...</div>;
 
-  if (error) return <div className="error">{error}</div>;
+  switch (error) {
+    case "Could not find any projects.":
+      return (
+        <div style={
+          {color: "#d8d8d8", padding: "20px"}        
+        }>
+          <h2>{error}</h2>
+        </div>
+      )
+    // default:
+    //   return <div className="error">{error}</div>
+  }
 
-  console.log(projects.map((project) =>
-    console.log(project)));
+
+  // console.log(projects.map((project) =>
+  //   console.log(project)));
 
   return (
     <div className="my-projects-tab">
@@ -59,10 +71,10 @@ const MyProjectsTab: React.FC = () => {
                 Funds Raised: ${selectedProject?.fundsRaised} / $
                 {selectedProject?.fundingGoal}
               </p>
-              <p>Number of Backers: {selectedProject?.backersCount}</p>
-              <p>Views: {selectedProject?.viewsCount}</p>
+              <p>Number of Backers: {selectedProject?.backers}</p>
+              <p>Views: {selectedProject?.views}</p>
               <button
-                className="edit-button"
+                className="confirmButton"
                 onClick={() => (window.location.href = `/edit-project/${selectedProject?.id}`)}
               >
                 Edit

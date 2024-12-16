@@ -10,14 +10,14 @@ import "./Header.css";
 import UserProfile from "../UserProfile/UserProfile";
 
 const Header: React.FC = () => {
-  const { user, logout } = useAuth(); // Dekonstrukcja `user` i `logout`
+  const { user, logout } = useAuth();
   const loginModal = useModal();
   const registerModal = useModal();
   const profileModal = useModal();
 
-  useEffect(() => {
-    console.log(user);
-  }, [user])
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user])
 
   return (
     <header className="header">
@@ -40,7 +40,6 @@ const Header: React.FC = () => {
         )}
       </div>
 
-      {/* Modals */}
       <Modal isOpen={loginModal.isOpen} onClose={loginModal.closeModal}>
         <LoginForm />
       </Modal>

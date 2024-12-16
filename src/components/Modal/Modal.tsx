@@ -12,15 +12,15 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const { user, serverErrorClear } = useAuth();
+  const { user, serverErrorClear, userId } = useAuth();
 
-  console.log(children);
+  // console.log(children);
 
   useEffect(() => {
-    if (user) {
+    if (userId) {
       handleClose();
     }
-  }, [user]);
+  }, [userId]);
 
   useEffect(() => {
     if (isOpen) {

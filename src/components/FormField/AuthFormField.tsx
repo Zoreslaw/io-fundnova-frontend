@@ -12,8 +12,6 @@ interface AuthFormFieldProps {
 
 const AuthFormField: React.FC<AuthFormFieldProps> = ({ label, name, type, error, register, validation }) => {
 
-    console.log("error");
-
     return(
       <div className="form-group">
         <label>{label}</label>

@@ -12,9 +12,10 @@ export const useProjects = () => {
       try {
         const data = await getRecentProjects();
         setProjects(data.list);
-        console.warn(data);
-      } catch (err) {
-        setError("Failed to fetch projects");
+      } catch (err: any) {
+        console.log('err',err)
+        const msg = err?.message.split(":")[1].trim();
+        setError(msg || "Failed to fetch projects");
       } finally {
         setIsLoading(false);
       }
@@ -23,5 +24,9 @@ export const useProjects = () => {
     fetchRecentProjects();
   }, []);
 
-  return { projects, isLoading, error };
+  const clearError = () => {
+    setError(null);
+  };
+
+  return { projects, isLoading, error, clearError };
 };

@@ -67,9 +67,6 @@ const AdvancedInfoTab: React.FC = () => {
   return (
     <div className="advancedInfoTab">
       {/* {isLoading && <p>Loading advanced info...</p>} */}
-
-      {error && <p className="error">{error}</p>}
-
       <div className={`infoContentWrapper ${isContentVisible ? "fade-in" : "fade-out"}`}>
         <h3 style={{ marginTop: "0px" }}>Advanced Info</h3>
         <ul className="infoList">
@@ -123,6 +120,8 @@ const AdvancedInfoTab: React.FC = () => {
             <i className="material-icons editIcon" title="Edit payment info">edit</i>
           </li>
         </ul>
+
+        {error && <p className="error">{error}</p>}
 
         <div
           className={`editForm ${activeField ? "visible" : ""} ${

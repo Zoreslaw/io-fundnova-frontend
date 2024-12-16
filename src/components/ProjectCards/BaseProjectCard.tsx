@@ -6,9 +6,10 @@ interface Project {
   id: string;
   title: string;
   description?: string;
-  URL: string;
+  url: string;
   fundingGoal?: number;
   fundsRaised?: number;
+  deadline?: string;
 }
 
 interface BaseProjectCardProps {
@@ -17,6 +18,7 @@ interface BaseProjectCardProps {
   renderContent?: (project: Project) => React.ReactNode;
   className?: string;
   paddingContentStyle?: CSS.Properties;
+  fontSizeContentStyle?: CSS.Properties;
 }
 
 const BaseProjectCard: React.FC<BaseProjectCardProps> = ({
@@ -25,22 +27,24 @@ const BaseProjectCard: React.FC<BaseProjectCardProps> = ({
   renderContent,
   className = "",
   paddingContentStyle,
+  fontSizeContentStyle,
 }) => {
   const progress =
     project.fundingGoal && project.fundsRaised
       ? Math.min((project.fundsRaised / project.fundingGoal) * 100, 100)
       : null;
     
+  
 
   return (
     <div className={`base-project-card ${className}`}>
       <div className="project-image">
-        <img src={project.URL} alt={project.title} />
+        <img src={project.url} alt={project.title} />
         {renderOverlay && <div className="overlay">{renderOverlay(project)}</div>}
       </div>
-      <div className="project-content" style={paddingContentStyle ? paddingContentStyle : {padding: "20px"}}>
+      <div className="project-content" style={(paddingContentStyle ? paddingContentStyle : ({padding: "20px", height: "40%"}))}>
         <div className="project-title">
-          <h3>{project.title}</h3>
+          <h3 style={fontSizeContentStyle ?? fontSizeContentStyle}>{project.title}</h3>
         </div>
         {progress !== null && (
           <div className="progress-content">
@@ -53,6 +57,12 @@ const BaseProjectCard: React.FC<BaseProjectCardProps> = ({
                 style={{ "--progress-width": `${progress}%` } as React.CSSProperties}
               ></div>
             </div>
+          </div>
+        )}
+        {project.deadline && (
+          <div className="deadline">
+            <i className="material-icons deadline-icon">schedule</i>
+            <span className="deadline-text">{project.deadline}</span>
           </div>
         )}
         {renderContent && renderContent(project)}

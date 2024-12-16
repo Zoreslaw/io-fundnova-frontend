@@ -26,7 +26,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         </div>
       </div>
 
-      <div className="project-content">
+      <div className="project-content" style={{height: "50%"}}>
         <div className="project-title">
           <h3>{project.title}</h3>
         </div>

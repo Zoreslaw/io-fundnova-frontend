@@ -5,7 +5,7 @@ import "./ProfileProjectCard.css";
 interface Project {
   id: string;
   title: string;
-  URL: string;
+  url: string;
 }
 
 interface ProfileProjectCardProps {
@@ -23,10 +23,11 @@ const ProfileProjectCard: React.FC<ProfileProjectCardProps> = ({
         project={{
             id: project.id,
             title: project.title,
-            URL: project.URL,
+            url: project.url,
         }}
         className="profile-project-card"
-        paddingContentStyle={{padding: "0 20px"}}
+        paddingContentStyle={{padding: "0 20px", height: "50%"}}
+        fontSizeContentStyle={{fontSize: "15px"}}
         />
     </div>
   );

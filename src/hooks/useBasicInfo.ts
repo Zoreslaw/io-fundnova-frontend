@@ -16,8 +16,9 @@ export const useBasicInfo = (user: User) => {
       const data = await fetchBasicInfo(user.userId);
       setInfo(data);
     } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Failed to fetch advanced info");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to fetch advanced info");
     } finally {
       setIsLoading(false);
     }
@@ -30,7 +31,9 @@ export const useBasicInfo = (user: User) => {
       setInfo((prevInfo: any) => ({ ...prevInfo, username: data.username }));
       updateUserSession({ username: data.username });
     } catch (err: any) {
-      setError(err.message || "Failed to update username");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update username");
     } finally {
       setIsLoading(false);
     }
@@ -42,7 +45,9 @@ export const useBasicInfo = (user: User) => {
       const data = await updateEmailApi(user.userId, newEmail);
       setInfo((prevInfo: any) => ({ ...prevInfo, email: data.email }));
     } catch (err: any) {
-      setError(err.message || "Failed to update email");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update email");
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +59,9 @@ export const useBasicInfo = (user: User) => {
       const data = await updatePasswordApi(user.userId, currentPassword, newPassword);
       setInfo((prevInfo: any) => ({ ...prevInfo, passwordLength: data.passwordLength }));
     } catch (err: any) {
-      setError(err.message || "Failed to update password");
+      console.log('err',err)
+      const msg = err?.message.split(":")[1].trim();
+      setError(msg || "Failed to update password");
     } finally {
       setIsLoading(false);
     }

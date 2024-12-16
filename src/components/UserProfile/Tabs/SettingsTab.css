@@ -1,0 +1,79 @@
+.settings-tab {
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+  }
+  
+  .settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #3d3d3d;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 10px;
+  }
+  
+  .settings-item:hover {
+    background-color: #464646;
+  }
+  
+  .settings-label {
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .switch {
+    width: 40px;
+    height: 20px;
+    background: #555555;
+    border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s ease;
+  }
+  
+  .switch.active {
+    background: #0056b3;
+  }
+  
+  .switch::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 1px;
+    left: 2px;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  .switch.active::before {
+    transform: translateX(20px);
+  }
+
+  .infoContentWrapper {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .infoContentWrapper.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .infoContentWrapper.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+  }

@@ -6,10 +6,12 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  URL: string;
+  url: string;
   fundingGoal: number;
   fundsRaised: number;
+  deadline: string;
 }
+
 
 const HomepageProjectCard: React.FC<{ project: Project }> = ({ project }) => {
   return (

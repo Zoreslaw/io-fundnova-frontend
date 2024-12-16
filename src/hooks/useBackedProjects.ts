@@ -13,9 +13,11 @@ export const useBackedProjects = (userId: string | null) => {
       setIsLoading(true);
       try {
         const data = await getBackedProjects(userId);
-        setProjects(data);
+        setProjects(data.list);
       } catch (err: any) {
-        setError(err.message || "Failed to fetch backed projects");
+        console.log('err',err)
+        const msg = err?.message.split(":")[1].trim();
+        setError(msg || "Failed to fetch backed projects");
       } finally {
         setIsLoading(false);
       }
@@ -24,5 +26,10 @@ export const useBackedProjects = (userId: string | null) => {
     fetchBackedProjects();
   }, [userId]);
 
-  return { projects, isLoading, error };
+  const clearError = () => {
+    setError(null);
+  };
+
+
+  return { projects, isLoading, error, clearError };
 };

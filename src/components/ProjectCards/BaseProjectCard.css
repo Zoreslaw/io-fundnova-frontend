@@ -36,7 +36,7 @@
   }
   
   .base-project-card:hover:not(.profile-project-card) .project-image img {
-    transform: scale(1.1); /* Только для остальных карточек */
+    transform: scale(1.1);
   }
   
   .overlay {
@@ -65,7 +65,7 @@
   
   .project-content {
     position: relative;
-    height: 50%;
+    /* height: 50%; */
     padding: 20px;
     text-align: center;
     display: flex;
@@ -86,9 +86,18 @@
     color: #fff;
   }
   
+
   .project-title h3 {
-    display: inline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(0.6rem, 1.2vw, 1rem);
+    line-height: 1.2;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 100%;
   }
+  
   
   .progress-bar {
     position: relative;
@@ -108,7 +117,7 @@
       background-position: 100% 50%;
     }
     100% {
-      background-position: 0% 50%; /* Возвращаемся к началу */
+      background-position: 0% 50%;
     }
   }
   
@@ -141,3 +150,22 @@
     padding-bottom: 5%;
   }
   
+  .deadline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    color: #e0e0e0;
+    font-size: 1rem;
+  }
+  
+  .deadline-icon {
+    font-size: 1.2rem;
+    color: #757575;
+  }
+  
+  .deadline-text {
+    font-weight: 500;
+    color: #ffffff;
+  } 
