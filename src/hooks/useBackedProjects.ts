@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getBackedProjects } from "../utils/projectsApi";
 
-export const useBackedProjects = (userId: string | null) => {
+export const useBackedProjects = (userId?: number) => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

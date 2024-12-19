@@ -1,0 +1,78 @@
+.project-display {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .project-image {
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tag {
+    background-color: #e3e3e3;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .funding-info {
+    margin: 20px 0;
+  }
+  
+  .progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 10px 0;
+    height: 20px;
+  }
+  
+  .progress {
+    background-color: #76c7c0;
+    height: 100%;
+  }
+  
+  .deadline {
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  .rewards {
+    margin-top: 20px;
+  }
+  
+  .reward-card {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .reward-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px 0;
+  }
+  

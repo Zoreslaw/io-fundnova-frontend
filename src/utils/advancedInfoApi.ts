@@ -11,7 +11,7 @@ const handleResponse = async (response: Response) => {
   return convertToCamelCase(data);
 };
 
-export const updateSurnameApi = async (userId: string, surname: string) => {
+export const updateSurnameApi = async (userId: number, surname: string) => {
   const payload = convertToPascalCase({ id: userId, surname });
   const response = await fetch(`${API_BASE}/users/update-surname`, {
     method: "POST",
@@ -22,7 +22,7 @@ export const updateSurnameApi = async (userId: string, surname: string) => {
   return handleResponse(response);
 };
 
-export const updateAddressApi = async (userId: string, address: string) => {
+export const updateAddressApi = async (userId: number, address: string) => {
   const payload = convertToPascalCase({ id: userId, address });
   const response = await fetch(`${API_BASE}/users/update-address`, {
     method: "POST",
@@ -33,7 +33,7 @@ export const updateAddressApi = async (userId: string, address: string) => {
   return handleResponse(response);
 };
 
-export const updatePaymentApi = async (userId: string, paymentMethod: string) => {
+export const updatePaymentApi = async (userId: number, paymentMethod: string) => {
   const payload = convertToPascalCase({ id: userId, paymentMethod });
   const response = await fetch(`${API_BASE}/users/update-payment-method`, {
     method: "POST",
@@ -44,7 +44,7 @@ export const updatePaymentApi = async (userId: string, paymentMethod: string) =>
   return handleResponse(response);
 };
 
-export const updatePaymentInfoApi = async (userId: string, paymentInfo: string) => {
+export const updatePaymentInfoApi = async (userId: number, paymentInfo: string) => {
   const payload = convertToPascalCase({ id: userId, paymentInfo });
   const response = await fetch(`${API_BASE}/users/update-payment-info`, {
     method: "POST",
@@ -55,7 +55,7 @@ export const updatePaymentInfoApi = async (userId: string, paymentInfo: string) 
   return handleResponse(response);
 };
 
-export const fetchAdvancedInfo = async (userId: string): Promise<any> => {
+export const fetchAdvancedInfo = async (userId: number): Promise<any> => {
   const payload = convertToPascalCase({ id: userId });
   const response = await fetch(`${API_BASE}/users/advanced-info`, {
     method: "POST",
@@ -66,7 +66,7 @@ export const fetchAdvancedInfo = async (userId: string): Promise<any> => {
   return handleResponse(response);
 };
 
-export const updateNameApi = async (userId: string, name: string): Promise<any> => {
+export const updateNameApi = async (userId: number, name: string): Promise<any> => {
   const payload = convertToPascalCase({ id: userId, name });
   const response = await fetch(`${API_BASE}/users/update-name`, {
     method: "POST",

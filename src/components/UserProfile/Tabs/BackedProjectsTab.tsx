@@ -97,7 +97,7 @@ const BackedProjectsTab: React.FC = () => {
     return <p>Loading user information...</p>;
   }
 
-  const { projects, isLoading, error } = useBackedProjects(user?.userId || null);
+  const { projects, isLoading, error } = useBackedProjects(user?.userId || undefined);
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [infoPanelIsOpen, setInfoPanelIsOpen] = useState<boolean>(false);
   const [isContentVisible, setIsContentVisible] = useState(false);

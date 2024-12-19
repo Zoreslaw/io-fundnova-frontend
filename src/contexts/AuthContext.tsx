@@ -6,7 +6,7 @@ import { User } from "../types/User";
 
 interface AuthContextProps {
   user: User | null;
-  userId: string | null;
+  userId: number | null;
   loginUser: (payload: LoginPayload) => Promise<void>;
   registerUser: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

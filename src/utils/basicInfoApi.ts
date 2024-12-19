@@ -3,7 +3,7 @@ import { convertToPascalCase, convertToCamelCase } from "../utils/caseConverters
 
 const API_BASE = "https://localhost:7225/api";
 
-export const updateUsernameApi = async (userId: string, newUsername: string): Promise<UpdateResponse> => {
+export const updateUsernameApi = async (userId: number, newUsername: string): Promise<UpdateResponse> => {
   try {
     const response = await fetch(`${API_BASE}/users/update-username`, {
       method: "POST",
@@ -24,7 +24,7 @@ export const updateUsernameApi = async (userId: string, newUsername: string): Pr
   }
 };
 
-export const updateEmailApi = async (userId: string, newEmail: string): Promise<UpdateResponse> => {
+export const updateEmailApi = async (userId: number, newEmail: string): Promise<UpdateResponse> => {
   try {
     const response = await fetch(`${API_BASE}/users/update-email`, {
       method: "POST",
@@ -46,7 +46,7 @@ export const updateEmailApi = async (userId: string, newEmail: string): Promise<
 };
 
 export const updatePasswordApi = async (
-  userId: string,
+  userId: number,
   currentPassword: string,
   newPassword: string
 ): Promise<UpdateResponse> => {
@@ -54,7 +54,7 @@ export const updatePasswordApi = async (
     const response = await fetch(`${API_BASE}/users/update-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(convertToPascalCase({ id: userId, currentPassword, password: newPassword })),
+      body: JSON.stringify(convertToPascalCase({ id: userId, currentPassword, newPassword })),
     });
 
     if (!response.ok) {
@@ -70,7 +70,7 @@ export const updatePasswordApi = async (
   }
 };
 
-export const fetchBasicInfo = async (userId: string): Promise<any> => {
+export const fetchBasicInfo = async (userId: number): Promise<any> => {
   try {
     const response = await fetch(`${API_BASE}/users/basic-info`, {
       method: "POST",

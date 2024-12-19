@@ -16,7 +16,9 @@ const GeneralInfoTab: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      setIsContentVisible(true);
+      if(info){
+        setIsContentVisible(true);
+      } 
     } else {
       setIsContentVisible(false);
     }

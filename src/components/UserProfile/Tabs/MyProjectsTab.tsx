@@ -7,7 +7,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 const MyProjectsTab: React.FC = () => {
   const { user } = useAuth();
 
-  const { projects, isLoading, error } = useMyProjects(user?.userId || null);
+  const { projects, isLoading, error } = useMyProjects(user?.userId || undefined);
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [infoPanelIsOpen, setInfoPanelIsOpen] = useState<boolean>(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
