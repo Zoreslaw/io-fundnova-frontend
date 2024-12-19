@@ -1,15 +1,16 @@
 import React, { createContext, useContext, useState } from "react";
-import { ProjectCreatePayload, ProjectEditPayload } from "../types/ProjectsPayload";
+// import { ProjectCreatePayload, ProjectEditPayload } from "../types/ProjectsPayload";
+import { Project } from "../types/Project";
 
 interface ProjectContextProps {
-  project: ProjectCreatePayload | ProjectEditPayload | null;
-  setProject: (project: ProjectCreatePayload | ProjectEditPayload | null) => void;
+  project: Project | null;
+  setProject: (project: Project | null) => void;
 }
 
 const ProjectContext = createContext<ProjectContextProps | undefined>(undefined);
 
 export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [project, setProject] = useState<ProjectCreatePayload | ProjectEditPayload | null>(null);
+  const [project, setProject] = useState<Project | null>(null);
 
   return (
     <ProjectContext.Provider value={{ project, setProject }}>

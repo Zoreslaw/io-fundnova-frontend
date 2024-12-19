@@ -2,14 +2,20 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProjectData } from "../hooks/useProjectData";
 import { updateProjectApi } from "../utils/projectsApi";
+import { useProject } from "../contexts/ProjectContext";
 
 const EditProjectPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const { project, fetchProject, isLoading, error } = useProjectData();
   const navigate = useNavigate();
 
+  const { setProject } = useProject()
 
 //   alert(projectId) ;
+
+  useEffect(()=>{
+    setProject(project);
+  }, [project])
 
   useEffect(() => {
     if (projectId) {

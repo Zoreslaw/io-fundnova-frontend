@@ -88,7 +88,7 @@ export const getProjectById = async (projectId: number) => {
     const response = await fetch(`${API_BASE}/projects/view/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(convertToPascalCase({ projectId })),
+      body: JSON.stringify(convertToPascalCase({ projectId: projectId.toString() })),
     });
 
     if (!response.ok) {
