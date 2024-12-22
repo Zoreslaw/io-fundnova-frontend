@@ -16,6 +16,7 @@ interface AuthContextProps {
   // updateEmail: (newEmail: string) => void;
   // updatePassword: (currentPassword: string, newPassword: string) => void;
   isLoading: boolean;
+  isInitialized: boolean;
   error: string | null;
 }
 
@@ -30,13 +31,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [userId, setUserId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-
+    setIsInitialized(true);
     return serverErrorClear;
   }, []);
 
@@ -152,7 +154,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, userId, updateUserSession, loginUser, registerUser, logout, serverErrorClear, isLoading, error }}>
+    <AuthContext.Provider value={{ user, userId, updateUserSession, loginUser, registerUser, logout, serverErrorClear, isLoading, isInitialized, error }}>
       {children}
     </AuthContext.Provider>
   );

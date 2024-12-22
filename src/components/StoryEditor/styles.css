@@ -1,0 +1,49 @@
+.story-editor {
+    background: #2a2a2a;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .editor-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .editor-toolbar button {
+    background: #333;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #d8d8d8;
+    display: flex;
+    align-items: center;
+  }
+  
+  .editor-toolbar button.is-active {
+    background: #0056b3;
+    color: white;
+  }
+  
+  .editor-toolbar button:hover {
+    background: #444;
+    .icon{
+        transform: scale(1.2);
+        stroke: #1e90ff; /* Увеличение и изменение цвета */
+    }
+  }
+  
+  .icon {
+    transition: transform 0.2s ease, stroke 0.2s ease;
+  }
+  
+  .ProseMirror {
+    padding: 12px; /* Отступ текста внутри редактора */
+    border: none; /* Убираем лишнюю границу */
+    outline: none; /* Убираем подсветку */
+    min-height: 200px; /* Задаем минимальную высоту */
+    line-height: 1.6; /* Увеличиваем межстрочный интервал для читаемости */
+  }
+  
+  

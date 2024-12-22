@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import "./Homepage.css";
 import HomePageProjectCard from "../components/ProjectCards/HomepageProjectCard";
 import { useProjects } from "../hooks/useRecentProjects";
-//import { useAuth } from "../Contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const Homepage: React.FC = () => {
   const { projects, isLoading, error } = useProjects();
   const [isContentVisible, setIsContentVisible] = useState(false);
+
+    const { user } = useAuth();
+    console.log(user);
 
   useEffect(() => {
     if (!isLoading) {

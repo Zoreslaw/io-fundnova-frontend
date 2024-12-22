@@ -10,10 +10,11 @@ export type ProjectEditPayload = {
         cardNumber?: string;
         paymentMethod?: string;
     };
-    rewards?: Reward;
+    rewards?: Reward[];
 }
 
 export type ProjectCreatePayload = {
+    userId: number;
     title: string;
     description: string;
     imageURL: string;
@@ -26,5 +27,5 @@ export type ProjectCreatePayload = {
         cardNumber: string;
         paymentMethod: string;
     };
-    rewards?: Reward;
+    rewards?: Reward[];
 }

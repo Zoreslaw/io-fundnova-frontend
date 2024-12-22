@@ -1,41 +1,120 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useProject } from "../contexts/ProjectContext";
-import { createProjectApi } from "../utils/projectsApi";
+import React from 'react';
+import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
+import { CreateProjectProvider, useCreateProjectContext } from '../contexts/CreateProjectContext';
+import StepNavigator from '../components/StopNavigator/StepNavigator';
+import CategoryAndTagsForm from '../components/CategoryAndTagsForm/CategoryAndTagsForm';
+import ProjectDetailsForm from '../components/ProjectDetailsForm/ProjectDetailsForm';
+import RewardForm from '../components/RewardForm/RewardForm';
+import PaymentMethodsForm from '../components/PaymentMethodsForm/PaymentMethodsForm';
+import { Box, Typography } from '@mui/material';
+import SubmitProjectStep from '../components/SubmitProjectStep/SubmitProjectStep';  
+
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: { main: '#0056b3' },
+    secondary: { main: '#3d3d3d' },
+    background: { default: '#2a2a2a', paper: '#333333' },
+    text: { primary: '#d8d8d8', secondary: '#b0b0b0' },
+  },
+  typography: {
+    fontFamily: 'Roboto, Arial, sans-serif',
+    h4: { color: '#d8d8d8' },
+    body1: { color: '#b0b0b0' },
+  },
+});
+
+const steps = [
+  {
+    label: 'Category & Tags Selection',
+    component: <CategoryAndTagsForm />,
+  },
+  { label: 'Project Details', component: <ProjectDetailsForm /> },
+  { label: 'Rewards Setup', component: <RewardForm /> },
+  { label: 'Payment Method', component: <PaymentMethodsForm /> },
+  { label: 'Review & Submit', component: <SubmitProjectStep /> },
+];
 
 const CreateProjectPage: React.FC = () => {
-  const { setProject } = useProject();
-  const navigate = useNavigate();
+  const { currentStep, setCurrentStep, state } = useCreateProjectContext();
 
-  const handleCreateProject = async (projectData: any) => {
-    try {
-      const newProject = await createProjectApi(projectData);
-      setProject(newProject); // Share state via context
-      navigate("/preview-project");
-    } catch (error) {
-      console.error("Error creating project:", error);
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 0: // Validate category and tags
+        return !!state.category && state.tags.length > 0;
+      case 1: // Validate project details
+        return (
+          state.title?.trim().length > 0 &&
+          state.description?.trim().length > 0 &&
+          !!state.story &&
+          state.imageURL !== "" &&
+          state.fundingGoal >= 100 &&
+          new Date(state.deadline) >= new Date(Date.now() + 60 * 24 * 60 * 60 * 1000) // Minimum 60 days
+        );
+      case 2: // Validate rewards
+        return state.rewards && state.rewards.length > 0;
+      case 3: // Validate payment method
+        return (
+          !!state.paymentInfo?.paymentMethod &&
+          !!state.paymentInfo?.cardNumber &&
+          state.paymentInfo.cardNumber.trim().length > 0
+        ); // Ensure payment method and card number are provided
+      case 4: // Review & Submit
+        return true; // Always valid
+      default:
+        return false;
+    }
+  };
+  
+
+  const handleNext = () => {
+    if (validateStep(currentStep) && currentStep < steps.length - 1) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
     }
   };
 
   return (
-    <div>
-      <h1>Create Project</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const formData = {
-            title: "Sample Project",
-            description: "Sample Description",
-            // ...rest of the form data
-          };
-          handleCreateProject(formData);
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          maxWidth: 1000,
+          mx: 'auto',
+          mt: 4,
+          p: 3,
+          backgroundColor: 'background.paper',
+          borderRadius: 2,
+          boxShadow: 3,
         }}
       >
-        {/* Add your form fields here */}
-        <button type="submit">Create and Preview</button>
-      </form>
-    </div>
+        <Typography variant="h4" gutterBottom>
+          {steps[currentStep].label}
+        </Typography>
+        {steps[currentStep].component}
+        <StepNavigator
+          currentStep={currentStep}
+          totalSteps={steps.length}
+          onNext={handleNext}
+          onBack={handleBack}
+          isNextDisabled={!validateStep(currentStep)}
+        />
+      </Box>
+    </ThemeProvider>
   );
 };
 
-export default CreateProjectPage;
+const CreateProjectPageWithProvider: React.FC = () => {
+  return (
+    <CreateProjectProvider>
+      <CreateProjectPage />
+    </CreateProjectProvider>
+  );
+};
+
+export default CreateProjectPageWithProvider;
