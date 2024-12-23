@@ -1,22 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useProjectData } from "../hooks/useProjectData";
 import ProjectDisplay from "../components/ProjectDisplay/ProjectDisplay";
+import axios from "axios";
+import { Project } from "../types/Project";
 
 const ViewProjectPage: React.FC = () => {
-  const { projectId } = useParams<{ projectId: string }>();
-  const { project, fetchProject, isLoading, error } = useProjectData();
+  const { id } = useParams<{ id: string }>();
+  const [project, setProject] = useState<Project | null>(null);
 
   useEffect(() => {
-    if (projectId) {
-      fetchProject(Number(projectId), "view");
-    }
-  }, [projectId, fetchProject]);
+    axios.get(`/api/projects/${id}`).then((response) => setProject(response.data));
+  }, [id]);
 
-  if (isLoading) return <p>Loading project...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  return project ? <ProjectDisplay {...project} mode="view" /> : <p>No project found.</p>;
+  return project ? <ProjectDisplay {...project} mode="view" /> : <div>Loading...</div>;
 };
 
 export default ViewProjectPage;

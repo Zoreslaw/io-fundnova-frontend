@@ -14,4 +14,8 @@ export type Project = {
     deadline: string;
     story: string;
     rewards?: Reward[];
+    paymentInfo: {
+      cardNumber: string;
+      paymentMethod: string;
+  };
   };

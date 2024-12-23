@@ -109,12 +109,12 @@ const CreateProjectPage: React.FC = () => {
   );
 };
 
-const CreateProjectPageWithProvider: React.FC = () => {
-  return (
-    <CreateProjectProvider>
-      <CreateProjectPage />
-    </CreateProjectProvider>
-  );
-};
+// const CreateProjectPageWithProvider: React.FC = () => {
+//   return (
+//     <CreateProjectProvider>
+//       <CreateProjectPage />
+//     </CreateProjectProvider>
+//   );
+// };
 
-export default CreateProjectPageWithProvider;
+export default CreateProjectPage;

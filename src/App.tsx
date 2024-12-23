@@ -11,30 +11,33 @@ import PreviewProjectPage from "./pages/PreviewProjectPage";
 import EditProjectPage from "./pages/EditProjectPage";
 import ViewProjectPage from "./pages/ViewProjectPage";
 import ProtectedRoute from "./Routes/ProtectedRoute";
+import { CreateProjectProvider } from "./contexts/CreateProjectContext";
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
         <div className="app">
-          <Header />
+        <Header />
           <main>
             <ProjectProvider>
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="*" element={<NotFound />} />
-                <Route
-                  path="/create-project"
-                  element={
-                    <ProtectedRoute>
-                      <CreateProjectPage />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/preview-project" element={<PreviewProjectPage />} />
-                <Route path="/edit-project/:projectId" element={<EditProjectPage />} />
-                <Route path="/view-project/:projectId" element={<ViewProjectPage />} />
-              </Routes>
+              <CreateProjectProvider>
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="*" element={<NotFound />} />
+                  <Route
+                    path="/create-project"
+                    element={
+                      <ProtectedRoute>
+                        <CreateProjectPage />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/preview" element={<PreviewProjectPage />} />
+                  <Route path="/edit-project/:projectId" element={<EditProjectPage />} />
+                  <Route path="/projects/:projectId" element={<ViewProjectPage />} />
+                </Routes>
+              </CreateProjectProvider>
             </ProjectProvider>
           </main>
         </div>
