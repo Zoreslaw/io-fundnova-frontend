@@ -23,7 +23,7 @@ const LinkModal: React.FC<LinkModalProps> = ({
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       contentLabel="Edit Link"
-      ariaHideApp={false} // Add this line to prevent errors in testing environments
+      ariaHideApp={false}
       style={{
         content: {
           top: '50%',

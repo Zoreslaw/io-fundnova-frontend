@@ -183,13 +183,6 @@ const StoryEditor: React.FC<StoryEditorProps> = ({ content, onUpdate }) => {
       </div>
       <EditorContent
         editor={editor}
-        style={{
-            // padding: "16px",
-            // border: "1px solid #ccc",
-            // borderRadius: "8px",
-            // backgroundColor: "#ffffff", // Цвет фона
-            // minHeight: "300px", // Минимальная высота редактора
-        }}
        />
 
     </div>

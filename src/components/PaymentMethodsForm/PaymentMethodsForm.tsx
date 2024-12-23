@@ -23,14 +23,14 @@ const PaymentMethodsForm: React.FC = () => {
   const handlePaymentMethodChange = (method: string) => {
     setState((prev) => ({
       ...prev,
-      paymentInfo: { ...prev.paymentInfo, paymentMethod: method }, // Update method
+      paymentInfo: { ...prev.paymentInfo, paymentMethod: method },
     }));
   };
 
   const handleCardNumberChange = (cardNumber: string) => {
     setState((prev) => ({
       ...prev,
-      paymentInfo: { ...prev.paymentInfo, cardNumber }, // Update card number
+      paymentInfo: { ...prev.paymentInfo, cardNumber },
     }));
   };
 

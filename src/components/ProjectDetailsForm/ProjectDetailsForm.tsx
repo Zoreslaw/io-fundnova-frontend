@@ -3,7 +3,7 @@ import { Box, TextField, Grid, Typography, Button, Card, CardMedia } from '@mui/
 import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import StoryEditor from '../StoryEditor/StoryEditor';
 import CropModal from '../../CropModal/CropModal';
-import { uploadImageToDrive } from '../../utils/imagesApi'; // Mock or real image upload API
+import { uploadImageToDrive } from '../../utils/imagesApi';
 
 const ProjectDetailsForm: React.FC = () => {
   const { state, setState } = useCreateProjectContext();
@@ -59,7 +59,7 @@ const ProjectDetailsForm: React.FC = () => {
     if (file) {
       setTempImageURL(URL.createObjectURL(file));
       setIsCropModalOpen(true);
-      event.target.value = ''; // Clear the file input for future changes
+      event.target.value = '';
     }
   };
 
@@ -69,7 +69,7 @@ const ProjectDetailsForm: React.FC = () => {
       const uploadedURL = await uploadImageToDrive(new File([croppedImage], 'project-image.png'));
       setState((prevState) => ({
         ...prevState,
-        imageURL: uploadedURL, // Убедитесь, что используете правильное имя свойства
+        imageURL: uploadedURL,
       }));
     } catch (error) {
       console.error('Failed to upload image:', error);
@@ -168,13 +168,13 @@ const ProjectDetailsForm: React.FC = () => {
             {isUploading ? 'Uploading...' : 'Upload Image'}
             <input type="file" hidden accept="image/*" onChange={handleImageChange} />
           </Button>
-          {state.imageURL && ( // Используем mainImageURL вместо imageURL
+          {state.imageURL && (
             <Box mt={2}>
               <Card sx={{ display: 'block', width: '100%', maxWidth: 300, aspectRatio: '16/9', overflow: 'hidden' }}>
                 <CardMedia
                   component="img"
                   sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  image={state.imageURL} // Используем mainImageURL
+                  image={state.imageURL}
                   alt="Main Project Image"
                 />
               </Card>

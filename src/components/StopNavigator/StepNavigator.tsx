@@ -6,7 +6,7 @@ interface StepNavigatorProps {
   totalSteps: number;
   onNext: () => void;
   onBack: () => void;
-  isNextDisabled: boolean; // Новый пропс для проверки валидности шага
+  isNextDisabled: boolean;
 }
 
 const StepNavigator: React.FC<StepNavigatorProps> = ({

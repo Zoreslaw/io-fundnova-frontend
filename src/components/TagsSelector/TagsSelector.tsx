@@ -10,7 +10,7 @@ const predefinedTags = [
   'Gaming',
   'Environment',
   'Science',
-]; // Replace with your actual predefined tags.
+];
 
 const TagsSelector: React.FC = () => {
   const { state, setState } = useCreateProjectContext();
@@ -20,8 +20,8 @@ const TagsSelector: React.FC = () => {
     setState((prev) => ({
       ...prev,
       tags: isSelected
-        ? prev.tags.filter((t) => t !== tag) // Remove tag if already selected.
-        : [...prev.tags, tag], // Add tag if not selected.
+        ? prev.tags.filter((t) => t !== tag)
+        : [...prev.tags, tag],
     }));
   };
 

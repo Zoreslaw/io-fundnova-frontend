@@ -19,7 +19,6 @@ interface RewardCardProps {
 const RewardCard: React.FC<RewardCardProps> = ({ reward }) => {
   return (
     <Card sx={{ mb: 2, boxShadow: 3, flexDirection: "column", width: "100%" }}>
-      {/* Убираем блок изображения, если imageURL отсутствует */}
       {reward.imageURL && (
         <Box
           sx={{

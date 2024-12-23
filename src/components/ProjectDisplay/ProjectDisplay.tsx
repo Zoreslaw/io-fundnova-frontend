@@ -65,25 +65,23 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
           </Typography>
         </Box>
 
-        {/* Центрированный контейнер */}
         <Box
           className="project-main-container"
           sx={{
             display: "flex",
-            flexDirection: { xs: "column", md: "row" }, // Мобильный column, desktop row
-            alignItems: { xs: "center", md: "flex-start" }, // Центровка на мобильных
-            justifyContent: "center", // Центрирование на desktop
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: { xs: "center", md: "flex-start" },
+            justifyContent: "center",
             gap: 4,
             marginBottom: 5,
           }}
         >
-          {/* Левая колонка (изображение + теги) */}
           <Box
             sx={{
               flex: 2,
               maxWidth: { xs: "100%", md: "60%" },
-              textAlign: { xs: "center", md: "left" }, // Центр текста на мобильных
-              order: { xs: 1, md: 0 }, // На мобильных идет первой
+              textAlign: { xs: "center", md: "left" },
+              order: { xs: 1, md: 0 },
             }}
           >
             {imageURL && (
@@ -99,14 +97,13 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
             {tags && <TagsDisplay tags={tags} />}
           </Box>
 
-          {/* Правая колонка (FundingStats) */}
           <Box
             sx={{
               flex: 1,
               maxWidth: { xs: "100%", md: "30%" },
               textAlign: "left",
               width: "100%",
-              order: { xs: 2, md: 0 }, // На мобильных идет после
+              order: { xs: 2, md: 0 },
             }}
           >
             <FundingStats
@@ -130,7 +127,6 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
           </Box>
         </Box>
 
-        {/* Табуляция */}
         <Tabs
           value={activeTab}
           onChange={handleTabChange}
@@ -144,7 +140,6 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
           <Tab label="Comments" disabled={mode === "preview"} />
         </Tabs>
 
-        {/* Содержимое вкладок */}
         <Box className="tab-content">
           {activeTab === 0 && (
             <Box>

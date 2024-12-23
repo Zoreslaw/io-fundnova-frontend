@@ -40,27 +40,27 @@ const CreateProjectPage: React.FC = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 0: // Validate category and tags
+      case 0:
         return !!state.category && state.tags.length > 0;
-      case 1: // Validate project details
+      case 1:
         return (
           state.title?.trim().length > 0 &&
           state.description?.trim().length > 0 &&
           !!state.story &&
           state.imageURL !== "" &&
           state.fundingGoal >= 100 &&
-          new Date(state.deadline) >= new Date(Date.now() + 60 * 24 * 60 * 60 * 1000) // Minimum 60 days
+          new Date(state.deadline) >= new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
         );
-      case 2: // Validate rewards
+      case 2:
         return state.rewards && state.rewards.length > 0;
-      case 3: // Validate payment method
+      case 3:
         return (
           !!state.paymentInfo?.paymentMethod &&
           !!state.paymentInfo?.cardNumber &&
           state.paymentInfo.cardNumber.trim().length > 0
-        ); // Ensure payment method and card number are provided
-      case 4: // Review & Submit
-        return true; // Always valid
+        );
+      case 4:
+        return true;
       default:
         return false;
     }

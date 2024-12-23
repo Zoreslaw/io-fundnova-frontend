@@ -43,12 +43,11 @@ const EditProjectPage: React.FC = () => {
           e.preventDefault();
           const updatedData = {
             ...project,
-            title: "Updated Project Title", // Example update
+            title: "Updated Project Title",
           };
           handleEditProject(updatedData);
         }}
       >
-        {/* Add form fields pre-filled with `project` data */}
         <button type="submit">Save and Preview</button>
       </form>
     </div>

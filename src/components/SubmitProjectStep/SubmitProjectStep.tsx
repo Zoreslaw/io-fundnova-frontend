@@ -4,7 +4,7 @@ import { createProjectApi } from '../../utils/projectsApi';
 import { Box, Button, Typography, CircularProgress, Alert } from '@mui/material';
 import { ProjectCreatePayload } from '../../types/ProjectsPayload';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom'; // Import navigation hook
+import { useNavigate } from 'react-router-dom';
 import { useProject } from "../../contexts/ProjectContext";
 import { Project } from '../../types/Project';
 
@@ -13,7 +13,7 @@ const SubmitProjectStep: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
   const { setProject } = useProject();
 
   if (!user) {
