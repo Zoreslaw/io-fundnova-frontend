@@ -13,7 +13,7 @@ const ProjectDetailsForm: React.FC = () => {
     deadline: false,
   });
   const [isCropModalOpen, setIsCropModalOpen] = useState(false);
-  const [tempImageURL, setTempImageURL] = useState<string | undefined>(undefined);
+  const [tempimageUrl, setTempimageUrl] = useState<string | undefined>(undefined);
   const [isUploading, setIsUploading] = useState(false);
 
   const MIN_FUNDING_GOAL = 100;
@@ -57,7 +57,7 @@ const ProjectDetailsForm: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setTempImageURL(URL.createObjectURL(file));
+      setTempimageUrl(URL.createObjectURL(file));
       setIsCropModalOpen(true);
       event.target.value = '';
     }
@@ -69,7 +69,7 @@ const ProjectDetailsForm: React.FC = () => {
       const uploadedURL = await uploadImageToDrive(new File([croppedImage], 'project-image.png'));
       setState((prevState) => ({
         ...prevState,
-        imageURL: uploadedURL,
+        imageUrl: uploadedURL,
       }));
     } catch (error) {
       console.error('Failed to upload image:', error);
@@ -77,13 +77,13 @@ const ProjectDetailsForm: React.FC = () => {
     } finally {
       setIsUploading(false);
       setIsCropModalOpen(false);
-      setTempImageURL(undefined);
+      setTempimageUrl(undefined);
     }
   };
   const handleImageDelete = () => {
     setState((prevState) => ({
       ...prevState,
-      imageURL: '',
+      imageUrl: '',
     }));
   };
 
@@ -168,13 +168,13 @@ const ProjectDetailsForm: React.FC = () => {
             {isUploading ? 'Uploading...' : 'Upload Image'}
             <input type="file" hidden accept="image/*" onChange={handleImageChange} />
           </Button>
-          {state.imageURL && (
+          {state.imageUrl && (
             <Box mt={2}>
               <Card sx={{ display: 'block', width: '100%', maxWidth: 300, aspectRatio: '16/9', overflow: 'hidden' }}>
                 <CardMedia
                   component="img"
                   sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  image={state.imageURL}
+                  image={state.imageUrl}
                   alt="Main Project Image"
                 />
               </Card>
@@ -197,7 +197,7 @@ const ProjectDetailsForm: React.FC = () => {
         open={isCropModalOpen}
         onClose={handleImageDelete}
         onCrop={handleCrop}
-        imageURL={tempImageURL || ''}
+        imageUrl={tempimageUrl || ''}
       />
     </Box>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import {
   Box,
@@ -12,21 +12,25 @@ import {
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material';
 
-const predefinedCategories = ['Art', 'Technology', 'Health', 'Education', 'Gaming', 'Science', 'Environment'];
-const predefinedTags = ['Technology', 'Health', 'Education', 'Art', 'Gaming', 'Environment', 'Science'];
+// const predefinedCategories = ['Art', 'Technology', 'Health', 'Education', 'Gaming', 'Science', 'Environment'];
+// const predefinedTags = ['Technology', 'Health', 'Education', 'Art', 'Gaming', 'Environment', 'Science'];
 
 const CategoryAndTagsForm: React.FC = () => {
-  const { state, setState } = useCreateProjectContext();
+  const { state, setState, configurations } = useCreateProjectContext();
+
+  const predefinedCategories = configurations?.categories || [''];
+  const predefinedTags = configurations?.tags || [''];
+
 
   // Устанавливаем дефолтное значение категории, если оно ещё не задано
-  React.useEffect(() => {
+  useEffect(() => {
     if (!state.category) {
       setState((prev) => ({
         ...prev,
         category: predefinedCategories[0], // Первое значение из массива
       }));
     }
-  }, [state.category, setState]);
+  }, [state.category, setState, state]);
 
   const handleCategoryChange = (event: SelectChangeEvent<string>) => {
     setState((prev) => ({

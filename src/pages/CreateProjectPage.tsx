@@ -37,6 +37,7 @@ const steps = [
 
 const CreateProjectPage: React.FC = () => {
   const { currentStep, setCurrentStep, state } = useCreateProjectContext();
+  console.log(state.category);
 
   const validateStep = (step: number): boolean => {
     switch (step) {
@@ -47,7 +48,7 @@ const CreateProjectPage: React.FC = () => {
           state.title?.trim().length > 0 &&
           state.description?.trim().length > 0 &&
           !!state.story &&
-          state.imageURL !== "" &&
+          state.imageUrl !== "" &&
           state.fundingGoal >= 100 &&
           new Date(state.deadline) >= new Date(Date.now() + 60 * 24 * 60 * 60 * 1000)
         );

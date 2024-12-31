@@ -2,9 +2,9 @@ export type Reward = {
     rewardId?: number;
     title: string;
     price: number;
-    contents: boolean;
+    contents: boolean | string;
     description?: string;
-    imageURL?: string | null;
+    imageUrl?: string | null;
     count?: number;
     deadline?: string;
 }

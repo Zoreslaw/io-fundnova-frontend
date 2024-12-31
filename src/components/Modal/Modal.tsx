@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import UserProfile from "../UserProfile/UserProfile";
+import { useLocation  } from "react-router-dom";
 import "./Modal.css";
 
 interface ModalProps {
@@ -13,6 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const { user, serverErrorClear, userId } = useAuth();
+  const location = useLocation();
 
   // console.log(children);
 
@@ -21,6 +23,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       handleClose();
     }
   }, [userId]);
+
+  useEffect(() => {
+    handleClose();
+  }, [location]);
 
   useEffect(() => {
     if (isOpen) {

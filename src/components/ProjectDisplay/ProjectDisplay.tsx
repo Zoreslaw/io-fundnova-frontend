@@ -33,7 +33,7 @@ interface ProjectDisplayProps extends Project {
 const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
   title,
   description,
-  imageURL,
+  imageUrl,
   tags,
   fundingGoal,
   fundsRaised = 0,
@@ -84,9 +84,9 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
               order: { xs: 1, md: 0 },
             }}
           >
-            {imageURL && (
+            {imageUrl && (
               <img
-                src={imageURL}
+                src={imageUrl}
                 alt={`${title} cover`}
                 style={{
                   width: "100%",

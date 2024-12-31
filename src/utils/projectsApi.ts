@@ -63,6 +63,14 @@ export const getRecentProjects = async () => {
 };
 
 export const createProjectApi = async (payload: ProjectCreatePayload) => {
+
+  if (payload.rewards) {
+    payload.rewards = payload.rewards.map((reward) => ({
+      ...reward,
+      contents: reward.contents.toString(), // Convert contents to string
+    }));
+  }
+
   try {
     const response = await fetch(`${API_BASE}/projects/create/`, {
       method: "POST",

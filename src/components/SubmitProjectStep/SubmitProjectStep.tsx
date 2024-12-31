@@ -30,7 +30,7 @@ const SubmitProjectStep: React.FC = () => {
         userId: user.userId,
         title: state.title,
         description: state.description,
-        imageURL: state.imageURL,
+        imageUrl: state.imageUrl,
         tags: state.tags,
         category: state.category,
         story: state.story,
@@ -47,7 +47,7 @@ const SubmitProjectStep: React.FC = () => {
           description: reward.description || undefined,
           deadline: reward.deadline || undefined,
           count: reward.count || undefined,
-          imageURL: reward.imageURL || undefined,
+          imageUrl: reward.imageUrl || undefined,
         })),
       };
 
@@ -65,7 +65,7 @@ const SubmitProjectStep: React.FC = () => {
     const projectData: Project = {
       title: state.title,
       description: state.description,
-      imageURL: state.imageURL,
+      imageUrl: state.imageUrl,
       tags: state.tags,
       category: state.category,
       fundingGoal: state.fundingGoal,

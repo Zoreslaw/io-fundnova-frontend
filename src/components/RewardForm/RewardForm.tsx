@@ -27,9 +27,9 @@ const RewardForm: React.FC = () => {
     deadline: undefined as string | undefined,
     count: undefined as number | undefined,
     imageFile: undefined as File | undefined,
-    imageURL: undefined as string | undefined,
+    imageUrl: undefined as string | undefined,
   });
-  const [tempImageURL, setTempImageURL] = useState<string | undefined>(undefined);
+  const [tempimageUrl, setTempimageUrl] = useState<string | undefined>(undefined);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleRewardChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const RewardForm: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setTempImageURL(URL.createObjectURL(file));
+      setTempimageUrl(URL.createObjectURL(file));
       setReward((prev) => ({
         ...prev,
         imageFile: file,
@@ -59,7 +59,7 @@ const RewardForm: React.FC = () => {
       const uploadedURL = await uploadImageToDrive(new File([croppedImage], 'cropped.png'));
       setReward((prev) => ({
         ...prev,
-        imageURL: uploadedURL,
+        imageUrl: uploadedURL,
         imageFile: new File([croppedImage], 'cropped.png'),
       }));
     } catch (error) {
@@ -68,7 +68,7 @@ const RewardForm: React.FC = () => {
     } finally {
       setIsUploading(false);
       setIsCropModalOpen(false);
-      setTempImageURL(undefined);
+      setTempimageUrl(undefined);
     }
   };
 
@@ -77,7 +77,7 @@ const RewardForm: React.FC = () => {
       ...prev,
       imageFile: undefined,
     }));
-    setTempImageURL(undefined);
+    setTempimageUrl(undefined);
     setIsCropModalOpen(false);
   };
 
@@ -85,7 +85,7 @@ const RewardForm: React.FC = () => {
     setReward((prev) => ({
       ...prev,
       imageFile: undefined,
-      imageURL: undefined,
+      imageUrl: undefined,
     }));
   };
 
@@ -105,7 +105,7 @@ const RewardForm: React.FC = () => {
         deadline: undefined,
         count: undefined,
         imageFile: undefined,
-        imageURL: undefined,
+        imageUrl: undefined,
       });
     }
   };
@@ -196,7 +196,7 @@ const RewardForm: React.FC = () => {
               accept="image/*"
             />
           </Button>
-          {reward.imageURL && (
+          {reward.imageUrl && (
             <Box mt={2}>
               <Card
                 sx={{
@@ -215,7 +215,7 @@ const RewardForm: React.FC = () => {
                     height: '100%',
                     objectFit: 'cover',
                   }}
-                  image={reward.imageURL}
+                  image={reward.imageUrl}
                   alt="Reward Image"
                 />
               </Card>
@@ -255,7 +255,7 @@ const RewardForm: React.FC = () => {
                 boxShadow: 3,
               }}
             >
-              {reward.imageURL && (
+              {reward.imageUrl && (
                 <CardMedia
                   component="img"
                   sx={{
@@ -264,7 +264,7 @@ const RewardForm: React.FC = () => {
                     aspectRatio: '16/9',
                     objectFit: 'cover',
                   }}
-                  image={reward.imageURL}
+                  image={reward.imageUrl}
                   alt={reward.title}
                 />
               )}
@@ -294,7 +294,7 @@ const RewardForm: React.FC = () => {
         open={isCropModalOpen}
         onClose={handleCropCancel}
         onCrop={handleCrop}
-        imageURL={tempImageURL || ''}
+        imageUrl={tempimageUrl || ''}
       />
     </Box>
   );

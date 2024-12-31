@@ -15,6 +15,7 @@
   justify-content: start;
   box-sizing: border-box;
   transition: margin-top 0.4s ease-in-out; 
+
 }
 
 .project-grid > * {
@@ -127,4 +128,32 @@
 .profile-project-card:hover {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   transform: scale(1.03);
+}
+
+.add-new-project-button {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: rgba(136, 136, 136, 0.44); /* Gray color for the button */
+  color: rgba(255, 255, 255, 0.729);
+  font-size: 4rem;
+  line-height: 4rem;
+  /* font-weight: bold; */
+  border: none;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  place-self: center;
+  cursor: pointer;
+  margin: 20px auto; /* Auto centers the button horizontally */
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.add-new-project-button:hover {
+  background-color: rgba(136, 136, 136, 0.608); /* Slightly darker gray on hover */
+  transform: scale(1.025); /* Scaling for hover effect */
+}
+
+.add-new-project-button:active {
+  transform: scale(0.95);
 }

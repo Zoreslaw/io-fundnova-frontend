@@ -4,21 +4,22 @@ import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import axios from 'axios';
 
 const PaymentMethodsForm: React.FC = () => {
-  const { state, setState } = useCreateProjectContext();
-  const [paymentMethods, setPaymentMethods] = useState<string[]>(['Visa', 'Mastercard']);
+  const { state, setState, configurations } = useCreateProjectContext();
+  const paymentMethods = configurations?.paymentMethods || [''];
 
-  useEffect(() => {
-    const fetchPaymentMethods = async () => {
-      try {
-        const response = await axios.get('/projects/fetchConfigurations');
-        setPaymentMethods(response.data.PaymentMethods || ['Visa', 'Mastercard']);
-      } catch (error) {
-        console.error('Error fetching payment methods:', error);
-      }
-    };
 
-    fetchPaymentMethods();
-  }, []);
+  // useEffect(() => {
+  //   const fetchPaymentMethods = async () => {
+  //     try {
+  //       const response = await axios.get('/projects/fetchConfigurations');
+  //       setPaymentMethods(response.data.PaymentMethods || ['Visa', 'Mastercard']);
+  //     } catch (error) {
+  //       console.error('Error fetching payment methods:', error);
+  //     }
+  //   };
+
+  //   fetchPaymentMethods();
+  // }, []);
 
   const handlePaymentMethodChange = (method: string) => {
     setState((prev) => ({

@@ -4,7 +4,7 @@ export type Project = {
     projectId?: number;
     title: string;
     description: string;
-    imageURL: string;
+    imageUrl: string;
     tags?: string[];
     category: string;
     fundingGoal: number;

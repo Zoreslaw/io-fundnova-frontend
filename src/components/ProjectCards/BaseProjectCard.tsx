@@ -16,6 +16,7 @@ interface BaseProjectCardProps {
   project: Project;
   renderOverlay?: (project: Project) => React.ReactNode;
   renderContent?: (project: Project) => React.ReactNode;
+  onClick?: () => void;
   className?: string;
   paddingContentStyle?: CSS.Properties;
   fontSizeContentStyle?: CSS.Properties;
@@ -25,6 +26,7 @@ const BaseProjectCard: React.FC<BaseProjectCardProps> = ({
   project,
   renderOverlay,
   renderContent,
+  onClick,
   className = "",
   paddingContentStyle,
   fontSizeContentStyle,
@@ -33,11 +35,10 @@ const BaseProjectCard: React.FC<BaseProjectCardProps> = ({
     project.fundingGoal && project.fundsRaised
       ? Math.min((project.fundsRaised / project.fundingGoal) * 100, 100)
       : null;
-    
   
-
+  
   return (
-    <div className={`base-project-card ${className}`}>
+    <div className={`base-project-card ${className}`} onClick={onClick}>
       <div className="project-image">
         <img src={project.url} alt={project.title} />
         {renderOverlay && <div className="overlay">{renderOverlay(project)}</div>}

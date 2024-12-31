@@ -10,7 +10,7 @@ interface RewardCardProps {
     price: number;
     contents: boolean;
     description?: string;
-    imageURL?: string | null;
+    imageUrl?: string | null;
     count?: number;
     deadline?: string;
   };
@@ -19,7 +19,7 @@ interface RewardCardProps {
 const RewardCard: React.FC<RewardCardProps> = ({ reward }) => {
   return (
     <Card sx={{ mb: 2, boxShadow: 3, flexDirection: "column", width: "100%" }}>
-      {reward.imageURL && (
+      {reward.imageUrl && (
         <Box
           sx={{
             width: "100%",
@@ -29,7 +29,7 @@ const RewardCard: React.FC<RewardCardProps> = ({ reward }) => {
           }}
         >
           <img
-            src={reward.imageURL}
+            src={reward.imageUrl}
             alt={reward.title}
             style={{
               width: "100%",
@@ -57,7 +57,7 @@ const RewardCard: React.FC<RewardCardProps> = ({ reward }) => {
             <Typography variant="body2">Deadline: {reward.deadline}</Typography>
           </Box>
         )}
-        {reward.count !== undefined && (
+        {reward.count && (
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px", mb: 1 }}>
             <InventoryIcon color="secondary" />
             <Typography variant="body2">Available: {reward.count}</Typography>

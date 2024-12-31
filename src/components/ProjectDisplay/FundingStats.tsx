@@ -14,7 +14,6 @@ const FundingStats: React.FC<FundingStatsProps> = ({
   backers,
   deadline,
 }) => {
-  fundsRaised = 1000;
   const progress = Math.min((fundsRaised / fundingGoal) * 100, 100);
 
   return (

@@ -3,15 +3,15 @@ import "./MyProjectsTab.css";
 import ProfileProjectCard from "../../ProjectCards/ProfileProjectCard";
 import { useMyProjects } from "../../../hooks/useMyProjects";
 import { useAuth } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const MyProjectsTab: React.FC = () => {
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const { projects, isLoading, error } = useMyProjects(user?.userId || undefined);
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [infoPanelIsOpen, setInfoPanelIsOpen] = useState<boolean>(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
-
 
   useEffect(() => {
     if (!isLoading) {
@@ -20,6 +20,10 @@ const MyProjectsTab: React.FC = () => {
       setIsContentVisible(false);
     }
   }, [isLoading]);
+
+  const handleAddNewProject = () => {
+    navigate("/create-project");
+  };
 
   const handleSelectProject = (project: any) => {
     if (infoPanelIsOpen) {
@@ -47,6 +51,13 @@ const MyProjectsTab: React.FC = () => {
           {color: "#d8d8d8", padding: "20px"}        
         }>
           <h2>{error}</h2>
+          <button
+            className="add-new-project-button"
+            onClick={handleAddNewProject}
+            aria-label="Add New Project"
+          >
+            +
+          </button> 
         </div>
       )
     // default:
@@ -93,6 +104,14 @@ const MyProjectsTab: React.FC = () => {
               onClick={() => handleSelectProject(project)}
             />
           ))}
+
+          <button
+            className="add-new-project-button"
+            onClick={handleAddNewProject}
+            aria-label="Add New Project"
+          >
+            +
+          </button> 
         </div>
       </div>
     </div>

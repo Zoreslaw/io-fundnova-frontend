@@ -7,10 +7,10 @@ interface CropModalProps {
   open: boolean;
   onClose: () => void;
   onCrop: (croppedImage: Blob) => void;
-  imageURL: string;
+  imageUrl: string;
 }
 
-const CropModal: React.FC<CropModalProps> = ({ open, onClose, onCrop, imageURL }) => {
+const CropModal: React.FC<CropModalProps> = ({ open, onClose, onCrop, imageUrl }) => {
   const [cropper, setCropper] = useState<Cropper | null>(null);
 
   const handleCrop = async () => {
@@ -33,7 +33,7 @@ const CropModal: React.FC<CropModalProps> = ({ open, onClose, onCrop, imageURL }
     <Modal open={open} onClose={onClose}>
       <Box sx={{ width: '50%', margin: 'auto', mt: '5%', backgroundColor: 'white', p: 2 }}>
         <Cropper
-          src={imageURL}
+          src={imageUrl}
           style={{ height: 200, width: '100%' }} // Уменьшаем высоту отображаемого изображения
           aspectRatio={16 / 9} // Сохраняем фиксированное соотношение сторон
           guides={true}
