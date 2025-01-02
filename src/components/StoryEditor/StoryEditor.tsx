@@ -11,7 +11,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import * as Icons from "./Icons";
 import "./styles.css";
-import { useCreateProjectContext } from "../../contexts/CreateProjectContext";
+//import { useCreateProjectContext } from "../../contexts/CreateProjectContext";
 import { uploadImageToDrive } from "../../utils/imagesApi";
 
 
@@ -23,7 +23,7 @@ type StoryEditorProps = {
 
 const StoryEditor: React.FC<StoryEditorProps> = ({ content, onUpdate }) => {
 
-  const { state, setState } = useCreateProjectContext();
+  //const { state, setState } = useCreateProjectContext(); //Irrelevant
 
   const editor = useEditor({
     extensions: [
@@ -50,7 +50,8 @@ const StoryEditor: React.FC<StoryEditorProps> = ({ content, onUpdate }) => {
         },
       }),
     ],
-    content: state.story,
+    //content: state.story, // Previous version
+    content: content, //Works both for editing projects and creating them.
     onUpdate: ({ editor }) => {
         onUpdate(editor.getHTML());
     },
