@@ -6,6 +6,7 @@ import { useProject } from "../contexts/ProjectContext";
 import { Box, Button, Chip, createTheme, Grid2, TextField, ThemeProvider } from "@mui/material";
 import StoryEditor from "../components/StoryEditor/StoryEditor";
 import { ProjectConfiguration } from "../contexts/CreateProjectContext";
+import RewardDisplay from "../components/ProjectDisplay/RewardDisplay";
 
 const theme = createTheme({
   palette: {
@@ -28,10 +29,12 @@ const EditProjectPage: React.FC = () => {
   const navigate = useNavigate();
   const { setProject } = useProject();
 
-  const [ newProjDescr, setNewDescr ] = useState<string>("Project Description");
-  const [ newProjStory, setNewStory ] = useState<string>("Project Story");
-  const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null);
+  const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null); //To get available tags and payment info
+  let firstTimeProjectTags: boolean = true;
 
+  const [ newProjDescr, setNewDescr ] = useState<string | undefined>(project?.description);
+  const [ newProjStory, setNewStory ] = useState<string | undefined>(project?.story);
+  const [ newProjTags, setNewTags ] = useState<string[] | undefined>(project?.tags);
   
 
   useEffect(()=>{
@@ -46,6 +49,10 @@ const EditProjectPage: React.FC = () => {
 
     setProject(project);
     fetchTagsAndPaymentMethods();
+    if (firstTimeProjectTags) {
+      setNewTags(project?.tags);
+      firstTimeProjectTags = false;
+    }
   }, [project])
 
   useEffect(() => {
@@ -75,6 +82,11 @@ const EditProjectPage: React.FC = () => {
     }
   };
 
+  const handleToggleTag = (handledTag: string) => {
+    const isSelected = newProjTags?.includes(handledTag);
+    setNewTags(isSelected ? newProjTags?.filter((t) => t !== handledTag) : newProjTags?.concat([handledTag]))
+  }
+
   if (isLoading) return <p>Loading project for editing...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -83,8 +95,8 @@ const EditProjectPage: React.FC = () => {
       <h1 style={{textAlign: "center"}}>Edit Project: {project.title}</h1>
       <ThemeProvider theme={theme}>
         <Box component="form">
-          {/* WORKS: Updating description, Updating story*/}
-          {/* TODO: Tags, Payment and Rewards Editing*/}
+          {/* WORKS: Updating description, Updating story, Selecting Tags*/}
+          {/* TODO: Updating Tags, Payment and Rewards Editing*/}
           <TextField
                 sx={{
                   mt: 4,
@@ -102,6 +114,8 @@ const EditProjectPage: React.FC = () => {
                 <Chip 
                   label={tag}
                   clickable
+                  color={newProjTags?.includes(tag) ? 'primary' : 'default'}
+                  onClick={() => handleToggleTag(tag)}
                 />
               ))
               }
@@ -109,14 +123,23 @@ const EditProjectPage: React.FC = () => {
           <Box sx={{ bgcolor: 'secondary.main', p: 2, mt: 2, borderRadius: 2}}>
             <StoryEditor content={project.story} onUpdate={(markdown: string) => handleStoryUpdate(markdown)} />
           </Box>
+          {/* Payment,
+              Rewards */}
+          <Box sx = {{mt: 2}}>
+            
+          </Box>
+          <Box sx={{mt: 2}}>
+            <RewardDisplay rewards={project.rewards} />
+          </Box>
         </Box>
         <Button onClick={(e) => {
             e.preventDefault();
             const updatedData = {
-              ...project,
+              //...project,
               projectId: projectId,
               description: newProjDescr,
               story: newProjStory,
+              tags: newProjTags,
             };
             handleEditProject(updatedData);
           }}
