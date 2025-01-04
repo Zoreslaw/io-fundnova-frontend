@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
 import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
-import axios from 'axios';
+//import axios from 'axios';
 
-const PaymentMethodsForm: React.FC = () => {
+type PaymentMethodProps = {
+  onUpdate: (cardNumber: string, paymentMethod : string) => void;
+}
+
+const PaymentMethodsForm: React.FC<PaymentMethodProps> = ({onUpdate}) => {
   const { state, setState, configurations } = useCreateProjectContext();
   const paymentMethods = configurations?.paymentMethods || [''];
 
@@ -26,6 +30,7 @@ const PaymentMethodsForm: React.FC = () => {
       ...prev,
       paymentInfo: { ...prev.paymentInfo, paymentMethod: method },
     }));
+    onUpdate(state.paymentInfo.cardNumber , method);
   };
 
   const handleCardNumberChange = (cardNumber: string) => {
@@ -33,6 +38,7 @@ const PaymentMethodsForm: React.FC = () => {
       ...prev,
       paymentInfo: { ...prev.paymentInfo, cardNumber },
     }));
+    onUpdate(cardNumber, state.paymentInfo.paymentMethod);
   };
 
   return (
