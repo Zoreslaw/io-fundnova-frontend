@@ -14,15 +14,20 @@ import {
 } from '@mui/material';
 import CropModal from '../../CropModal/CropModal';
 import { uploadImageToDrive } from '../../utils/imagesApi';
+import { Reward } from '../../types/Reward';
 
-const RewardForm: React.FC = () => {
+type RewardFormProps = {
+  onUpdate: (Rewards: Reward[]) => void
+};
+
+const RewardForm: React.FC<RewardFormProps> = ({onUpdate}) => {
   const { state, setState } = useCreateProjectContext();
   const [isCropModalOpen, setIsCropModalOpen] = useState(false);
 
   const [reward, setReward] = useState({
     title: '',
     price: 0,
-    contents: false,
+    contents: "false",
     description: undefined as string | undefined,
     deadline: undefined as string | undefined,
     count: undefined as number | undefined,
@@ -100,13 +105,14 @@ const RewardForm: React.FC = () => {
       setReward({
         title: '',
         price: 0,
-        contents: false,
+        contents: "false",
         description: undefined,
         deadline: undefined,
         count: undefined,
         imageFile: undefined,
         imageUrl: undefined,
       });
+      onUpdate(state.rewards);
     }
   };
 
@@ -174,7 +180,7 @@ const RewardForm: React.FC = () => {
             control={
               <Checkbox
                 name="contents"
-                checked={reward.contents}
+                checked={reward.contents == "false"}
                 onChange={handleRewardChange}
               />
             }
