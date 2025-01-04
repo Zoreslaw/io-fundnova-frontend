@@ -30,8 +30,8 @@ const steps = [
     component: <CategoryAndTagsForm />,
   },
   { label: 'Project Details', component: <ProjectDetailsForm /> },
-  { label: 'Rewards Setup', component: <RewardForm /> },
-  { label: 'Payment Method', component: <PaymentMethodsForm /> },
+  { label: 'Rewards Setup', component: <RewardForm onUpdate={() => {}} /> },
+  { label: 'Payment Method', component: <PaymentMethodsForm onUpdate={() => {}} /> },
   { label: 'Review & Submit', component: <SubmitProjectStep /> },
 ];
 

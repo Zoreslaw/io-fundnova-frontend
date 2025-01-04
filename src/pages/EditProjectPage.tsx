@@ -7,6 +7,9 @@ import { Box, Button, Chip, createTheme, Grid2, TextField, ThemeProvider } from 
 import StoryEditor from "../components/StoryEditor/StoryEditor";
 import { ProjectConfiguration } from "../contexts/CreateProjectContext";
 import RewardDisplay from "../components/ProjectDisplay/RewardDisplay";
+import PaymentMethodsForm from "../components/PaymentMethodsForm/PaymentMethodsForm";
+import RewardForm from "../components/RewardForm/RewardForm";
+import { Reward } from "../types/Reward";
 
 const theme = createTheme({
   palette: {
@@ -29,13 +32,14 @@ const EditProjectPage: React.FC = () => {
   const navigate = useNavigate();
   const { setProject } = useProject();
 
-  const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null); //To get available tags and payment info
+  const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null); //To get available tags
   let firstTimeProjectTags: boolean = true;
 
   const [ newProjDescr, setNewDescr ] = useState<string | undefined>(project?.description);
   const [ newProjStory, setNewStory ] = useState<string | undefined>(project?.story);
   const [ newProjTags, setNewTags ] = useState<string[] | undefined>(project?.tags);
-  
+  const [ newProjPayment, setNewPayment ] = useState<{cardNumber: string, paymentMethod: string} | undefined>(project?.paymentInfo);
+  const [ newProjRewards, setNewRewards ] = useState<Reward[] | undefined>(project?.rewards)
 
   useEffect(()=>{
     const fetchTagsAndPaymentMethods = async () => {
@@ -85,7 +89,16 @@ const EditProjectPage: React.FC = () => {
   const handleToggleTag = (handledTag: string) => {
     const isSelected = newProjTags?.includes(handledTag);
     setNewTags(isSelected ? newProjTags?.filter((t) => t !== handledTag) : newProjTags?.concat([handledTag]))
-  }
+  };
+
+  const handlePaymentChange = (handledCardNumber:string, handledPaymentMethod: string) => {
+    const newInfo = {cardNumber: handledCardNumber, paymentMethod: handledPaymentMethod};
+    setNewPayment(newInfo);
+  };
+
+  const handleNewRewards = (rewards: Reward[]) => {
+    setNewRewards(rewards);
+  };
 
   if (isLoading) return <p>Loading project for editing...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -95,8 +108,11 @@ const EditProjectPage: React.FC = () => {
       <h1 style={{textAlign: "center"}}>Edit Project: {project.title}</h1>
       <ThemeProvider theme={theme}>
         <Box component="form">
-          {/* WORKS: Updating description, Updating story, Selecting Tags*/}
-          {/* TODO: Updating Tags, Payment and Rewards Editing*/}
+          {/* WORKS: Updating description, Updating story, Updating Tags, Updating rewards (It doens't add the newest reward yet)*/}
+          {/* TODO: 
+          - Payment Update: Backend doesn't update payment method for some reason. Maybe a spelling error somewhere? 
+          - Fix updating rewards so, you don't need a 'dummy' reward to add one reward.
+          */}
           <TextField
                 sx={{
                   mt: 4,
@@ -117,19 +133,20 @@ const EditProjectPage: React.FC = () => {
                   color={newProjTags?.includes(tag) ? 'primary' : 'default'}
                   onClick={() => handleToggleTag(tag)}
                 />
-              ))
-              }
+              ))}
           </Grid2>
           <Box sx={{ bgcolor: 'secondary.main', p: 2, mt: 2, borderRadius: 2}}>
             <StoryEditor content={project.story} onUpdate={(markdown: string) => handleStoryUpdate(markdown)} />
           </Box>
-          {/* Payment,
-              Rewards */}
-          <Box sx = {{mt: 2}}>
-            
+          <Box sx={{mt: 2}}>
+            <PaymentMethodsForm onUpdate={(cardNumb: string, paymentInfo: string) => handlePaymentChange(cardNumb, paymentInfo)}/>
           </Box>
           <Box sx={{mt: 2}}>
+            <h4>Previous rewards:</h4>
             <RewardDisplay rewards={project.rewards} />
+          </Box>
+          <Box sx={{mt: 2}}>
+            <RewardForm onUpdate={(rewards: Reward[]) => handleNewRewards(rewards)}/>
           </Box>
         </Box>
         <Button onClick={(e) => {
@@ -140,6 +157,8 @@ const EditProjectPage: React.FC = () => {
               description: newProjDescr,
               story: newProjStory,
               tags: newProjTags,
+              paymentInfo: newProjPayment,
+              rewards: newProjRewards,
             };
             handleEditProject(updatedData);
           }}
