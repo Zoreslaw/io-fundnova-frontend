@@ -1,3 +1,4 @@
+import { EditAuth } from "../types/EditAuth";
 import { ProjectCreatePayload, ProjectEditPayload } from "../types/ProjectsPayload";
 import { convertToPascalCase, convertToCamelCase } from "../utils/caseConverters";
 
@@ -171,9 +172,13 @@ export const getProjectConfiguration = async () => {
   }
 };
 
-export const fetchUserAccessForEdit = async () => {
+export const fetchUserAccessForEdit = async (payload: EditAuth) => {
   try {
-    const response = await fetch(`${API_BASE}/projects/update/fetchUserAccess`);
+    const response = await fetch(`${API_BASE}/projects/update/fetchUserAccess`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase(payload)),
+    });
 
     switch (response.status) {
       case 403:
