@@ -29,7 +29,7 @@ const Header: React.FC = () => {
       <div className="auth-buttons">
         {user ? (
           <>
-            <span onClick={profileModal.openModal} style={{color: "#fff"}}>{user.username}</span>
+            <button onClick={profileModal.openModal} style={{color: "#fff"}}>{user.username}</button>
             <button onClick={logout}>Log Out</button>
           </>
         ) : (
