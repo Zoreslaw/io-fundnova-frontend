@@ -12,6 +12,7 @@ import EditProjectPage from "./pages/EditProjectPage";
 import ViewProjectPage from "./pages/ViewProjectPage";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { CreateProjectProvider } from "./contexts/CreateProjectContext";
+import Searchpage from "./pages/SearchPage";
 
 const App: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                       </ProtectedRoute>
                     }
                   />
+                  <Route path="/search" element={<Searchpage />}/>
                   <Route path="/preview" element={<PreviewProjectPage />} />
                   <Route path="/edit-project/:projectId" element={<EditProjectPage />} />
                   <Route path="/projects/:projectId" element={<ViewProjectPage />} />
