@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProjectData } from "../hooks/useProjectData";
-import { getProjectConfiguration, updateProjectApi } from "../utils/projectsApi";
+import { fetchUserAccessForEdit, getProjectConfiguration, updateProjectApi } from "../utils/projectsApi";
 import { useProject } from "../contexts/ProjectContext";
 import { Box, Button, Chip, createTheme, Grid2, TextField, ThemeProvider } from "@mui/material";
 import StoryEditor from "../components/StoryEditor/StoryEditor";
@@ -10,6 +10,8 @@ import RewardDisplay from "../components/ProjectDisplay/RewardDisplay";
 import PaymentMethodsForm from "../components/PaymentMethodsForm/PaymentMethodsForm";
 import RewardForm from "../components/RewardForm/RewardForm";
 import { Reward } from "../types/Reward";
+import { useAuth } from "../contexts/AuthContext";
+//import ProjectDisplay from "../components/ProjectDisplay/ProjectDisplay";
 
 const theme = createTheme({
   palette: {
@@ -31,6 +33,7 @@ const EditProjectPage: React.FC = () => {
   const { project, fetchProject, isLoading, error } = useProjectData();
   const navigate = useNavigate();
   const { setProject } = useProject();
+  const { user } = useAuth();
 
   const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null); //To get available tags
   let firstTimeProjectTags: boolean = true;
@@ -41,16 +44,30 @@ const EditProjectPage: React.FC = () => {
   const [ newProjPayment, setNewPayment ] = useState<{cardNumber: string, paymentMethod: string} | undefined>(project?.paymentInfo);
   const [ newProjRewards, setNewRewards ] = useState<Reward[] | undefined>(project?.rewards)
 
+  const [ isEditing, setIsEditing ] = useState<boolean>(true);
+  const [ canEdit, setCanEdit ] = useState<boolean>(false);
+
+  const canUserEditProject = async () => {
+    try {
+      const response = await fetchUserAccessForEdit({projectId: projectId, userId: user.userId});
+      setCanEdit(response);
+    } catch (err: any) {
+      console.log('err', err);
+      setCanEdit(false);
+    }
+  }
+
   useEffect(()=>{
     const fetchTagsAndPaymentMethods = async () => {
       try {
         const data = await getProjectConfiguration();
-        setProjConfig(data)
+        setProjConfig(data);
       } catch (err: any) {
-        console.log('err',err)
+        console.log('err', err);
       }
     }
 
+    canUserEditProject();
     setProject(project);
     fetchTagsAndPaymentMethods();
     if (firstTimeProjectTags) {
@@ -84,6 +101,7 @@ const EditProjectPage: React.FC = () => {
     } catch (error) {
       console.error("Error updating project:", error);
     }
+    setIsEditing(false);
   };
 
   const handleToggleTag = (handledTag: string) => {
@@ -102,8 +120,10 @@ const EditProjectPage: React.FC = () => {
 
   if (isLoading) return <p>Loading project for editing...</p>;
   if (error) return <p>Error: {error}</p>;
+  //if (!canEdit) return <p>Error: No permissions for editing</p>;
 
   return project ? (
+    //isEditing ? (
     <div>
       <h1 style={{textAlign: "center"}}>Edit Project: {project.title}</h1>
       <ThemeProvider theme={theme}>
@@ -170,6 +190,16 @@ const EditProjectPage: React.FC = () => {
         >Save and Preview</Button>
       </ThemeProvider>
     </div>
+    /*) : (<div>
+          <ProjectDisplay {...project} mode="preview"/>
+          <Button 
+          variant="contained"
+          fullWidth
+          sx={{mb: 2, mt: 2}}
+          onClick={() => {setIsEditing(true)}}>Back to Editing</Button>
+        </div>
+    )
+        */
   ) : (
     <p>No project to edit.</p>
   );
