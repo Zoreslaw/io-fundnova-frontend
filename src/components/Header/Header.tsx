@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useModal } from "../../hooks/useModal";
 import { useAuth } from "../../contexts/AuthContext"; 
 import Modal from "../Modal/Modal";
@@ -15,6 +15,12 @@ const Header: React.FC = () => {
   const registerModal = useModal();
   const profileModal = useModal();
 
+  const navigate = useNavigate();
+
+  const searchButtonHandler = () => {
+    navigate("./search")
+  };
+
   // useEffect(() => {
   //   console.log(user);
   // }, [user])
@@ -25,6 +31,9 @@ const Header: React.FC = () => {
       <Link to="/">
           <Logo />
         </Link>
+      </div>
+      <div className="searchButton">
+        <button onClick={searchButtonHandler}>Explore</button>
       </div>
       <div className="auth-buttons">
         {user ? (
