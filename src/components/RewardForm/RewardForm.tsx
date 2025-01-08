@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import {
   Box,
@@ -112,9 +112,16 @@ const RewardForm: React.FC<RewardFormProps> = ({onUpdate}) => {
         imageFile: undefined,
         imageUrl: undefined,
       });
-      onUpdate(state.rewards);
     }
   };
+
+  const updateToParam = () => {
+    onUpdate(state.rewards);
+  }
+
+  useEffect(() => {
+    updateToParam();
+  }, [state.rewards, updateToParam])
 
   return (
     <Box sx={{ marginTop: 5 }}>
