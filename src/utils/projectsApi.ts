@@ -1,5 +1,6 @@
 import { EditAuth } from "../types/EditAuth";
 import { ProjectCreatePayload, ProjectEditPayload } from "../types/ProjectsPayload";
+import { SearchPayload } from "../types/SearchPayload";
 import { convertToPascalCase, convertToCamelCase } from "../utils/caseConverters";
 
 const API_BASE = "https://localhost:7225/api";
@@ -190,6 +191,27 @@ export const fetchUserAccessForEdit = async (payload: EditAuth) => {
     }
   } catch (error: any) {
     console.error("Error fetching project configuration:", error.message);
+    throw error;
+  }
+};
+
+export const getSpecificProjects = async (payload: SearchPayload) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/search`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase(payload)),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error while fetching specified projects:", error.message);
     throw error;
   }
 };
