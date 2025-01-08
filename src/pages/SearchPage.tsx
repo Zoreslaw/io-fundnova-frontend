@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useProjects } from "../hooks/useRecentProjects";
 import SearchpageProjectCard from "../components/ProjectCards/SearchpageProjectCard";
 import { ProjectConfiguration } from "../contexts/CreateProjectContext";
-import { getProjectConfiguration } from "../utils/projectsApi";
+import { getProjectConfiguration, getSpecificProjects } from "../utils/projectsApi";
 
 const theme = createTheme({
     palette: {
@@ -36,21 +36,29 @@ const Searchpage: React.FC = () => {
         }
 
         fetchTagsAndCategories();
-        if (!isLoading) {
-          setIsContentVisible(true);
-        } else {
-          setIsContentVisible(false);
-        }
+        //if (!isLoading) {
+        //  setIsContentVisible(true);
+        //} else {
+        //  setIsContentVisible(false);
+        //}
     }, [isLoading]);
 
     const handleSelectTag = (handledTag: string) => {
         const isSelected = selectedTags?.includes(handledTag);
-        setNewTags(isSelected ? selectedTags?.filter((t) => t !== handledTag) : selectedTags?.concat([handledTag]));
+        if (selectedTags?.length > 0) {
+            setNewTags(isSelected ? selectedTags?.filter((t) => t !== handledTag) : selectedTags?.concat([handledTag]))
+        } else {
+            setNewTags([handledTag]);
+        }
     };
 
     const handleSelectCategory = (handledCategory: string) => {
         const isSelected = selectedCategories?.includes(handledCategory);
-        setNewCategories(isSelected ? selectedCategories?.filter((c) => c !== handledCategory) : selectedCategories?.concat([handledCategory]));
+        if (selectedCategories?.length > 0) {
+            setNewCategories(isSelected ? selectedCategories?.filter((c) => c !== handledCategory) : selectedCategories?.concat([handledCategory]));
+        } else {
+            setNewCategories([handledCategory]);
+        }
     };
 
     const handleNewInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +70,7 @@ const Searchpage: React.FC = () => {
     };
 
     const askForResults = () => {
+        setIsContentVisible(false);
         const askingData = {
             categories: selectedCategories,
             tags: selectedTags,
@@ -70,15 +79,17 @@ const Searchpage: React.FC = () => {
 
         console.log(askingData);
         //TODO: Ask Database for results
+
+        //getSpecificProjects(askingData);
     };
 
     return (
-        <div>
+        <div style={{marginLeft: "50px", marginRight: "50px"}}>
             <ThemeProvider theme={theme}>
-                <div className="searchBar" style={{marginLeft: "50px", marginRight: "50px"}}>
+                <div className="searchBar">
                     <TextField
                         variant="filled"
-                        label="SearchBar"
+                        label="Search Bar"
                         name="Search"
                         fullWidth
                         sx={{
@@ -89,7 +100,13 @@ const Searchpage: React.FC = () => {
                 </div>
                 <div className="categories-list" style={{margin: "5px"}}>
                     <h3 style={{textAlign: "center"}}>Select categories:</h3>
-                    <Grid2 container spacing={2}>
+                    <Grid2 container spacing={2} sx={{
+                        border: 2, 
+                        borderColor: 'secondary.main', 
+                        borderRadius: 2, 
+                        p: 2, 
+                        justifyContent: "center", 
+                        alignItems: "center"}}>
                         {!isLoading ? projectConfig?.categories.map((availableCategory) => (
                             <Chip 
                                 label={availableCategory}
@@ -102,7 +119,13 @@ const Searchpage: React.FC = () => {
                 </div>
                 <div className="tags-list" style={{margin: "5px"}}>
                     <h3 style={{textAlign: "center"}}>Select tags:</h3>
-                    <Grid2 container spacing={2}>
+                    <Grid2 container spacing={2} sx={{
+                        border: 2, 
+                        borderColor: 'secondary.main', 
+                        borderRadius: 2, 
+                        p: 2, 
+                        justifyContent: "center", 
+                        alignItems: "center"}}>
                         {!isLoading ? projectConfig?.tags.map((availableTag) => (
                             <Chip 
                                 label={availableTag}
@@ -121,9 +144,10 @@ const Searchpage: React.FC = () => {
                         onClick={(e) => {
                             e.preventDefault();
                             askForResults();
+                            setIsContentVisible(true);
                         }}
                         >Search</Button>
-                    {!isLoading && !error && projects.length > 0 ? ( 
+                    {isContentVisible && (!isLoading && !error && projects.length > 0 ? ( 
                     <div style={{
                         display: "grid",
                         gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
@@ -139,7 +163,7 @@ const Searchpage: React.FC = () => {
                     </div>
                     ) : (
                         !isLoading && <p>No projects found.</p>
-                    )}
+                    ))}
                     {error && <p>Error: {error}</p>}
                 </div>
             </ThemeProvider>

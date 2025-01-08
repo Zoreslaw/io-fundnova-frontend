@@ -4,13 +4,16 @@ import "./Homepage.css";
 import HomePageProjectCard from "../components/ProjectCards/HomepageProjectCard";
 import { useProjects } from "../hooks/useRecentProjects";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Homepage: React.FC = () => {
   const { projects, isLoading, error } = useProjects();
   const [isContentVisible, setIsContentVisible] = useState(false);
 
-    const { user } = useAuth();
-    console.log(user);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  console.log(user);
 
   useEffect(() => {
     if (!isLoading) {
@@ -26,6 +29,10 @@ const Homepage: React.FC = () => {
   //   alert("User: " + user?.username + " Email: " + user?.email)
   // }
 
+  const exploreButtonHandler = () => {
+    navigate("/search/");
+  };
+
   return (
     <div className="homepage">
       <section className="hero">
@@ -33,7 +40,7 @@ const Homepage: React.FC = () => {
         <p>Discover and support innovative projects that shape the future.</p>
         
         <button className="btn btn-primary"
-        //onClick={exploreButtonHandler}
+        onClick={exploreButtonHandler}
         >
           Explore Projects
         </button>

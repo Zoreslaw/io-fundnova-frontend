@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useProjectData } from "../hooks/useProjectData";
 import { fetchUserAccessForEdit, getProjectConfiguration, updateProjectApi } from "../utils/projectsApi";
 import { useProject } from "../contexts/ProjectContext";
-import { Box, Button, Chip, createTheme, Grid2, TextField, ThemeProvider } from "@mui/material";
+import { Box, Button, Chip, createTheme, Grid2, TextField, ThemeProvider, Typography } from "@mui/material";
 import StoryEditor from "../components/StoryEditor/StoryEditor";
 import { ProjectConfiguration } from "../contexts/CreateProjectContext";
 import RewardDisplay from "../components/ProjectDisplay/RewardDisplay";
@@ -128,14 +128,13 @@ const EditProjectPage: React.FC = () => {
       <h1 style={{textAlign: "center"}}>Edit Project: {project.title}</h1>
       <ThemeProvider theme={theme}>
         <Box component="form">
-          {/* WORKS: Updating description, Updating story, Updating Tags, Updating rewards (It doens't add the newest reward yet)*/}
+          {/* WORKS: Updating description, Updating story, Updating Tags, Updating rewards*/}
           {/* TODO: 
           - Payment Update: Backend doesn't update payment method for some reason. Maybe a spelling error somewhere? 
-          - Fix updating rewards so, you don't need a 'dummy' reward to add one reward.
           */}
           <TextField
                 sx={{
-                  mt: 4,
+                  mt: 2,
                 }}
                 label="Change Project Description"
                 name="Description"
@@ -145,18 +144,24 @@ const EditProjectPage: React.FC = () => {
                 onChange={handleChangedInfo}
                 helperText="Describe your project in a few sentences."
               />
-          <Grid2 container spacing={2} sx={{ mt: 2}}>
-              { projConfig?.tags.map((tag) => (
-                <Chip 
-                  label={tag}
-                  clickable
-                  color={newProjTags?.includes(tag) ? 'primary' : 'default'}
-                  onClick={() => handleToggleTag(tag)}
-                />
-              ))}
-          </Grid2>
-          <Box sx={{ bgcolor: 'secondary.main', p: 2, mt: 2, borderRadius: 2}}>
-            <StoryEditor content={project.story} onUpdate={(markdown: string) => handleStoryUpdate(markdown)} />
+          <Box>
+            <Typography sx={{textAlign: "center"}} variant="h6">Select tags:</Typography>
+            <Grid2 container spacing={2} sx={{border: 2, borderColor: 'secondary.main', borderRadius: 2, p: 2, mt: 2, mb: 2, justifyContent: "center", alignItems: "center"}}>
+                { projConfig?.tags.map((tag) => (
+                  <Chip 
+                    label={tag}
+                    clickable
+                    color={newProjTags?.includes(tag) ? 'primary' : 'default'}
+                    onClick={() => handleToggleTag(tag)}
+                  />
+                ))}
+            </Grid2>
+          </Box>
+          <Box>
+            <Typography sx={{textAlign: "center"}} variant="h6">Change campaign:</Typography>
+            <Box sx={{ bgcolor: 'secondary.main', p: 3, mt: 2, borderRadius: 2}}>
+              <StoryEditor content={project.story} onUpdate={(markdown: string) => handleStoryUpdate(markdown)} />
+            </Box>
           </Box>
           <Box sx={{mt: 2}}>
             <PaymentMethodsForm onUpdate={(cardNumb: string, paymentInfo: string) => handlePaymentChange(cardNumb, paymentInfo)}/>
