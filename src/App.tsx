@@ -13,6 +13,7 @@ import ViewProjectPage from "./pages/ViewProjectPage";
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import { CreateProjectProvider } from "./contexts/CreateProjectContext";
 import Searchpage from "./pages/SearchPage";
+import BackProjectPage from "./pages/BackProjectPage";
 
 const App: React.FC = () => {
   return (
@@ -38,6 +39,7 @@ const App: React.FC = () => {
                   <Route path="/preview" element={<PreviewProjectPage />} />
                   <Route path="/edit-project/:projectId" element={<EditProjectPage />} />
                   <Route path="/projects/:projectId" element={<ViewProjectPage />} />
+                  <Route path="/projects/:projectId/back-project" element={<BackProjectPage />}/>
                 </Routes>
               </CreateProjectProvider>
             </ProjectProvider>
