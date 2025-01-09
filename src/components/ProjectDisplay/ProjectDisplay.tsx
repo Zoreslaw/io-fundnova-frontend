@@ -14,6 +14,7 @@ import {
   Button,
 } from "@mui/material";
 import "./ProjectDisplay.css";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -44,9 +45,14 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
   mode,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
 
   const handleTabChange = (_: React.ChangeEvent<{}>, newValue: number) => {
     setActiveTab(newValue);
+  };
+
+  const handleBackingProject = () => {
+    navigate("./back-project");
   };
 
   return (
@@ -94,7 +100,7 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
                 }}
               />
             )}
-            {tags && <TagsDisplay tags={tags} />}
+            
           </Box>
 
           <Box
@@ -112,6 +118,7 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
               backers={backers}
               deadline={deadline}
             />
+
             {mode === "view" && (
               <Button
                 variant="contained"
@@ -120,10 +127,14 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
                   marginTop: 2,
                   width: "100%",
                 }}
+                onClick={handleBackingProject}
               >
                 Back This Project
               </Button>
             )}
+
+            {tags && <div style={{marginTop: 5}}><TagsDisplay tags={tags}/></div>}
+
           </Box>
         </Box>
 
