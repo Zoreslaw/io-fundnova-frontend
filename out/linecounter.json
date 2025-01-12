@@ -1,0 +1,1023 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\xxx\\Documents\\GitHub\\IO-fundnova\\io-fundnova.client",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2025-01-11 18:57:10",
+            "filesum": 154,
+            "codesum": 17640,
+            "commentsum": 440,
+            "blanksum": 1107,
+            "statistics": {
+                ".json": {
+                    "code": 9573,
+                    "comment": 4,
+                    "blank": 89
+                },
+                ".esproj": {
+                    "code": 11,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".tsbuildinfo": {
+                    "code": 1,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".ts": {
+                    "code": 848,
+                    "comment": 40,
+                    "blank": 132
+                },
+                ".html": {
+                    "code": 14,
+                    "comment": 0,
+                    "blank": 0
+                },
+                "": {
+                    "code": 19,
+                    "comment": 9,
+                    "blank": 2
+                },
+                ".js": {
+                    "code": 27,
+                    "comment": 0,
+                    "blank": 1
+                },
+                ".tsx": {
+                    "code": 5102,
+                    "comment": 318,
+                    "blank": 615
+                },
+                ".xml": {
+                    "code": 99,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 34,
+                    "comment": 9,
+                    "blank": 10
+                },
+                ".txt": {
+                    "code": 4,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".config": {
+                    "code": 10,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".svg": {
+                    "code": 407,
+                    "comment": 8,
+                    "blank": 8
+                },
+                ".iml": {
+                    "code": 12,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".css": {
+                    "code": 1479,
+                    "comment": 52,
+                    "blank": 250
+                },
+                ".cache": {
+                    "code": 0,
+                    "comment": 0,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 9,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": ".idea\\.gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".idea\\inspectionProfiles\\Project_Default.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": ".idea\\io-fundnova.client.iml"
+                },
+                {
+                    "blank": 0,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": ".idea\\modules.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".idea\\vcs.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": ".idea\\workspace.xml"
+                },
+                {
+                    "blank": 1,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "eslint.config.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "io-fundnova.client.esproj"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "nuget.config"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\io-fundnova.client.esproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "obj\\Debug\\io-fundnova.client.esproj.FileListAbsolute.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "obj\\Release\\io-fundnova.client.esproj.CoreCompileInputs.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "obj\\Release\\io-fundnova.client.esproj.FileListAbsolute.txt"
+                },
+                {
+                    "blank": 85,
+                    "code": 9441,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "public\\vite.svg"
+                },
+                {
+                    "blank": 10,
+                    "code": 34,
+                    "comment": 9,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src\\App.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\assets\\Add.tsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 71,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\fundnova_full_logo_dark_mode.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 71,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\fundnova_full_logo_light_mode.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\header_section_dark.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 37,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\header_section_light.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 46,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\icons\\login_icon_dark.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 48,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\icons\\login_icon_light.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 48,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\icons\\search_icon_dark.svg"
+                },
+                {
+                    "blank": 1,
+                    "code": 47,
+                    "comment": 1,
+                    "filename": "src\\assets\\img\\icons\\search_icon_light.svg"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src\\assets\\react.svg"
+                },
+                {
+                    "blank": 9,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "src\\components\\Auth\\Auth.css"
+                },
+                {
+                    "blank": 11,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "src\\components\\Auth\\LoginForm.tsx"
+                },
+                {
+                    "blank": 19,
+                    "code": 90,
+                    "comment": 0,
+                    "filename": "src\\components\\Auth\\RegisterForm.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 104,
+                    "comment": 7,
+                    "filename": "src\\components\\CategoryAndTagsForm\\CategoryAndTagsForm.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src\\components\\FormField\\AuthFormField.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 78,
+                    "comment": 1,
+                    "filename": "src\\components\\Header\\Header.css"
+                },
+                {
+                    "blank": 7,
+                    "code": 55,
+                    "comment": 3,
+                    "filename": "src\\components\\Header\\Header.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src\\components\\Logo\\Logo.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src\\components\\Logo\\Logo.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 54,
+                    "comment": 5,
+                    "filename": "src\\components\\Modal\\Modal.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 75,
+                    "comment": 7,
+                    "filename": "src\\components\\Modal\\Modal.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 48,
+                    "comment": 12,
+                    "filename": "src\\components\\PaymentMethodsForm\\PaymentMethodsForm.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\PaymentSteps\\Forms\\ConfirmPaymentForm.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\PaymentSteps\\Forms\\PaymentMethodForm.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\components\\PaymentSteps\\Forms\\UserInformationForm.tsx"
+                },
+                {
+                    "blank": 23,
+                    "code": 147,
+                    "comment": 1,
+                    "filename": "src\\components\\ProjectCards\\BaseProjectCard.css"
+                },
+                {
+                    "blank": 6,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectCards\\BaseProjectCard.tsx"
+                },
+                {
+                    "blank": 18,
+                    "code": 111,
+                    "comment": 11,
+                    "filename": "src\\components\\ProjectCards\\HomepageProjectCard.css"
+                },
+                {
+                    "blank": 9,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectCards\\HomepageProjectCard.tsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 122,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectCards\\old\\ProjectCard.css"
+                },
+                {
+                    "blank": 7,
+                    "code": 42,
+                    "comment": 1,
+                    "filename": "src\\components\\ProjectCards\\old\\ProjectCard.tsx"
+                },
+                {
+                    "blank": 24,
+                    "code": 135,
+                    "comment": 23,
+                    "filename": "src\\components\\ProjectCards\\ProfileProjectCard.css"
+                },
+                {
+                    "blank": 4,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectCards\\ProfileProjectCard.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 28,
+                    "comment": 1,
+                    "filename": "src\\components\\ProjectCards\\SearchpageProjectCard.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 191,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDetailsForm\\ProjectDetailsForm.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDisplay\\FundingStats.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDisplay\\ProjectDisplay.css"
+                },
+                {
+                    "blank": 15,
+                    "code": 166,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDisplay\\ProjectDisplay.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 1,
+                    "filename": "src\\components\\ProjectDisplay\\RewardDisplay.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDisplay\\StoryDisplay.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\components\\ProjectDisplay\\TagsDisplay.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 77,
+                    "comment": 12,
+                    "filename": "src\\components\\RewardCards\\NoRewardCard.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 81,
+                    "comment": 19,
+                    "filename": "src\\components\\RewardCards\\RewardCard.tsx"
+                },
+                {
+                    "blank": 14,
+                    "code": 302,
+                    "comment": 0,
+                    "filename": "src\\components\\RewardForm\\RewardForm.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src\\components\\StopNavigator\\StepNavigator.tsx"
+                },
+                {
+                    "blank": 17,
+                    "code": 211,
+                    "comment": 28,
+                    "filename": "src\\components\\StoryEditor\\Icons.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 107,
+                    "comment": 0,
+                    "filename": "src\\components\\StoryEditor\\LinkModal.tsx"
+                },
+                {
+                    "blank": 18,
+                    "code": 172,
+                    "comment": 4,
+                    "filename": "src\\components\\StoryEditor\\StoryEditor.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src\\components\\StoryEditor\\styles.css"
+                },
+                {
+                    "blank": 18,
+                    "code": 121,
+                    "comment": 3,
+                    "filename": "src\\components\\SubmitProjectStep\\SubmitProjectStep.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\avatar.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\button.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\checkbox.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\close-button.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\color-mode.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\dialog.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\drawer.tsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\field.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\input-group.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\popover.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\provider.tsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\radio.tsx"
+                },
+                {
+                    "blank": 9,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\slider.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src\\components\\ui\\tooltip.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 123,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\AdvancedInfoTab.tsx"
+                },
+                {
+                    "blank": 22,
+                    "code": 85,
+                    "comment": 76,
+                    "filename": "src\\components\\UserProfile\\Tabs\\BackedProjectsTab.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangeAdressForm.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangeEmailForm.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangeNameForm.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 83,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangePassForm.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangePaymentForm.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangePaymentInfoForm.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangeSurnameForm.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\ChangeUsernameForm.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\MyProjectInfoForm.css"
+                },
+                {
+                    "blank": 5,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\Forms\\MyProjectInfoForm.tsx"
+                },
+                {
+                    "blank": 25,
+                    "code": 151,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\GeneralInfoTab.css"
+                },
+                {
+                    "blank": 13,
+                    "code": 119,
+                    "comment": 2,
+                    "filename": "src\\components\\UserProfile\\Tabs\\GeneralInfoTab.tsx"
+                },
+                {
+                    "blank": 25,
+                    "code": 129,
+                    "comment": 5,
+                    "filename": "src\\components\\UserProfile\\Tabs\\MyProjectsTab.css"
+                },
+                {
+                    "blank": 14,
+                    "code": 99,
+                    "comment": 8,
+                    "filename": "src\\components\\UserProfile\\Tabs\\MyProjectsTab.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\SettingsTab.css"
+                },
+                {
+                    "blank": 10,
+                    "code": 76,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\SettingsTab.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\ToggleSwitch.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\Tabs\\ToggleSwitch.tsx"
+                },
+                {
+                    "blank": 30,
+                    "code": 130,
+                    "comment": 4,
+                    "filename": "src\\components\\UserProfile\\UserProfile.css"
+                },
+                {
+                    "blank": 8,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "src\\components\\UserProfile\\UserProfile.tsx"
+                },
+                {
+                    "blank": 19,
+                    "code": 108,
+                    "comment": 43,
+                    "filename": "src\\contexts\\AuthContext.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 93,
+                    "comment": 6,
+                    "filename": "src\\contexts\\CreateProjectContext.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src\\contexts\\ProjectContext.tsx"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 1,
+                    "filename": "src\\contexts\\UserDataContext.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 52,
+                    "comment": 4,
+                    "filename": "src\\CropModal\\CropModal.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useAdvancedInfo.ts"
+                },
+                {
+                    "blank": 4,
+                    "code": 0,
+                    "comment": 33,
+                    "filename": "src\\hooks\\useAuth.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useBackedProjects.ts"
+                },
+                {
+                    "blank": 9,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useBasicInfo.ts"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useModal.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useMyProjects.ts"
+                },
+                {
+                    "blank": 6,
+                    "code": 35,
+                    "comment": 1,
+                    "filename": "src\\hooks\\useProjectData.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useRecentProjects.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src\\hooks\\useViewProject.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "src\\main.tsx"
+                },
+                {
+                    "blank": 16,
+                    "code": 102,
+                    "comment": 18,
+                    "filename": "src\\pages\\BackProjectPage.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 104,
+                    "comment": 7,
+                    "filename": "src\\pages\\CreateProjectPage.tsx"
+                },
+                {
+                    "blank": 20,
+                    "code": 178,
+                    "comment": 17,
+                    "filename": "src\\pages\\EditProjectPage.tsx"
+                },
+                {
+                    "blank": 12,
+                    "code": 75,
+                    "comment": 2,
+                    "filename": "src\\pages\\Homepage.css"
+                },
+                {
+                    "blank": 12,
+                    "code": 63,
+                    "comment": 4,
+                    "filename": "src\\pages\\Homepage.tsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src\\pages\\NotFound.css"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 2,
+                    "filename": "src\\pages\\NotFound.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 142,
+                    "comment": 16,
+                    "filename": "src\\pages\\PaymentPage.tsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 41,
+                    "comment": 2,
+                    "filename": "src\\pages\\PreviewProjectPage.tsx"
+                },
+                {
+                    "blank": 15,
+                    "code": 152,
+                    "comment": 8,
+                    "filename": "src\\pages\\SearchPage.tsx"
+                },
+                {
+                    "blank": 10,
+                    "code": 26,
+                    "comment": 6,
+                    "filename": "src\\pages\\ViewProjectPage.tsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\Routes\\ProtectedRoute.tsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "src\\styles\\global.css"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src\\types\\AuthResponses.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src\\types\\EditAuth.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src\\types\\LoginPayload.ts"
+                },
+                {
+                    "blank": 1,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "src\\types\\Project.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "src\\types\\ProjectsPayload.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\types\\Reward.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "src\\types\\SearchPayload.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\types\\User.ts"
+                },
+                {
+                    "blank": 14,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "src\\utils\\advancedInfoApi.ts"
+                },
+                {
+                    "blank": 7,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src\\utils\\authApi.ts"
+                },
+                {
+                    "blank": 13,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "src\\utils\\basicInfoApi.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src\\utils\\caseConverters.ts"
+                },
+                {
+                    "blank": 5,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src\\utils\\imagesApi.ts"
+                },
+                {
+                    "blank": 32,
+                    "code": 185,
+                    "comment": 1,
+                    "filename": "src\\utils\\projectsApi.ts"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 1,
+                    "filename": "src\\vite-env.d.ts"
+                },
+                {
+                    "blank": 2,
+                    "code": 22,
+                    "comment": 2,
+                    "filename": "tsconfig.app.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "tsconfig.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 20,
+                    "comment": 2,
+                    "filename": "tsconfig.node.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "tsconfig.tsbuildinfo"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 2,
+                    "filename": "vite.config.ts"
+                }
+            ]
+        }
+    ]
+}

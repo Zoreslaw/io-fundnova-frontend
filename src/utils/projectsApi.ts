@@ -143,6 +143,8 @@ export const updateProjectApi = async (payload: ProjectEditPayload) => {
       headers: { "Content-Type": "application/json" },
     });
 
+    
+
     if (!response.ok) {
       const errorResponse = await response.text();
       throw new Error(errorResponse);
@@ -169,6 +171,27 @@ export const getProjectConfiguration = async () => {
     return convertToCamelCase(data);
   } catch (error: any) {
     console.error("Error fetching project configuration:", error.message);
+    throw error;
+  }
+};
+
+export const getRewardInfo = async (projectId: number, rewardId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/fetch-reward`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ projectId: projectId.toString(), rewardId: rewardId.toString() })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching reward:", error.message);
     throw error;
   }
 };

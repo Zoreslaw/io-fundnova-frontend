@@ -1,6 +1,6 @@
 import React from "react";
 import { Reward } from "../../types/Reward";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import RewardCard from "../RewardCards/RewardCard";
 
 interface RewardDisplayProps {
@@ -8,15 +8,24 @@ interface RewardDisplayProps {
 }
 
 const RewardDisplay: React.FC<RewardDisplayProps> = ({ rewards }) => (
-  <Grid container spacing={2}>
+  <Stack
+    direction="column"
+    spacing={2}
+    sx={{
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
     {rewards.map((reward) => (
-      <Grid item xs={12} sm={6} md={4} key={reward.rewardId}>
+      // <Grid item xs={12} sm={6} md={4} key={reward.rewardId}>
+
         <RewardCard
+          sx={{ maxWidth: "50%" }}
           reward={{ ...reward }}
         />
-      </Grid>
+
     ))}
-  </Grid>
+  </Stack>
 );
 
 export default RewardDisplay;
