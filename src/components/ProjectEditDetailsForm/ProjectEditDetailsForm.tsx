@@ -1,13 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, TextField, Grid, Typography, Button, Card, CardMedia } from '@mui/material';
-import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
+import { ProjectConfiguration, useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import StoryEditor from '../StoryEditor/StoryEditor';
 import CropModal from '../../CropModal/CropModal';
 import { uploadImageToDrive } from '../../utils/imagesApi';
+import { useProjectData } from '../../hooks/useProjectData';
+import { useProject } from '../../contexts/ProjectContext';
+import { getProjectConfiguration } from '../../utils/projectsApi';
+import { useParams } from 'react-router-dom';
+
+
+
+
+
+
 
 const ProjectDetailsForm: React.FC = () => {
-  const { state, setState } = useCreateProjectContext();
-
+  const { state, setState, configurations } = useCreateProjectContext();
+  const { project, fetchProject, isLoading, error } = useProjectData();
+  const [projConfig, setProjConfig] = useState<ProjectConfiguration | null>(null); // To get available tags
+  const { setProject } = useProject();
+  const { projectId } = useParams<{ projectId: string }>();
+  
+  const [newProjTags, setNewTags] = useState<string[]>(project?.tags || []);
+  
+  
+  
+  
+  useEffect(() => {
+    console.log(project);
+    console.log(newProjTags);
+  }, [project]);
+  
+  useEffect(() => {
+    const fetchTagsAndPaymentMethods = async () => {
+      try {
+        const data = await getProjectConfiguration();
+        setProjConfig(data);
+      } catch (err: any) {
+        console.log('err', err);
+      }
+    };
+  
+    setProject(project);
+    fetchTagsAndPaymentMethods();
+   
+  }, [project]);
+  
+  useEffect(() => {
+    if (projectId) {
+      fetchProject(Number(projectId), 'edit');
+    }
+  }, [projectId, fetchProject]);
+  
   const [errors, setErrors] = useState({
     fundingGoal: false,
     deadline: false,
@@ -87,98 +132,17 @@ const ProjectDetailsForm: React.FC = () => {
     }));
   };
 
-  return (
+  return project ?(
     <Box sx={{ height: 'auto', marginTop: 5 }}>
       <Typography variant="h5" gutterBottom sx={{ marginBottom: 2.5 }}>
-        Enter Project Details
+        Edit Project Details
       </Typography>
       <Grid container spacing={6}>        
+        
         <Grid item xs={12}>
-          <TextField
-            label="Project Description"
-            name="description"
-            multiline
-            rows={4}
-            fullWidth
-            required
-            value={state.description}
-            onChange={handleChange}
-            helperText="Describe your project in detail."
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <StoryEditor content={state.story} onUpdate={(markdown: any) => handleStoryUpdate(markdown)} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Funding Goal ($)"
-            name="fundingGoal"
-            type="number"
-            fullWidth
-            required
-            value={state.fundingGoal}
-            onChange={handleChange}
-            error={errors.fundingGoal}
-            helperText={
-              errors.fundingGoal
-                ? `Funding goal must be at least $${MIN_FUNDING_GOAL}.`
-                : `Set a goal of at least $${MIN_FUNDING_GOAL}.`
-            }
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            label="Deadline"
-            name="deadline"
-            type="date"
-            fullWidth
-            required
-            InputLabelProps={{ shrink: true }}
-            value={state.deadline}
-            onChange={handleChange}
-            error={errors.deadline}
-            helperText={
-              errors.deadline
-                ? `Deadline must be at least ${MIN_DEADLINE_DAYS} days from today.`
-                : `Select a deadline at least ${MIN_DEADLINE_DAYS} days in the future.`
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
-            Upload Project Main Image
-          </Typography>
-          <Button
-            variant="contained"
-            component="label"
-            color="primary"
-            disabled={isUploading}
-          >
-            {isUploading ? 'Uploading...' : 'Upload Image'}
-            <input type="file" hidden accept="image/*" onChange={handleImageChange} />
-          </Button>
-          {state.imageUrl && (
-            <Box mt={2}>
-              <Card sx={{ display: 'block', width: '100%', maxWidth: 300, aspectRatio: '16/9', overflow: 'hidden' }}>
-                <CardMedia
-                  component="img"
-                  sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  image={state.imageUrl}
-                  alt="Main Project Image"
-                />
-              </Card>
-              <Button
-                variant="outlined"
-                color="error"
-                size="small"
-                onClick={handleImageDelete}
-                sx={{ mt: 1 }}
-              >
-                Delete Image
-              </Button>
-            </Box>
-          )}
-        </Grid>
+          <StoryEditor content={project?.story || ''} onUpdate={(markdown: any) => handleStoryUpdate(markdown)} />
+
+        </Grid>      
 
       </Grid>
 
@@ -189,6 +153,8 @@ const ProjectDetailsForm: React.FC = () => {
         imageUrl={tempimageUrl || ''}
       />
     </Box>
+  ): (
+    <p>No project to edit.</p>
   );
 };
 

@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TagsForm from '../components/TagsForm/TagsForm';
 import ProjectEditDetailsForm from '../components/ProjectEditDetailsForm/ProjectEditDetailsForm';
-import RewardForm from '../components/RewardForm/RewardForm';
+import EditRewardForm from '../components/EditRewardForm/EditRewardForm';
 import PaymentMethodsForm from '../components/PaymentMethodsForm/PaymentMethodsForm';
 import SubmitProjectStep from '../components/SubmitProjectStep/SubmitProjectStep';
 import { Box, Typography } from '@mui/material';
@@ -28,7 +28,7 @@ const theme = createTheme({
 const tabs = [  
   {label: 'Tags Selection', component: <TagsForm />},  
   { label: 'Project Details', component: <ProjectEditDetailsForm /> },
-  { label: 'Rewards Setup', component: <RewardForm onUpdate={() => {}} /> },
+  { label: 'Rewards Setup', component: <EditRewardForm onUpdate={() => {}} /> },
   { label: 'Payment Method', component: <PaymentMethodsForm onUpdate={() => {}} /> },
   { label: 'Review & Submit', component: <SubmitProjectStep /> },
 ];
