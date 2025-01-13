@@ -1,13 +1,21 @@
-/* Header Container */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #3d3d3d; /* Light gray background */
-    border-bottom: 4px solid #363636; /* Subtle border for separation */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100vw;
+  z-index: 1000; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #3d3d3d;
+  border-bottom: 4px solid #363636;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
   
   .header-logo {
     display: flex;
@@ -17,19 +25,21 @@
   .header-logo a {
     max-height: 25.04px;
   }
-  
-  /* Auth Buttons Container */
+
   .auth-buttons {
     display: flex;
     gap: 10px;
   }
+
+  .auth-buttons span {
+    cursor: pointer;
+  }
   
-  /* Auth Button Styling */
   .auth-buttons button {
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
-    color: #ffffff; /* White text */
+    color: #ffffff;
     background: linear-gradient(135deg, #0061c8, #0056b3);
     border: none;
     border-radius: 6px;
@@ -49,8 +59,24 @@
     align-items: center;
     margin-right: 15px;
   }
-  
-  /* Responsive Design */
+
+  .searchButton {
+    margin-left: 60px; /* Aligning to center*/
+  }
+
+  .searchButton button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0061c8, #0056b3);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
   @media (max-width: 768px) {
     .header {
       flex-direction: column;

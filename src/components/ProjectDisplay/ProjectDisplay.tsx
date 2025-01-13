@@ -1,0 +1,181 @@
+import React, { useState } from "react";
+import { Project } from "../../types/Project";
+import RewardDisplay from "./RewardDisplay";
+import FundingStats from "./FundingStats";
+import StoryDisplay from "./StoryDisplay";
+import TagsDisplay from "./TagsDisplay";
+import {
+  Box,
+  Typography,
+  Tabs,
+  Tab,
+  createTheme,
+  ThemeProvider,
+  Button,
+} from "@mui/material";
+import "./ProjectDisplay.css";
+import { useNavigate } from "react-router-dom";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: { main: "#0056b3" },
+    background: { default: "#2a2a2a", paper: "#333333" },
+    text: { primary: "#d8d8d8", secondary: "#b0b0b0" },
+  },
+});
+
+interface ProjectDisplayProps extends Project {
+  mode: "view" | "preview";
+  onEdit?: () => void;
+  onSubmit?: () => void;
+}
+
+const ProjectDisplay: React.FC<ProjectDisplayProps> = ({
+  title,
+  description,
+  imageUrl,
+  tags,
+  fundingGoal,
+  fundsRaised = 0,
+  backers = 0,
+  deadline,
+  story,
+  rewards,
+  mode,
+}) => {
+  const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
+
+  const handleTabChange = (_: React.ChangeEvent<{}>, newValue: number) => {
+    setActiveTab(newValue);
+  };
+
+  const handleBackingProject = () => {
+    navigate("./back-project");
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Box className="project-display" sx={{ padding: 3 }}>
+        {/* Заголовок */}
+        <Box sx={{ marginBottom: 4, textAlign: "center" }}>
+          <Typography variant="h3" sx={{ fontWeight: "bold", marginBottom: 1 }}>
+            {title}
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ marginBottom: 2, color: "#b0b0b0" }}
+          >
+            {description}
+          </Typography>
+        </Box>
+
+        <Box
+          className="project-main-container"
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            alignItems: { xs: "center", md: "flex-start" },
+            justifyContent: "center",
+            gap: 4,
+            marginBottom: 5,
+          }}
+        >
+          <Box
+            sx={{
+              flex: 2,
+              maxWidth: { xs: "100%", md: "60%" },
+              textAlign: { xs: "center", md: "left" },
+              order: { xs: 1, md: 0 },
+            }}
+          >
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt={`${title} cover`}
+                style={{
+                  width: "100%",
+                  borderRadius: "8px",
+                }}
+              />
+            )}
+            
+          </Box>
+
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: { xs: "100%", md: "30%" },
+              textAlign: "left",
+              width: "100%",
+              order: { xs: 2, md: 0 },
+            }}
+          >
+            <FundingStats
+              fundsRaised={fundsRaised}
+              fundingGoal={fundingGoal}
+              backers={backers}
+              deadline={deadline}
+            />
+
+            {mode === "view" && (
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  marginTop: 2,
+                  width: "100%",
+                }}
+                onClick={handleBackingProject}
+              >
+                Back This Project
+              </Button>
+            )}
+
+            {tags && <div style={{marginTop: 5}}><TagsDisplay tags={tags}/></div>}
+
+          </Box>
+        </Box>
+
+        <Tabs
+          value={activeTab}
+          onChange={handleTabChange}
+          centered
+          sx={{ marginBottom: 3 }}
+        >
+          <Tab label="Campaign" />
+          <Tab label="Rewards" />
+          <Tab label="FAQ" disabled={mode === "preview"} />
+          <Tab label="Updates" disabled={mode === "preview"} />
+          <Tab label="Comments" disabled={mode === "preview"} />
+        </Tabs>
+
+        <Box className="tab-content">
+          {activeTab === 0 && (
+            <Box>
+              <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                Campaign
+              </Typography>
+              <StoryDisplay story={story} />
+            </Box>
+          )}
+          {activeTab === 1 && (
+            <Box>
+              <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                Rewards
+              </Typography>
+              {rewards?.length ? (
+                <RewardDisplay rewards={rewards} />
+              ) : (
+                <Typography>No rewards available.</Typography>
+              )}
+            </Box>
+          )}
+        </Box>
+      </Box>
+    </ThemeProvider>
+  );
+};
+
+export default ProjectDisplay;

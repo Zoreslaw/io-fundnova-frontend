@@ -15,4 +15,30 @@ body {
 main {
   flex: 1;
   padding: 20px;
+  margin-top: 60px;
+}
+
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+.infoContentWrapper {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.infoContentWrapper.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.infoContentWrapper.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }

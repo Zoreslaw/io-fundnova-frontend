@@ -1,12 +1,240 @@
-export const getRecentProjects = async () => {
-    const response = await fetch("https://localhost:7225/api/projects/recent");
-    if (!response.ok) {
-      throw new Error("Failed to fetch recent projects");
-    }
-    return response.json();
-  };
+import { EditAuth } from "../types/EditAuth";
+import { ProjectCreatePayload, ProjectEditPayload } from "../types/ProjectsPayload";
+import { SearchPayload } from "../types/SearchPayload";
+import { convertToPascalCase, convertToCamelCase } from "../utils/caseConverters";
 
-  //TODO:
-    //getProjectById(id: string)
-    //createProject(data: ProjectPayload)
-    //deleteProject(id: string)
+const API_BASE = "https://localhost:7225/api";
+
+export const getBackedProjects = async (userId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/backed/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ id: userId })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching backed projects:", error.message);
+    throw error;
+  }
+};
+
+export const getMyProjects = async (userId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/my/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ id: userId })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching user projects:", error.message);
+    throw error;
+  }
+};
+
+export const getRecentProjects = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/recent`);
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching recent projects:", error.message);
+    throw error;
+  }
+};
+
+export const createProjectApi = async (payload: ProjectCreatePayload) => {
+
+  if (payload.rewards) {
+    payload.rewards = payload.rewards.map((reward) => ({
+      ...reward,
+      contents: reward.contents.toString(), // Convert contents to string
+    }));
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/projects/create/`, {
+      method: "POST",
+      body: JSON.stringify(convertToPascalCase(payload)),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Creating project error:", error.message);
+    throw error;
+  }
+};
+
+export const getProjectById = async (projectId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/view/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ projectId: projectId.toString() })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching project:", error.message);
+    throw error;
+  }
+};
+
+export const getProjectForEdit = async (projectId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/update/fetch`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ projectId: projectId.toString() })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching project:", error.message);
+    throw error;
+  }
+};
+
+export const updateProjectApi = async (payload: ProjectEditPayload) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/update/upload`, {
+      method: "POST",
+      body: JSON.stringify(convertToPascalCase(payload)),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error updating project:", error.message);
+    throw error;
+  }
+};
+
+export const getProjectConfiguration = async () => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/fetchConfigurations`);
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching project configuration:", error.message);
+    throw error;
+  }
+};
+
+export const getRewardInfo = async (projectId: number, rewardId: number) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/fetch-reward`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase({ projectId: projectId.toString(), rewardId: rewardId.toString() })),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = await response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error fetching reward:", error.message);
+    throw error;
+  }
+};
+
+export const fetchUserAccessForEdit = async (payload: EditAuth) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/update/fetch-user-access`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase(payload)),
+    });
+
+    switch (response.status) {
+      case 403:
+        throw new Error("Error: Access Denied");
+      case 204:
+        return true;
+      default:
+        throw new Error("Error: Something went wrong");
+    }
+  } catch (error: any) {
+    console.error("Error fetching project configuration:", error.message);
+    throw error;
+  }
+};
+
+export const getSpecificProjects = async (payload: SearchPayload) => {
+  try {
+    const response = await fetch(`${API_BASE}/projects/search`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(convertToPascalCase(payload)),
+    });
+
+    if (!response.ok) {
+      const errorResponse = await response.text();
+      throw new Error(errorResponse);
+    }
+
+    const data = response.json();
+    return convertToCamelCase(data);
+  } catch (error: any) {
+    console.error("Error while fetching specified projects:", error.message);
+    throw error;
+  }
+};

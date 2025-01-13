@@ -1,0 +1,164 @@
+
+    .profilePage {
+        display: flex;
+        height: 90vh; 
+        max-height: 90vh;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profileMenuCategories {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 64px; 
+        min-width: 64px;
+        height: 100%; 
+        /* background-color: #3d3d3d; */
+    }
+    
+    .profileCategory {
+        flex-grow: 1; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: #3d3d3d;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        border-left: 4px solid transparent;
+        min-height: 50px; 
+        max-height: 90px; 
+    }
+    
+    .profileCategoryList {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+        align-items: stretch;
+        height: 100%;
+        padding: 0;
+        gap: 0;
+    }
+    
+    
+    .profileCategory svg {
+        width: calc(2vw + 20px);
+        height: calc(2vw + 20px);
+        color: #ffffff;
+        transition: transform 0.2s ease;
+    }
+
+    .profileCategory:hover {
+        background-color: #464646;
+    }
+    
+    .profileCategory.active {
+        background-color: #2a2a2a; 
+        border-left: 4px solid #0056b3;
+        width: calc(100% + 10px); 
+        margin-left: -5px;
+        transition: transform 0.3s ease, background-color 0.3s ease; 
+        z-index: 1;
+    }
+
+    
+    
+    .profileContent {
+        flex-grow: 1;
+        overflow-y: scroll; 
+        background-color: #2a2a2a;
+        scrollbar-width: thin;
+        scrollbar-color: #313131 #2a2a2a;
+        padding: 20px;
+        transition: background-color 0.3s ease;
+        
+    }
+    
+
+    .profileContent::-webkit-scrollbar {
+        width: 8px;
+    }
+      
+    .profileContent::-webkit-scrollbar-track {
+        background: #2a2a2a;
+    }
+      
+    .profileContent::-webkit-scrollbar-thumb {
+        background-color: #0056b3;
+        border-radius: 4px;
+        border: 2px solid #2a2a2a;
+    }
+
+    
+    
+    .tabContent {
+        /* padding: 20px; */
+        border-radius: 8px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    }
+    
+    @keyframes fadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(10px);
+        }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .profilePage {
+            height: 100vh;
+            flex-direction: column; 
+        }
+    
+        .profileMenuCategories {
+            display: flex;
+            /* padding-right: 30px; */
+            height: 64px; 
+            flex-direction: row;
+            width: 100%; 
+            min-width: auto; 
+            background-color: #3d3d3d;
+        }
+
+
+
+        .profileCategoryList{
+            flex-direction: row;
+        }
+    
+        .profileCategory {
+            flex-grow: 1; 
+            height: 100%; 
+            min-height: auto; 
+            width: calc(100% / 5);
+        }
+
+        .profileCategory.active {
+            background-color: #2a2a2a;
+            border-top: 4px solid #0056b3;
+            border-left: none; 
+            height: calc(100% + 5px); 
+            margin-top: -5px; 
+            margin-left: 0; 
+            width: 100%; 
+            transition: background-color 0.3s ease;
+        }
+    
+        .profileContent {
+            flex-grow: 1;
+            height: calc(100% - 64px);
+            padding: 0px;
+            overflow-y: auto; 
+        }
+    }
+    
+    .tabContent h3 {
+        margin-top: 0px;
+    }

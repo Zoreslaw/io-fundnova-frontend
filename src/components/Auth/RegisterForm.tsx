@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "../../contexts/AuthContext";
-import FormField from "../FormField/FormField";
+import AuthFormField from "../FormField/AuthFormField";
 import "./Auth.css";
 
 interface RegisterFormInputs {
@@ -49,7 +49,7 @@ const RegisterForm: React.FC = () => {
       <h2>Register</h2>
       {error && <div className="error">{error}</div>}
 
-      <FormField
+      <AuthFormField
         label="Username"
         name="username"
         type="username"
@@ -63,7 +63,7 @@ const RegisterForm: React.FC = () => {
         }}
       />
 
-      <FormField
+      <AuthFormField
         label="Email"
         name="email"
         type="email"
@@ -75,7 +75,7 @@ const RegisterForm: React.FC = () => {
       }}
       />
 
-      <FormField
+      <AuthFormField
         label="Password"
         name="password"
         type="password"
@@ -87,7 +87,7 @@ const RegisterForm: React.FC = () => {
         }}
       />
 
-      <FormField
+      <AuthFormField
         label="Confirm Password"
         name="confirmPassword"
         type="password"
