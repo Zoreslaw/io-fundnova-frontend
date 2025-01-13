@@ -101,7 +101,7 @@ const RewardCard: React.FC<RewardCardProps> = ({
           <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <LocalOfferIcon color="success" />
             <Typography variant="body2">
-              Content: {reward.contents ? "Physical Item" : "Digital Content"}
+              Content: {reward.contents === "True" ? "Physical Item" : "Digital Content"}
             </Typography>
           </Box>
         </CardContent>

@@ -39,3 +39,6 @@ main {
   transform: translateY(-10px);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}

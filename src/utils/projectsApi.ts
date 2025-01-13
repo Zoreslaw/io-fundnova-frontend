@@ -198,7 +198,7 @@ export const getRewardInfo = async (projectId: number, rewardId: number) => {
 
 export const fetchUserAccessForEdit = async (payload: EditAuth) => {
   try {
-    const response = await fetch(`${API_BASE}/projects/update/fetchUserAccess`, {
+    const response = await fetch(`${API_BASE}/projects/update/fetch-user-access`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(convertToPascalCase(payload)),

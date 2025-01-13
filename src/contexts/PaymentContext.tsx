@@ -5,6 +5,8 @@ import { Project } from "../types/Project";
 interface PaymentContextProps {
   project: Project | null;
   setProject: (project: Project | null) => void;
+  projectId: string | null;
+  setProjectId: (id: string | null) => void;
   reward: Reward | null;
   setReward: (reward: Reward | null) => void;
   pledgeAmount: number;
@@ -19,6 +21,7 @@ const PaymentContext = createContext<PaymentContextProps | undefined>(undefined)
 
 export const PaymentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [project, setProject] = useState<Project | null>(null);
+  const [projectId, setProjectId] = useState<string | null>(null);
   const [reward, setReward] = useState<Reward | null>(null);
   const [pledgeAmount, setPledgeAmount] = useState<number>(0);
   const [paymentMethod, setPaymentMethod] = useState<string | null>(null);
@@ -26,7 +29,7 @@ export const PaymentProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   return (
     <PaymentContext.Provider
-      value={{ project, setProject, reward, setReward, pledgeAmount, setPledgeAmount, paymentMethod, setPaymentMethod, paymentInfo, setPaymentInfo }}
+      value={{ project, setProject, projectId, setProjectId, reward, setReward, pledgeAmount, setPledgeAmount, paymentMethod, setPaymentMethod, paymentInfo, setPaymentInfo }}
     >
       {children}
     </PaymentContext.Provider>

@@ -28,10 +28,13 @@ const tabs: Tab[] = [
   { id: "settings", label: "Settings", icon: <AdjustmentsHorizontalIcon className="icon" /> },
 ];
 
-const UserProfile: React.FC = () => {
+interface UserProfileProps {
+  firstTab: string;
+}
+const UserProfile: React.FC<UserProfileProps> = ({ firstTab }) => {
 
   const { serverErrorClear } = useAuth();
-  const [activeTab, setActiveTab] = useState("general");
+  const [activeTab, setActiveTab] = useState(firstTab);
 
   const renderTabContent = () => {
     switch (activeTab) {

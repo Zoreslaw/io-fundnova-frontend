@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useCreateProjectContext } from '../../contexts/CreateProjectContext';
+import { ProjectConfiguration, useCreateProjectContext } from '../../contexts/CreateProjectContext';
 import {
   Box,
   Typography,
@@ -10,22 +10,36 @@ import {
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useProjectData } from "../../hooks/useProjectData";
 import { getProjectConfiguration } from '../../utils/projectsApi';
+import { useProject } from '../../contexts/ProjectContext';
+import { useParams } from 'react-router-dom';
 
 const CategoryAndTagsForm: React.FC = () => {
+
+  let firstTimeProjectTags: boolean = true;
+
   const { state, setState, configurations } = useCreateProjectContext();
   const { project, fetchProject, isLoading, error } = useProjectData();
+  const [ projConfig, setProjConfig ] = useState<ProjectConfiguration | null>(null); //To get available tags
+  const { setProject } = useProject();
+  const { projectId } = useParams<{ projectId: string }>();
 
   // Initialize newProjTags with the project's existing tags
   const [newProjTags, setNewTags] = useState<string[]>(project?.tags || []);
 
   const handleToggleTag = (tag: string) => {
-    const isSelected = newProjTags.includes(tag);
+    const isSelected = newProjTags?.includes(tag);
     setNewTags(isSelected
       ? newProjTags.filter((t) => t !== tag)
       : [...newProjTags, tag]
     );
     
   };
+
+  useEffect(()=>{
+    console.log(project);
+    console.log(newProjTags);
+  },[project])
+
   useEffect(()=>{
     const fetchTagsAndPaymentMethods = async () => {
       try {
@@ -35,21 +49,25 @@ const CategoryAndTagsForm: React.FC = () => {
         console.log('err', err);
       }
     }
-
+    
     setProject(project);
     fetchTagsAndPaymentMethods();
     if (firstTimeProjectTags) {
-      setNewTags(project?.tags);
+      project?.tags ? setNewTags(project?.tags) : setNewTags([]);
       firstTimeProjectTags = false;
     }
-    
-    console.log(project?.tags);
   }, [project])
 
   const handleAddTag = () => {
     console.log('Add new tag button clicked');
     // Logic for adding a new tag can go here
   };
+
+  useEffect(() => {
+    if (projectId) {
+      fetchProject(Number(projectId), "edit");
+    }
+  }, [projectId, fetchProject]);
 
   // Filter out the tags that are already in newProjTags
   const availableTags = configurations?.tags.filter(

@@ -31,7 +31,7 @@ const theme = createTheme({
 });
 
 const BackProjectPage: React.FC = () => {
-  const { setProject, setReward, setPledgeAmount } = usePayment();
+  const { setProject, setReward, setPledgeAmount, setProjectId } = usePayment();
   const navigate = useNavigate();
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -50,6 +50,7 @@ const BackProjectPage: React.FC = () => {
   useEffect(() => {
     if(project){
         setProject(project);
+        setProjectId(projectId ? projectId : null)
     }
   }, [project]);
 

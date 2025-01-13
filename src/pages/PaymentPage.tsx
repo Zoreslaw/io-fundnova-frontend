@@ -40,10 +40,10 @@ const theme = createTheme({
 
 const PaymentPage: React.FC = () => {
   const { user, userId } = useAuth();
-  const { project, reward, pledgeAmount } = usePayment();
+  const { project, reward, pledgeAmount, projectId } = usePayment();
   const [activeStep, setActiveStep] = useState(0);
   const [userInformationValid, setUserInformationValid] = useState(false); // Tracks form validity
-  const[paymentMethodValid, setPaymentMethodValid] = useState(false);
+  const [paymentMethodValid, setPaymentMethodValid] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [status, setStatus] = useState<"success" | "error" | null>(null);
   const navigate = useNavigate();
@@ -60,6 +60,8 @@ const PaymentPage: React.FC = () => {
         paymentInfo,
         pledgeAmount,
         rewardId: reward?.rewardId || null,
+        userId: (user?.userId)?.toString() || null, // Assuming `user` has an `id` property
+        projectId: projectId || null, // Assuming `project` has an `id` property
       });
       setStatus("success");
       setIsProcessing(false);
@@ -87,14 +89,16 @@ const PaymentPage: React.FC = () => {
     console.log(pledgeAmount);
   },[project, reward, pledgeAmount])
 
+//   console.log("lol" + JSON.parse(reward?.contents.toString().toLowerCase()));
+
   const steps = [
     {
       label: "User Information",
       component: (
         <UserInformationForm
           onChange={(isValid) => setUserInformationValid(isValid)} // Pass form state to parent
-          requiresAllFields={!!reward?.contents} // Require all fields only if reward has physical contents
-          requiresEmailOnly={!reward?.contents} // Require only email if reward does not have physical contents
+          requiresAllFields={JSON.parse(reward?.contents.toString().toLowerCase() || "false")} // Require all fields only if reward has physical contents
+          requiresEmailOnly={JSON.parse(reward?.contents.toString().toLowerCase() || "false")} // Require only email if reward does not have physical contents
         />
       ),
     },
